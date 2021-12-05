@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (int) var speed = 200  # speed in pixels/sec
+var speed = 200  # speed in pixels/sec
 
 var velocity = Vector2.ZERO
 
