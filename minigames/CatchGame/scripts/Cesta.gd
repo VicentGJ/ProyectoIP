@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export (int) var speed = 200
-var limit
+export (int) var speed = 400
+var limit = Vector2()
 var velocity = Vector2()
 
 func _ready():
@@ -18,7 +18,7 @@ func get_input(): #move the trash bucket only to the sides
 	elif Input.is_key_pressed(KEY_LEFT):
 		velocity.x -= 1
 	
-	velocity = velocity.normalized() * speed
+	velocity =  velocity * speed
 
 func _physics_process(delta):
 	keep_in_screen()
