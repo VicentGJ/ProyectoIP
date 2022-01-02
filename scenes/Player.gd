@@ -110,8 +110,8 @@ func get_input():
 					attack_counter += 1
 					$Area2D/attacking_3.start()
 			elif jump:
-				$jump_delay.start()
-				state_machine.travel("jump")
+				velocity.y = jump_speed 
+				state_machine.travel("fall")
 			elif (slide) and (right or left) and (not crouch):
 				sliding = true
 				$sliding.start()
@@ -135,7 +135,7 @@ func _on_attack_delay_timeout():
 	attack_counter = 1
 
 func _on_jump_delay_timeout():
-	velocity.y = jump_speed 
+	pass
 
 func _on_sliding_timeout():
 	sliding = false
