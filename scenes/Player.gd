@@ -50,7 +50,7 @@ func get_input():
 				$Player_area.set_position(Vector2(4, 5))
 			state_machine.travel("run")
 			
-	if crouching == false and not (right or left) and attacking == false:
+	if not crouching and not sliding and attacking == false:
 		restore_playerProperty()
 	
 	if is_on_floor():
@@ -59,68 +59,68 @@ func get_input():
 			state_machine.travel("crouch")
 			$Player_area.shape.set_extents(Vector2(20,25))
 			$Player_area.set_position(Vector2(0, 15))
-		elif not crouch:
+		else:
 			crouching = false
-		if attack_counter == 4:
-			attack_counter = 1
-		if attack:
-			attacking = true
-			if attack_counter == 1 and $attack_delay.get_time_left() == 0:
-				if $Sprite.flip_h == false:
-					$Area2D/attack_area1.shape.set_extents(Vector2(16.5,38.5))
-					$Area2D/attack_area2.shape.set_extents(Vector2(13,7))
-					$Area2D/attack_area1.set_position(Vector2(36.5,-5.5)) 
-					$Area2D/attack_area2.set_position(Vector2(7,-37))
-				else:
-					$Area2D/attack_area1.shape.set_extents(Vector2(17,38.5))
-					$Area2D/attack_area2.shape.set_extents(Vector2(14.5,7))
-					$Area2D/attack_area1.set_position(Vector2(-36,-5.75)) 
-					$Area2D/attack_area2.set_position(Vector2(-4.5,-37))
-				state_machine.travel("attack_1")
-				attack_counter += 1
-				$attack_delay.start()
-				$Area2D/attacking_1.start()
-			elif attack_counter == 2 and $attack_delay.get_time_left() < 0.5:
-				if $Sprite.flip_h == false:
-					$Area2D/attack_area1.shape.set_extents(Vector2(15.5,35))
-					$Area2D/attack_area2.shape.set_extents(Vector2(16,12))
-					$Area2D/attack_area1.set_position(Vector2(35.5,7)) 
-					$Area2D/attack_area2.set_position(Vector2(-35,25))
-				else:
-					$Area2D/attack_area1.shape.set_extents(Vector2(16,35))
-					$Area2D/attack_area2.shape.set_extents(Vector2(15.5,11.5))
-					$Area2D/attack_area1.set_position(Vector2(-35,7)) 
-					$Area2D/attack_area2.set_position(Vector2(35.5,24.5))
-				state_machine.travel("attack_2")
-				attack_counter += 1
-				$attack_delay.start()
-				$Area2D/attacking_2.start()
-			elif attack_counter == 3 and $attack_delay.get_time_left() < 0.65:
-				if $Sprite.flip_h == false:
-					$Area2D/attack_area1.shape.set_extents(Vector2(17.5,20.5))
-					$Area2D/attack_area2.shape.set_extents(Vector2(18,14.5))
-					$Area2D/attack_area1.set_position(Vector2(37.5,15.5)) 
-					$Area2D/attack_area2.set_position(Vector2(-37,18.5))
-				else:
-					$Area2D/attack_area1.shape.set_extents(Vector2(18,21.5))
-					$Area2D/attack_area2.shape.set_extents(Vector2(18,16.5))
-					$Area2D/attack_area1.set_position(Vector2(-37,14.5)) 
-					$Area2D/attack_area2.set_position(Vector2(38,20.75))
-				state_machine.travel("attack_3")
-				attack_counter += 1
-				$Area2D/attacking_3.start()
-		elif jump:
-			$jump_delay.start()
-			state_machine.travel("jump")
-		elif (slide) and (right or left) and (not crouch):
-			sliding = true
-			$sliding.start()
-			$Player_area.disabled = true
-			speed += 200
-			gravity = 0
-			state_machine.travel("slide")
-			$Player_area.shape.set_extents(Vector2(20,20))
-			$Player_area.set_position(Vector2(0, 20))
+			if attack_counter == 4:
+				attack_counter = 1
+			if attack:
+				attacking = true
+				if attack_counter == 1 and $attack_delay.get_time_left() == 0:
+					if $Sprite.flip_h == false:
+						$Area2D/attack_area1.shape.set_extents(Vector2(16.5,38.5))
+						$Area2D/attack_area2.shape.set_extents(Vector2(13,7))
+						$Area2D/attack_area1.set_position(Vector2(36.5,-5.5)) 
+						$Area2D/attack_area2.set_position(Vector2(7,-37))
+					else:
+						$Area2D/attack_area1.shape.set_extents(Vector2(17,38.5))
+						$Area2D/attack_area2.shape.set_extents(Vector2(14.5,7))
+						$Area2D/attack_area1.set_position(Vector2(-36,-5.75)) 
+						$Area2D/attack_area2.set_position(Vector2(-4.5,-37))
+					state_machine.travel("attack_1")
+					attack_counter += 1
+					$attack_delay.start()
+					$Area2D/attacking_1.start()
+				elif attack_counter == 2 and $attack_delay.get_time_left() < 0.5:
+					if $Sprite.flip_h == false:
+						$Area2D/attack_area1.shape.set_extents(Vector2(15.5,35))
+						$Area2D/attack_area2.shape.set_extents(Vector2(16,12))
+						$Area2D/attack_area1.set_position(Vector2(35.5,7)) 
+						$Area2D/attack_area2.set_position(Vector2(-35,25))
+					else:
+						$Area2D/attack_area1.shape.set_extents(Vector2(16,35))
+						$Area2D/attack_area2.shape.set_extents(Vector2(15.5,11.5))
+						$Area2D/attack_area1.set_position(Vector2(-35,7)) 
+						$Area2D/attack_area2.set_position(Vector2(35.5,24.5))
+					state_machine.travel("attack_2")
+					attack_counter += 1
+					$attack_delay.start()
+					$Area2D/attacking_2.start()
+				elif attack_counter == 3 and $attack_delay.get_time_left() < 0.65:
+					if $Sprite.flip_h == false:
+						$Area2D/attack_area1.shape.set_extents(Vector2(17.5,20.5))
+						$Area2D/attack_area2.shape.set_extents(Vector2(18,14.5))
+						$Area2D/attack_area1.set_position(Vector2(37.5,15.5)) 
+						$Area2D/attack_area2.set_position(Vector2(-37,18.5))
+					else:
+						$Area2D/attack_area1.shape.set_extents(Vector2(18,21.5))
+						$Area2D/attack_area2.shape.set_extents(Vector2(18,16.5))
+						$Area2D/attack_area1.set_position(Vector2(-37,14.5)) 
+						$Area2D/attack_area2.set_position(Vector2(38,20.75))
+					state_machine.travel("attack_3")
+					attack_counter += 1
+					$Area2D/attacking_3.start()
+			elif jump:
+				$jump_delay.start()
+				state_machine.travel("jump")
+			elif (slide) and (right or left) and (not crouch):
+				sliding = true
+				$sliding.start()
+				$Player_area.disabled = true
+				speed += 200
+				gravity = 0
+				state_machine.travel("slide")
+				$Player_area.shape.set_extents(Vector2(20,20))
+				$Player_area.set_position(Vector2(0, 20))
 			
 	elif sliding == false:
 		state_machine.travel("fall")
