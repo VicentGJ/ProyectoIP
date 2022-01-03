@@ -397,8 +397,11 @@ extents = Vector2( 14.5, 7 )
 [node name="Node" type="Node"]
 
 [node name="player" type="KinematicBody2D" parent="."]
-position = Vector2( 71, 97 )
+position = Vector2( 319, 295 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="player"]
 scale = Vector2( 2.2, 2.36486 )
@@ -472,6 +475,9 @@ wait_time = 0.7
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 current = true
+zoom = Vector2( 0.2, 0.2 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 
 [node name="Node2D" parent="." instance=ExtResource( 74 )]
 position = Vector2( -1, -18 )
