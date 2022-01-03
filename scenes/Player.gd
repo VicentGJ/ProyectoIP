@@ -11,6 +11,7 @@ var crouching = false
 var attacking = false
 var falling = false
 var running = false
+var looking_up = false
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -22,6 +23,7 @@ func restore_playerProperty():
 	gravity = 900                                  #restaurar la gravedad
 	$Camera2D.offset_v = 0                         #restaurar camara en Y
 	$Camera2D.offset_h = 0                         #restaurar camara en X
+	$Camera2D.align()
 	
 func player_movement(right, left):
 	if right:
@@ -103,15 +105,14 @@ func slide_animation():
 	state_machine.travel("slide")
 	$Player_area.shape.set_extents(Vector2(20,22))
 	$Player_area.set_position(Vector2(0, 20))
-func look_up_camera():
-	if $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
-		$Camera2D/camera_timer.start()
+
 func get_input():
 	velocity.x = 0
 #	var current_anim = state_machine.get_current_node()
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var crouch = Input.is_action_pressed("ui_down")
+	var up = Input.is_action_pressed("ui_up")
 	var jump = Input.is_action_just_pressed("jump")
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
@@ -126,7 +127,7 @@ func get_input():
 		elif velocity.x != 0 and sliding == false and attacking == false: 
 			run_animation()
 		
-	if not crouching and not sliding and attacking == false:
+	if not crouching and not sliding and not attacking and not looking_up:
 		restore_playerProperty()
 	
 	if is_on_floor():
@@ -135,6 +136,7 @@ func get_input():
 		else:
 			crouching = false
 			falling = false
+			looking_up = false
 			if attack_counter == 4:
 				attack_counter = 1
 			if attack:
@@ -143,13 +145,16 @@ func get_input():
 				do_jump()
 			elif (slide) and (right or left) and (not crouch):
 				slide_animation()
-		if Input.is_action_pressed("ui_up"):
-			look_up_camera()
-		
+			elif up:
+				looking_up = true
+				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
+					$Camera2D/camera_timer.start()
+
 	elif  sliding == false:
 		fall_animation()
-	print(crouching)
-	print($Camera2D/camera_timer.get_time_left())
+
+	print($Camera2D.get_offset())
+
 func _physics_process(delta):
 	
 	get_input()
@@ -173,6 +178,6 @@ func _on_attacking_3_timeout():
 
 func _on_camera_timer_timeout():
 	if crouching:
-		$Camera2D.offset_v = 40
-	elif Input.is_action_pressed("ui_up"):
-		$Camera2D.offset_v = -40
+		$Camera2D.offset_v = 0.5
+	if looking_up:
+		$Camera2D.offset_v = -0.5
