@@ -12,6 +12,7 @@ var attacking = false
 var falling = false
 var running = false
 var looking_up = false
+var climbing = false
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -19,13 +20,26 @@ func restore_playerProperty():
 	$Player_area.shape.set_extents(Vector2(20,35)) #restaurar tamaño de la collision shape
 	$Player_area.set_position(Vector2(0, 6))       #restaurar posicion de la collision shape
 	$Player_area.disabled = false                  #reactivar collision shape
+	
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900                                  #restaurar la gravedad
+	
 	$Camera2D.offset_v = 0                         #restaurar camara en Y
 	$Camera2D.offset_h = 0                         #restaurar camara en X
-	$Camera2D.align()
-	set_collision_layer(1)
-	set_collision_mask(1)
+	
+	set_collision_layer(1)                         #restaurar capa de collision del personaje
+	set_collision_mask(1)                          #restaurar mascara de collision del personaje
+	
+	$ray_to_climb.set_collision_mask(1)            #restaurar mascara de collision de los raycast
+	$ray_to_climb_2.set_collision_mask(1)
+	$ray_to_climb_3.set_collision_mask(1)
+	
+	if $Sprite.flip_h == false:                    #ajustar los raycast para el climb
+		$ray_to_climb.set_cast_to(Vector2(22,-33))
+		$ray_to_climb_2.set_cast_to(Vector2(22,-25))
+	else:
+		$ray_to_climb.set_cast_to(Vector2(-22,-33))
+		$ray_to_climb_2.set_cast_to(Vector2(-22,-25))
 func player_movement(right, left):
 	if not sliding:
 		if right:
@@ -108,15 +122,21 @@ func slide_animation():
 		sliding = true
 		$sliding.start()
 		$slide_delay.start()
-		set_collision_layer(2)
+		set_collision_layer(2) #cambiar la capa y mascara de colision del player
 		set_collision_mask(2)
+		$ray_to_climb.set_collision_mask(2) #cambiar la capa y mascara de colision deyer
+		$ray_to_climb_2.set_collision_mask(2)
+		$ray_to_climb_3.set_collision_mask(2)
 		speed += 200
 		state_machine.travel("slide")
 		$Player_area.shape.set_extents(Vector2(20,22))
 		$Player_area.set_position(Vector2(0, 20))
+func climb_animation():
+	state_machine.travel("climb")
+	velocity.y = -362
 func get_input():
 	velocity.x = 0
-#	var current_anim = state_machine.get_current_node()
+	var current_anim = state_machine.get_current_node()
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var crouch = Input.is_action_pressed("ui_down")
@@ -125,10 +145,14 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	
-	$Area2D/attack_area1.disabled = not attacking
-	$Area2D/attack_area2.disabled = not attacking
-	
-	if not crouch and attack_counter == 1:
+	if current_anim == "attack_1" or current_anim == "attack_2" or current_anim == "attack_3":
+		$Area2D/attack_area1.disabled = false
+		$Area2D/attack_area2.disabled = false
+	else:
+		$Area2D/attack_area1.disabled = true
+		$Area2D/attack_area2.disabled = true
+		
+	if not crouch and attack_counter == 1 and $attack_delay.get_time_left() == 0:
 		player_movement(right, left)
 		if velocity.length() == 0:
 			idle_animation()
@@ -138,6 +162,11 @@ func get_input():
 	if not crouching and not sliding and not attacking and not looking_up:
 		restore_playerProperty()
 	
+	if current_anim == "climb":
+		climbing = true
+	else:
+		climbing = false
+		
 	if is_on_floor():
 		if crouch:
 			crouch_animation()
@@ -157,8 +186,10 @@ func get_input():
 				looking_up = true
 				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 					$Camera2D/camera_timer.start()
-	elif  sliding == false:
+	elif  sliding == false and not climbing:
 		fall_animation()
+	if  $ray_to_climb_2.is_colliding() and not $ray_to_climb_3.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
+		climb_animation()
 
 func _physics_process(delta):
 	
