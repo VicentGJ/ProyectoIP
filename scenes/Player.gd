@@ -13,6 +13,7 @@ var falling = false
 var running = false
 var looking_up = false
 
+
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 func restore_playerProperty():
@@ -31,6 +32,7 @@ func player_movement(right, left):
 		velocity.x += speed
 	elif left:
 		velocity.x -= speed
+
 func run_animation():
 	$Sprite.flip_h = velocity.x < 0
 	state_machine.travel("run")
@@ -104,7 +106,6 @@ func slide_animation():
 		$slide_delay.start()
 		set_collision_layer(2)
 		set_collision_mask(2)
-		gravity = 0
 		speed += 200
 		state_machine.travel("slide")
 		$Player_area.shape.set_extents(Vector2(20,22))
