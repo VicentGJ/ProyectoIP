@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/adventurer-Sheet.png" type="Texture" id=2]
@@ -338,25 +338,27 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=63]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
 switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id=18]
 states/attack_1/node = SubResource( 20 )
-states/attack_1/position = Vector2( -140.313, 186.144 )
+states/attack_1/position = Vector2( -408.313, -10.856 )
 states/attack_2/node = SubResource( 21 )
-states/attack_2/position = Vector2( -140.313, 233.144 )
+states/attack_2/position = Vector2( -535.313, 56.144 )
 states/attack_3/node = SubResource( 22 )
-states/attack_3/position = Vector2( -140.313, 280.144 )
+states/attack_3/position = Vector2( -603.313, 183.144 )
 states/climb/node = SubResource( 23 )
 states/climb/position = Vector2( 51.687, -216.856 )
 states/crouch/node = SubResource( 24 )
@@ -368,7 +370,7 @@ states/fall/position = Vector2( -275.313, -216.856 )
 states/idle/node = SubResource( 27 )
 states/idle/position = Vector2( -140.313, 22.144 )
 states/idle_sword/node = SubResource( 28 )
-states/idle_sword/position = Vector2( -723.876, -105.856 )
+states/idle_sword/position = Vector2( 34.124, 390.144 )
 states/in_corner/node = SubResource( 29 )
 states/in_corner/position = Vector2( -109.313, -216.856 )
 states/jump/node = SubResource( 69 )
@@ -379,10 +381,10 @@ states/run/node = SubResource( 32 )
 states/run/position = Vector2( 103.687, -119.856 )
 states/slide/node = SubResource( 33 )
 states/slide/position = Vector2( 172.687, -25.856 )
-transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "die", SubResource( 37 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "fall", "in_corner", SubResource( 50 ), "in_corner", "fall", SubResource( 51 ), "in_corner", "climb", SubResource( 52 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle", SubResource( 64 ), "attack_2", "idle", SubResource( 65 ), "attack_3", "idle", SubResource( 66 ) ]
+transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "die", SubResource( 37 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "fall", "in_corner", SubResource( 50 ), "in_corner", "fall", SubResource( 51 ), "in_corner", "climb", SubResource( 52 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "attack_3", "idle", SubResource( 74 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -798, -230.755 )
+graph_offset = Vector2( -798, -294.249 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 

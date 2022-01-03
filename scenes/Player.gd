@@ -9,24 +9,21 @@ var state_machine
 var sliding = false
 var crouching = false
 var attacking = false
-var damage_counter = 0
+var falling = false
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
-
 func restore_playerProperty():
 	$Player_area.shape.set_extents(Vector2(20,35)) #restaurar tamaño de la collision shape
 	$Player_area.set_position(Vector2(0, 5))       #restaurar posicion de la collision shape
 	$Player_area.disabled = false                  #reactivar collision shape
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900                                  #restaurar la gravedad
-
 func player_movement(right, left):
 	if right:
 		velocity.x += speed
 	elif left:
 		velocity.x -= speed
-
 func run_animation():
 	$Sprite.flip_h = velocity.x < 0
 	if velocity.x < 0:         #cuando corre el sprte se pone un poco por delante de la colision, fixed
@@ -34,16 +31,13 @@ func run_animation():
 	elif velocity.x > 0:
 		$Player_area.set_position(Vector2(4, 5))
 	state_machine.travel("run")
-	
 func idle_animation():
 	state_machine.travel("idle")
-	
 func crouch_animation():
 	crouching = true
 	state_machine.travel("crouch")
 	$Player_area.shape.set_extents(Vector2(20,25))
 	$Player_area.set_position(Vector2(0, 15))
-
 func attack_animation():
 	attacking = true
 	if attack_counter == 1 and $attack_delay.get_time_left() == 0:
@@ -90,14 +84,12 @@ func attack_animation():
 		state_machine.travel("attack_3")
 		attack_counter += 1
 		$Area2D/attacking_3.start()
-
 func do_jump():
 	velocity.y = jump_speed 
 	state_machine.travel("fall")
-
 func fall_animation():
 	state_machine.travel("fall")
-	
+	falling = true
 func slide_animation():
 	sliding = true
 	$sliding.start()
@@ -107,7 +99,6 @@ func slide_animation():
 	state_machine.travel("slide")
 	$Player_area.shape.set_extents(Vector2(20,20))
 	$Player_area.set_position(Vector2(0, 20))
-
 func get_input():
 	velocity.x = 0
 	var current_anim = state_machine.get_current_node()
@@ -127,7 +118,7 @@ func get_input():
 			idle_animation()
 		elif velocity.x != 0 and sliding == false and attacking == false: 
 			run_animation()
-			
+		
 	if not crouching and not sliding and attacking == false:
 		restore_playerProperty()
 	
@@ -136,6 +127,7 @@ func get_input():
 			crouch_animation()
 		else:
 			crouching = false
+			falling = false
 			if attack_counter == 4:
 				attack_counter = 1
 			if attack:
@@ -144,10 +136,10 @@ func get_input():
 				do_jump()
 			elif (slide) and (right or left) and (not crouch):
 				slide_animation()
-			
-	elif sliding == false:
+		
+	elif  sliding == false:
 		fall_animation()
-
+	
 func _physics_process(delta):
 	
 	get_input()
