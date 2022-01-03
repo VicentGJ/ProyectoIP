@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "attack_1"
-length = 0.5
+length = 0.512
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -358,25 +358,25 @@ states/attack_1/position = Vector2( -408.313, -10.856 )
 states/attack_2/node = SubResource( 21 )
 states/attack_2/position = Vector2( -535.313, 56.144 )
 states/attack_3/node = SubResource( 22 )
-states/attack_3/position = Vector2( -603.313, 183.144 )
+states/attack_3/position = Vector2( -642.313, 141.144 )
 states/climb/node = SubResource( 23 )
 states/climb/position = Vector2( 51.687, -216.856 )
 states/crouch/node = SubResource( 24 )
-states/crouch/position = Vector2( 103.687, 68.144 )
+states/crouch/position = Vector2( 103.687, 82.144 )
 states/die/node = SubResource( 25 )
-states/die/position = Vector2( 103.687, 149.144 )
+states/die/position = Vector2( -140.313, -114.856 )
 states/fall/node = SubResource( 26 )
-states/fall/position = Vector2( -275.313, -216.856 )
+states/fall/position = Vector2( -327.313, -216.856 )
 states/idle/node = SubResource( 27 )
 states/idle/position = Vector2( -140.313, 22.144 )
 states/idle_sword/node = SubResource( 28 )
-states/idle_sword/position = Vector2( 34.124, 390.144 )
+states/idle_sword/position = Vector2( -389.876, 294.144 )
 states/in_corner/node = SubResource( 29 )
-states/in_corner/position = Vector2( -109.313, -216.856 )
+states/in_corner/position = Vector2( -140.313, -216.856 )
 states/jump/node = SubResource( 69 )
 states/jump/position = Vector2( -723.876, -209.731 )
 states/jump_2/node = SubResource( 31 )
-states/jump_2/position = Vector2( -723.876, -157.856 )
+states/jump_2/position = Vector2( -723.876, -161.856 )
 states/run/node = SubResource( 32 )
 states/run/position = Vector2( 103.687, -119.856 )
 states/slide/node = SubResource( 33 )
@@ -384,7 +384,7 @@ states/slide/position = Vector2( 172.687, -25.856 )
 transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "die", SubResource( 37 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "fall", "in_corner", SubResource( 50 ), "in_corner", "fall", SubResource( 51 ), "in_corner", "climb", SubResource( 52 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "attack_3", "idle", SubResource( 74 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -798, -294.249 )
+graph_offset = Vector2( -798, -373.399 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
@@ -412,12 +412,6 @@ vframes = 11
 [node name="Player_area" type="CollisionShape2D" parent="player"]
 position = Vector2( 0.5, 6 )
 shape = SubResource( 2 )
-
-[node name="RayCast2D" type="RayCast2D" parent="player"]
-enabled = true
-cast_to = Vector2( 0, 42 )
-collide_with_areas = true
-collide_with_bodies = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
 root_node = NodePath("../Sprite")
