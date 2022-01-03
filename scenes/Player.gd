@@ -97,14 +97,16 @@ func fall_animation():
 	state_machine.travel("fall")
 	falling = true
 func slide_animation():
-	sliding = true
-	$sliding.start()
-	$Player_area.disabled = true
-	speed += 100
-	gravity = 0
-	state_machine.travel("slide")
-	$Player_area.shape.set_extents(Vector2(20,22))
-	$Player_area.set_position(Vector2(0, 20))
+	if $slide_delay.get_time_left() == 0:
+		sliding = true
+		$sliding.start()
+		$slide_delay.start()
+		$Player_area.disabled = true
+		speed += 200
+		gravity = 0
+		state_machine.travel("slide")
+		$Player_area.shape.set_extents(Vector2(20,22))
+		$Player_area.set_position(Vector2(0, 20))
 
 func get_input():
 	velocity.x = 0
