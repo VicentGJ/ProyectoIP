@@ -20,6 +20,9 @@ func restore_playerProperty():
 	$Player_area.disabled = false                  #reactivar collision shape
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900                                  #restaurar la gravedad
+	$Camera2D.offset_v = 0                         #restaurar camara en Y
+	$Camera2D.offset_h = 0                         #restaurar camara en X
+	
 func player_movement(right, left):
 	if right:
 		velocity.x += speed
@@ -37,6 +40,8 @@ func crouch_animation():
 	state_machine.travel("crouch")
 	$Player_area.shape.set_extents(Vector2(20,25))
 	$Player_area.set_position(Vector2(0, 16))
+	if $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
+		$Camera2D/camera_timer.start()
 func attack_animation():
 	attacking = true
 	if attack_counter == 1 and $attack_delay.get_time_left() == 0:
@@ -98,6 +103,9 @@ func slide_animation():
 	state_machine.travel("slide")
 	$Player_area.shape.set_extents(Vector2(20,22))
 	$Player_area.set_position(Vector2(0, 20))
+func look_up_camera():
+	if $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
+		$Camera2D/camera_timer.start()
 func get_input():
 	velocity.x = 0
 #	var current_anim = state_machine.get_current_node()
@@ -135,10 +143,13 @@ func get_input():
 				do_jump()
 			elif (slide) and (right or left) and (not crouch):
 				slide_animation()
+		if Input.is_action_pressed("ui_up"):
+			look_up_camera()
 		
 	elif  sliding == false:
 		fall_animation()
-	
+	print(crouching)
+	print($Camera2D/camera_timer.get_time_left())
 func _physics_process(delta):
 	
 	get_input()
@@ -159,3 +170,9 @@ func _on_attacking_2_timeout():
 	attacking = false
 func _on_attacking_3_timeout():
 	attacking = false
+
+func _on_camera_timer_timeout():
+	if crouching:
+		$Camera2D.offset_v = 40
+	elif Input.is_action_pressed("ui_up"):
+		$Camera2D.offset_v = -40
