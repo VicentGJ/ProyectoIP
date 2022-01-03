@@ -10,12 +10,13 @@ var sliding = false
 var crouching = false
 var attacking = false
 var falling = false
+var running = false
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 func restore_playerProperty():
 	$Player_area.shape.set_extents(Vector2(20,35)) #restaurar tamaño de la collision shape
-	$Player_area.set_position(Vector2(0, 5))       #restaurar posicion de la collision shape
+	$Player_area.set_position(Vector2(0, 6))       #restaurar posicion de la collision shape
 	$Player_area.disabled = false                  #reactivar collision shape
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900                                  #restaurar la gravedad
@@ -26,18 +27,16 @@ func player_movement(right, left):
 		velocity.x -= speed
 func run_animation():
 	$Sprite.flip_h = velocity.x < 0
-	if velocity.x < 0:         #cuando corre el sprte se pone un poco por delante de la colision, fixed
-		$Player_area.set_position(Vector2(-4, 5))
-	elif velocity.x > 0:
-		$Player_area.set_position(Vector2(4, 5))
 	state_machine.travel("run")
+	running = true
 func idle_animation():
 	state_machine.travel("idle")
+	running = false
 func crouch_animation():
 	crouching = true
 	state_machine.travel("crouch")
 	$Player_area.shape.set_extents(Vector2(20,25))
-	$Player_area.set_position(Vector2(0, 15))
+	$Player_area.set_position(Vector2(0, 16))
 func attack_animation():
 	attacking = true
 	if attack_counter == 1 and $attack_delay.get_time_left() == 0:
@@ -97,7 +96,7 @@ func slide_animation():
 	speed += 100
 	gravity = 0
 	state_machine.travel("slide")
-	$Player_area.shape.set_extents(Vector2(20,20))
+	$Player_area.shape.set_extents(Vector2(20,22))
 	$Player_area.set_position(Vector2(0, 20))
 func get_input():
 	velocity.x = 0
