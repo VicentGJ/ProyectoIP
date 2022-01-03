@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 510.625, 18.5 )
+extents = Vector2( 1187.5, 18.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 87, 22.25 )
+extents = Vector2( 87, 26.75 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 86.5, 17.5 )
@@ -12,14 +12,18 @@ extents = Vector2( 86.5, 17.5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 88, 20 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 42.25, 26 )
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 37.5, 165.25 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 89.75, 13.5 )
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 20, 39.5 )
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 61.0
+height = 0.0
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 134.5, 15 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,7 +32,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 510.375, 519 )
+position = Vector2( 543.5, 519 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -36,7 +40,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2( 105, 478.25 )
+position = Vector2( 105, 473.75 )
 shape = SubResource( 2 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
@@ -44,7 +48,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2( 339, 399 )
+position = Vector2( 357, 395 )
 shape = SubResource( 3 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
@@ -60,8 +64,8 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-position = Vector2( 823, 474 )
-shape = SubResource( 5 )
+position = Vector2( 963, 336.25 )
+shape = SubResource( 8 )
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 collision_layer = 3
@@ -71,8 +75,17 @@ collision_mask = 3
 position = Vector2( 714.25, 338 )
 shape = SubResource( 6 )
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+[node name="StaticBody2D7" type="RigidBody2D" parent="."]
+mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
-position = Vector2( 535, 462 )
-shape = SubResource( 7 )
+position = Vector2( 618, 476 )
+shape = SubResource( 9 )
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
+position = Vector2( 869, 154 )
+shape = SubResource( 10 )
