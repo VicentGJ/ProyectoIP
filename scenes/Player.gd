@@ -24,7 +24,8 @@ func restore_playerProperty():
 	$Camera2D.offset_v = 0                         #restaurar camara en Y
 	$Camera2D.offset_h = 0                         #restaurar camara en X
 	$Camera2D.align()
-	
+	set_collision_layer(1)
+	set_collision_mask(1)
 func player_movement(right, left):
 	if right:
 		velocity.x += speed
@@ -101,13 +102,13 @@ func slide_animation():
 		sliding = true
 		$sliding.start()
 		$slide_delay.start()
-		$Player_area.disabled = true
-		speed += 200
+		set_collision_layer(2)
+		set_collision_mask(2)
 		gravity = 0
+		speed += 200
 		state_machine.travel("slide")
 		$Player_area.shape.set_extents(Vector2(20,22))
 		$Player_area.set_position(Vector2(0, 20))
-
 func get_input():
 	velocity.x = 0
 #	var current_anim = state_machine.get_current_node()
@@ -151,11 +152,11 @@ func get_input():
 				looking_up = true
 				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 					$Camera2D/camera_timer.start()
-
 	elif  sliding == false:
 		fall_animation()
-
-	print($Camera2D.get_offset())
+	
+	print(get_collision_layer())
+	print(get_collision_mask())
 
 func _physics_process(delta):
 	
@@ -181,5 +182,5 @@ func _on_attacking_3_timeout():
 func _on_camera_timer_timeout():
 	if crouching:
 		$Camera2D.offset_v = 0.5
-	if looking_up:
+	elif looking_up:
 		$Camera2D.offset_v = -0.5
