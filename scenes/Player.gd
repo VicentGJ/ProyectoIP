@@ -94,14 +94,14 @@ func slide_animation():
 	sliding = true
 	$sliding.start()
 	$Player_area.disabled = true
-	speed += 200
+	speed += 100
 	gravity = 0
 	state_machine.travel("slide")
 	$Player_area.shape.set_extents(Vector2(20,20))
 	$Player_area.set_position(Vector2(0, 20))
 func get_input():
 	velocity.x = 0
-	var current_anim = state_machine.get_current_node()
+#	var current_anim = state_machine.get_current_node()
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var crouch = Input.is_action_pressed("ui_down")
@@ -146,18 +146,17 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
-func _on_attack_delay_timeout():
-	attack_counter = 1
-
 func _on_sliding_timeout():
 	sliding = false
 	restore_playerProperty()
+func _on_slide_delay_timeout():
+	pass
 
+func _on_attack_delay_timeout():
+	attack_counter = 1
 func _on_attacking_1_timeout():
 	attacking = false
-
 func _on_attacking_2_timeout():
 	attacking = false
-
 func _on_attacking_3_timeout():
 	attacking = false

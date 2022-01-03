@@ -410,6 +410,12 @@ vframes = 11
 position = Vector2( 0.5, 6 )
 shape = SubResource( 2 )
 
+[node name="RayCast2D" type="RayCast2D" parent="player"]
+enabled = true
+cast_to = Vector2( 0, 42 )
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
 root_node = NodePath("../Sprite")
 anims/RESET = SubResource( 3 )
@@ -464,15 +470,14 @@ wait_time = 0.4
 [node name="attacking_3" type="Timer" parent="player/Area2D"]
 wait_time = 0.7
 
+[node name="Camera2D" type="Camera2D" parent="player"]
+current = true
+
 [node name="Node2D" parent="." instance=ExtResource( 74 )]
 position = Vector2( -1, -18 )
 
 [connection signal="timeout" from="player/attack_delay" to="player" method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="player/sliding" to="player" method="_on_sliding_timeout"]
-[connection signal="timeout" from="player/sliding" to="player" method="_on_attack_delay_timeout"]
-[connection signal="timeout" from="player/sliding" to="player" method="_on_slide_delay_timeout"]
-[connection signal="timeout" from="player/slide_delay" to="player" method="_on_sliding_timeout"]
-[connection signal="timeout" from="player/slide_delay" to="player" method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="player/slide_delay" to="player" method="_on_slide_delay_timeout"]
 [connection signal="timeout" from="player/Area2D/attacking_1" to="player" method="_on_attacking_1_timeout"]
 [connection signal="timeout" from="player/Area2D/attacking_2" to="player" method="_on_attacking_2_timeout"]
