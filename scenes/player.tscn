@@ -466,8 +466,6 @@ drag_margin_bottom = 0.7
 wait_time = 0.8
 one_shot = true
 
-[node name="Timer" type="Timer" parent="player/Camera2D"]
-
 [node name="Area2D" type="Area2D" parent="player"]
 
 [node name="attack_area1" type="CollisionShape2D" parent="player/Area2D"]
