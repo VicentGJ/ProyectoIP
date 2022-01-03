@@ -13,7 +13,6 @@ var falling = false
 var running = false
 var looking_up = false
 
-
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 func restore_playerProperty():
@@ -28,11 +27,16 @@ func restore_playerProperty():
 	set_collision_layer(1)
 	set_collision_mask(1)
 func player_movement(right, left):
-	if right:
-		velocity.x += speed
-	elif left:
-		velocity.x -= speed
-
+	if not sliding:
+		if right:
+			velocity.x += speed
+		elif left:
+			velocity.x -= speed
+	else:
+		if $Sprite.flip_h == false:
+			velocity.x += speed
+		else:
+			velocity.x -= speed
 func run_animation():
 	$Sprite.flip_h = velocity.x < 0
 	state_machine.travel("run")
@@ -155,9 +159,6 @@ func get_input():
 					$Camera2D/camera_timer.start()
 	elif  sliding == false:
 		fall_animation()
-	
-	print(get_collision_layer())
-	print(get_collision_mask())
 
 func _physics_process(delta):
 	
