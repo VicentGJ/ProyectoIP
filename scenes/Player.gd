@@ -134,7 +134,7 @@ func slide_animation():
 		speed += 200
 		state_machine.travel("slide")
 		$Player_area.shape.set_extents(Vector2(20,22))
-		$Player_area.set_position(Vector2(0, 20))
+		$Player_area.set_position(Vector2(0, 19))
 func climb_animation():
 	climbing = true
 	state_machine.travel("climb")
@@ -186,13 +186,13 @@ func get_input():
 				attack_animation()
 			elif jump:
 				do_jump()
-			elif (slide) and (right or left) and (not crouch) and not attacking:
+			elif (slide) and (right or left) and (not crouch):
 				slide_animation()
 			elif up:
 				looking_up = true
 				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 					$Camera2D/camera_timer.start()
-	elif  sliding == false and not climbing and not $Tween.is_active():
+	elif  not sliding and not climbing and not $Tween.is_active():
 		fall_animation()
 	if  not $ray_to_climb_3.is_colliding() and $ray_to_climb_2.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
 		climb_animation()
