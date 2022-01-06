@@ -122,7 +122,7 @@ func fall_animation():
 	state_machine.travel("fall")
 	falling = true
 func slide_animation():
-	if $slide_delay.get_time_left() == 0:
+	if $slide_delay.get_time_left() == 0 and $attack_delay.get_time_left() == 0:
 		sliding = true
 		$sliding.start()
 		$slide_delay.start()
@@ -170,7 +170,7 @@ func get_input():
 		player_movement(right, left)
 		if velocity.length() == 0:
 			idle_animation()
-		elif velocity.x != 0 and not sliding and not attacking and $Tween.is_active() == 0: 
+		elif velocity.x != 0 and not sliding and not attacking and not $Tween.is_active(): 
 			run_animation()
 		
 	if is_on_floor():
@@ -186,7 +186,7 @@ func get_input():
 				attack_animation()
 			elif jump:
 				do_jump()
-			elif (slide) and (right or left) and (not crouch):
+			elif (slide) and (right or left) and (not crouch) and not attacking:
 				slide_animation()
 			elif up:
 				looking_up = true
