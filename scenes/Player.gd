@@ -24,8 +24,8 @@ func restore_playerProperty():
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900                                  #restaurar la gravedad
 	
-	$Camera2D.offset_v = 0                         #restaurar camara en Y
-	$Camera2D.offset_h = 0                         #restaurar camara en X
+	$Camera2D.set_v_offset(0)                         #restaurar camara en Y
+	
 	
 	set_collision_layer(1)                         #restaurar capa de collision del personaje
 	set_collision_mask(1)                          #restaurar mascara de collision del personaje
@@ -37,9 +37,13 @@ func restore_playerProperty():
 	if $Sprite.flip_h == false:                    #ajustar los raycast para el climb
 		$ray_to_climb.set_cast_to(Vector2(22,-33))
 		$ray_to_climb_2.set_cast_to(Vector2(22,-25))
+		$ray_to_climb_3.set_cast_to(Vector2(25,-70))
+		$Camera2D.set_h_offset(300)                    #restaurar camara en X
 	else:
 		$ray_to_climb.set_cast_to(Vector2(-22,-33))
 		$ray_to_climb_2.set_cast_to(Vector2(-22,-25))
+		$ray_to_climb_3.set_cast_to(Vector2(-25,-70))
+		$Camera2D.set_h_offset(-300)  
 func player_movement(right, left):
 	if not sliding:
 		if right:
@@ -132,8 +136,15 @@ func slide_animation():
 		$Player_area.shape.set_extents(Vector2(20,22))
 		$Player_area.set_position(Vector2(0, 20))
 func climb_animation():
+	climbing = true
 	state_machine.travel("climb")
-	velocity.y = -362
+	if not $Sprite.flip_h:
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x+10, position.y-65), 0.3,Tween.TRANS_LINEAR)
+	else:
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x-10, position.y-65), 0.3,Tween.TRANS_LINEAR)
+	$Tween.start()
+	$Tween/Timer2.start()
+
 func get_input():
 	velocity.x = 0
 	var current_anim = state_machine.get_current_node()
@@ -144,6 +155,9 @@ func get_input():
 	var jump = Input.is_action_just_pressed("jump")
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
+	
+	if not crouching and not sliding and not attacking and not looking_up:
+		restore_playerProperty()
 	
 	if current_anim == "attack_1" or current_anim == "attack_2" or current_anim == "attack_3":
 		$Area2D/attack_area1.disabled = false
@@ -156,16 +170,8 @@ func get_input():
 		player_movement(right, left)
 		if velocity.length() == 0:
 			idle_animation()
-		elif velocity.x != 0 and sliding == false and attacking == false: 
+		elif velocity.x != 0 and not sliding and not attacking and $Tween.is_active() == 0: 
 			run_animation()
-		
-	if not crouching and not sliding and not attacking and not looking_up:
-		restore_playerProperty()
-	
-	if current_anim == "climb":
-		climbing = true
-	else:
-		climbing = false
 		
 	if is_on_floor():
 		if crouch:
@@ -186,13 +192,12 @@ func get_input():
 				looking_up = true
 				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 					$Camera2D/camera_timer.start()
-	elif  sliding == false and not climbing:
+	elif  sliding == false and not climbing and not $Tween.is_active():
 		fall_animation()
-	if  $ray_to_climb_2.is_colliding() and not $ray_to_climb_3.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
+	if  not $ray_to_climb_3.is_colliding() and $ray_to_climb_2.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
 		climb_animation()
 
 func _physics_process(delta):
-	
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
@@ -217,3 +222,6 @@ func _on_camera_timer_timeout():
 		$Camera2D.offset_v = 0.5
 	elif looking_up:
 		$Camera2D.offset_v = -0.5
+
+func _on_climb_timeout():
+	climbing= false
