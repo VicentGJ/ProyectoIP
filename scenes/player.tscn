@@ -506,12 +506,6 @@ visible = false
 enabled = true
 cast_to = Vector2( 25, -70 )
 
-[node name="Tween" type="Tween" parent="player"]
-
-[node name="Timer2" type="Timer" parent="player/Tween"]
-wait_time = 0.28
-one_shot = true
-
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2( 1, 3 )
 current = true
@@ -546,14 +540,19 @@ wait_time = 0.4
 [node name="attacking_3" type="Timer" parent="player/Area2D"]
 wait_time = 0.7
 
+[node name="Tween" type="Tween" parent="player"]
+
+[node name="Timer" type="Timer" parent="player/Tween"]
+wait_time = 0.3
+
 [node name="Node2D" parent="." instance=ExtResource( 74 )]
 position = Vector2( -1, -18 )
 
 [connection signal="timeout" from="player/attack_delay" to="player" method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="player/sliding" to="player" method="_on_sliding_timeout"]
 [connection signal="timeout" from="player/slide_delay" to="player" method="_on_slide_delay_timeout"]
-[connection signal="timeout" from="player/Tween/Timer2" to="player" method="_on_climb_timeout"]
 [connection signal="timeout" from="player/Camera2D/camera_timer" to="player" method="_on_camera_timer_timeout"]
 [connection signal="timeout" from="player/Area2D/attacking_1" to="player" method="_on_attacking_1_timeout"]
 [connection signal="timeout" from="player/Area2D/attacking_2" to="player" method="_on_attacking_2_timeout"]
 [connection signal="timeout" from="player/Area2D/attacking_3" to="player" method="_on_attacking_3_timeout"]
+[connection signal="timeout" from="player/Tween/Timer" to="player" method="_on_climb_timeout"]

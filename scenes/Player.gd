@@ -28,9 +28,9 @@ func restore_playerProperty():
 	set_collision_layer(1)                         #restaurar capa de collision del personaje
 	set_collision_mask(1)                          #restaurar mascara de collision del personaje
 	
-	$ray_to_climb.set_collision_mask(1)            #restaurar mascara de collision de los raycast
-	$ray_to_climb_2.set_collision_mask(1)
-	$ray_to_climb_3.set_collision_mask(1)
+#	$ray_to_climb.set_collision_mask(1)            #restaurar mascara de collision de los raycast
+#	$ray_to_climb_2.set_collision_mask(1)
+#	$ray_to_climb_3.set_collision_mask(1)
 	
 	if $Sprite.flip_h == false:                    #ajustar los raycast para el climb
 		$ray_to_climb.set_cast_to(Vector2(22,-33))
@@ -49,10 +49,16 @@ func player_movement(right, left):
 		elif left:
 			velocity.x -= speed
 	else:
-		if $Sprite.flip_h == false:
+		if not $Sprite.flip_h:
 			velocity.x += speed
 		else:
 			velocity.x -= speed
+		if is_on_wall():
+			if  $Sprite.flip_h:
+				$Tween.interpolate_property(self,"position", position,Vector2(position.x+1, position.y),$sliding.get_time_left(),Tween.TRANS_LINEAR)
+			else:
+				$Tween.interpolate_property(self,"position", position,Vector2(position.x-1, position.y),$sliding.get_time_left(),Tween.TRANS_LINEAR)
+			$Tween.start()
 func run_animation():
 	$Sprite.flip_h = velocity.x < 0
 	state_machine.travel("run")
@@ -138,9 +144,9 @@ func slide_animation():
 		$slide_delay.start()
 		set_collision_layer(2) #cambiar la capa y mascara de colision del player
 		set_collision_mask(2)
-		$ray_to_climb.set_collision_mask(2) #cambiar la capa y mascara de colision deyer
-		$ray_to_climb_2.set_collision_mask(2)
-		$ray_to_climb_3.set_collision_mask(2)
+		$ray_to_climb.set_collision_mask(3) #cambiar la capa y mascara de colision de los ray
+		$ray_to_climb_2.set_collision_mask(3)
+		$ray_to_climb_3.set_collision_mask(3)
 		speed += 200
 		state_machine.travel("slide")
 		$Player_area.shape.set_extents(Vector2(20,22))
@@ -150,13 +156,14 @@ func climb_animation():
 	state_machine.travel("climb")
 	if not $Sprite.flip_h:
 		$Tween.interpolate_property(self,"position", position, Vector2(position.x+10, position.y-60), 0.3,Tween.TRANS_LINEAR)
-	else:
+	elif $Sprite.flip_h:
 		$Tween.interpolate_property(self,"position", position, Vector2(position.x-10, position.y-60), 0.3,Tween.TRANS_LINEAR)
 	$Tween.start()
-	$Tween/Timer2.start()
+	$Tween/Timer.start()
 
 func get_input():
 	velocity.x = 0
+
 	var current_anim = state_machine.get_current_node()
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
