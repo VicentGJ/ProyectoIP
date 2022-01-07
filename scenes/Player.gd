@@ -139,9 +139,9 @@ func climb_animation():
 	climbing = true
 	state_machine.travel("climb")
 	if not $Sprite.flip_h:
-		$Tween.interpolate_property(self,"position", position, Vector2(position.x+10, position.y-65), 0.3,Tween.TRANS_LINEAR)
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x+10, position.y-60), 0.3,Tween.TRANS_LINEAR)
 	else:
-		$Tween.interpolate_property(self,"position", position, Vector2(position.x-10, position.y-65), 0.3,Tween.TRANS_LINEAR)
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x-10, position.y-60), 0.3,Tween.TRANS_LINEAR)
 	$Tween.start()
 	$Tween/Timer2.start()
 
