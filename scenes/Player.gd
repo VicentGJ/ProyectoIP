@@ -115,6 +115,19 @@ func attack_animation():
 		state_machine.travel("attack_3")
 		attack_counter += 1
 		$Area2D/attacking_3.start()
+func air_attack_animation():
+	state_machine.travel("air_attack")
+	if $Sprite.flip_h == false:
+			$Area2D/attack_area1.shape.set_extents(Vector2(15.5,35))
+			$Area2D/attack_area2.shape.set_extents(Vector2(16,12))
+			$Area2D/attack_area1.set_position(Vector2(35.5,7)) 
+			$Area2D/attack_area2.set_position(Vector2(-35,25))
+	else:
+			$Area2D/attack_area1.shape.set_extents(Vector2(16,35))
+			$Area2D/attack_area2.shape.set_extents(Vector2(15.5,11.5))
+			$Area2D/attack_area1.set_position(Vector2(-35,7)) 
+			$Area2D/attack_area2.set_position(Vector2(35.5,24.5))
+
 func do_jump():
 	velocity.y = jump_speed 
 	state_machine.travel("fall")
@@ -194,6 +207,9 @@ func get_input():
 					$Camera2D/camera_timer.start()
 	elif  not sliding and not climbing and not $Tween.is_active():
 		fall_animation()
+		if falling and attack:
+			air_attack_animation()
+
 	if  not $ray_to_climb_3.is_colliding() and $ray_to_climb_2.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
 		climb_animation()
 
