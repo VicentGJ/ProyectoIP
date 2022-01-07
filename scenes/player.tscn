@@ -526,7 +526,6 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="player"]
-visible = false
 
 [node name="attack_area1" type="CollisionShape2D" parent="player/Area2D"]
 position = Vector2( 37, -3 )

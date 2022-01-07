@@ -22,10 +22,8 @@ func restore_playerProperty():
 	$Player_area.disabled = false                  #reactivar collision shape
 	
 	speed = 200                                    #restaurar velocidad 
-	gravity = 900                                  #restaurar la gravedad
-	
+
 	$Camera2D.set_v_offset(0)                         #restaurar camara en Y
-	
 	
 	set_collision_layer(1)                         #restaurar capa de collision del personaje
 	set_collision_mask(1)                          #restaurar mascara de collision del personaje
@@ -127,7 +125,6 @@ func air_attack_animation():
 			$Area2D/attack_area2.shape.set_extents(Vector2(15.5,11.5))
 			$Area2D/attack_area1.set_position(Vector2(-35,7)) 
 			$Area2D/attack_area2.set_position(Vector2(35.5,24.5))
-
 func do_jump():
 	velocity.y = jump_speed 
 	state_machine.travel("fall")
@@ -172,7 +169,7 @@ func get_input():
 	if not crouching and not sliding and not attacking and not looking_up:
 		restore_playerProperty()
 	
-	if current_anim == "attack_1" or current_anim == "attack_2" or current_anim == "attack_3":
+	if current_anim == "attack_1" or current_anim == "attack_2" or current_anim == "attack_3" or current_anim == "air_attack":
 		$Area2D/attack_area1.disabled = false
 		$Area2D/attack_area2.disabled = false
 	else:
