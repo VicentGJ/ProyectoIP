@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1187.5, 18.5 )
@@ -18,18 +18,24 @@ extents = Vector2( 37.5, 165.25 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 89.75, 13.5 )
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 134.5, 15 )
+
+[sub_resource type="CircleShape2D" id=11]
+radius = 59.0
+
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 61.0
 height = 0.0
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 134.5, 15 )
 
 [node name="Node2D" type="Node2D"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" groups=["area"]]
 position = Vector2( 543.5, 519 )
@@ -38,6 +44,9 @@ shape = SubResource( 1 )
 [node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" groups=["area"]]
 position = Vector2( 105, 466.75 )
@@ -46,6 +55,9 @@ shape = SubResource( 2 )
 [node name="StaticBody2D3" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" groups=["area"]]
 position = Vector2( 357, 395 )
@@ -54,6 +66,9 @@ shape = SubResource( 3 )
 [node name="StaticBody2D4" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" groups=["area"]]
 position = Vector2( 494, 328 )
@@ -62,6 +77,9 @@ shape = SubResource( 4 )
 [node name="StaticBody2D5" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" groups=["area"]]
 position = Vector2( 963, 336.25 )
@@ -70,33 +88,48 @@ shape = SubResource( 8 )
 [node name="StaticBody2D6" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" groups=["area"]]
 position = Vector2( 714.25, 338 )
 shape = SubResource( 6 )
 
-[node name="RIGID" type="RigidBody2D" parent="." groups=["enemy"]]
-mode = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RIGID" groups=["enemy"]]
-position = Vector2( 612, 471 )
-shape = SubResource( 9 )
-
-[node name="Label" type="Label" parent="RIGID" groups=["enemy"]]
-margin_left = 537.0
-margin_top = 402.0
-margin_right = 704.0
-margin_bottom = 433.0
-text = "RIGID BODDY 2D ENEMY
-"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="StaticBody2D8" type="StaticBody2D" parent="." groups=["area"]]
 collision_layer = 3
 collision_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8" groups=["area"]]
 position = Vector2( 869, 155 )
 shape = SubResource( 10 )
+
+[node name="RIGID" type="RigidBody2D" parent="." groups=["enemy"]]
+mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RIGID"]
+position = Vector2( 612, 471 )
+shape = SubResource( 11 )
+
+[node name="Label" type="Label" parent="RIGID"]
+margin_left = 533.0
+margin_top = 399.0
+margin_right = 700.0
+margin_bottom = 430.0
+text = "RIGID BODDY 2D ENEMY
+"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="RIGID"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RIGID/Area2D"]
+position = Vector2( 612, 471 )
+shape = SubResource( 9 )

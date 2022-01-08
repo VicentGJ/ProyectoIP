@@ -1,19 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/area+enemy_testingNODE.tscn" type="PackedScene" id=74]
+
+[sub_resource type="Animation" id=2]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 60, 61 ]
+}
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Node" type="Node"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 755, 80 )
 
 [node name="Sprite" parent="player" index="0"]
-frame = 0
+flip_h = true
+region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
+
+[node name="AnimationPlayer" parent="player" index="2"]
+anims/hurt = SubResource( 2 )
 
 [node name="AnimationTree" parent="player" index="3"]
 parameters/playback = SubResource( 1 )
+
+[node name="ray_to_climb" parent="player" index="7"]
+visible = true
+
+[node name="ray_to_climb_2" parent="player" index="8"]
+visible = true
+
+[node name="ray_to_climb_3" parent="player" index="9"]
+visible = true
 
 [node name="Node2D" parent="." instance=ExtResource( 74 )]
 position = Vector2( -1, -18 )

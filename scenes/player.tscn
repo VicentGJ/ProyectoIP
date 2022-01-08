@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/adventurer-Sheet.png" type="Texture" id=2]
@@ -92,7 +92,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "climb"
 length = 0.3
-loop = true
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -314,6 +313,9 @@ animation = "die"
 [sub_resource type="AnimationNodeAnimation" id=26]
 animation = "fall"
 
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "hurt"
+
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "idle"
 
@@ -336,8 +338,6 @@ animation = "run"
 animation = "slide"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
@@ -375,10 +375,6 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=73]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=74]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=76]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=77]
@@ -408,51 +404,66 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=91]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=96]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id=18]
 states/air_attack/node = SubResource( 86 )
-states/air_attack/position = Vector2( -408.313, -132.856 )
+states/air_attack/position = Vector2( -408.313, -122.856 )
 states/air_dash/node = SubResource( 90 )
 states/air_dash/position = Vector2( -140.313, -314.783 )
 states/attack_1/node = SubResource( 20 )
-states/attack_1/position = Vector2( -408.313, 213.513 )
+states/attack_1/position = Vector2( -632.313, 107.513 )
 states/attack_2/node = SubResource( 21 )
-states/attack_2/position = Vector2( -579.313, 213.513 )
+states/attack_2/position = Vector2( -511.313, 125.513 )
 states/attack_3/node = SubResource( 22 )
-states/attack_3/position = Vector2( -408.313, 31.144 )
+states/attack_3/position = Vector2( -395.313, 156.144 )
 states/climb/node = SubResource( 23 )
-states/climb/position = Vector2( 108.687, -314.783 )
+states/climb/position = Vector2( 179.687, -314.783 )
 states/combo1/node = SubResource( 79 )
-states/combo1/position = Vector2( -715, 3.51302 )
+states/combo1/position = Vector2( -624.876, -199.856 )
 states/combo2/node = SubResource( 80 )
-states/combo2/position = Vector2( -715, 76.513 )
+states/combo2/position = Vector2( -763.876, -147.487 )
 states/combo3/node = SubResource( 81 )
-states/combo3/position = Vector2( -715, 144.144 )
+states/combo3/position = Vector2( -624.876, -92.856 )
 states/crouch/node = SubResource( 24 )
-states/crouch/position = Vector2( 284.687, 294.144 )
+states/crouch/position = Vector2( 108.687, 203.835 )
 states/die/node = SubResource( 25 )
-states/die/position = Vector2( -140.313, 294.144 )
+states/die/position = Vector2( -140.313, 298.835 )
 states/fall/node = SubResource( 26 )
-states/fall/position = Vector2( -140.313, -132.856 )
+states/fall/position = Vector2( -140.313, -122.856 )
+states/hurt/node = SubResource( 92 )
+states/hurt/position = Vector2( -140.313, 203.835 )
 states/idle/node = SubResource( 27 )
 states/idle/position = Vector2( -140.313, 31.144 )
 states/idle_sword/node = SubResource( 28 )
-states/idle_sword/position = Vector2( -408.313, 380.144 )
+states/idle_sword/position = Vector2( -408.313, 298.835 )
 states/in_corner/node = SubResource( 75 )
-states/in_corner/position = Vector2( -723.876, -114.856 )
+states/in_corner/position = Vector2( -624.876, -338.731 )
 states/jump/node = SubResource( 69 )
-states/jump/position = Vector2( -723.876, -209.731 )
+states/jump/position = Vector2( -571.876, -393.731 )
 states/jump_2/node = SubResource( 31 )
-states/jump_2/position = Vector2( -723.876, -161.856 )
+states/jump_2/position = Vector2( -700.876, -393.731 )
 states/run/node = SubResource( 32 )
-states/run/position = Vector2( 108.687, -49.856 )
+states/run/position = Vector2( 108.687, -79.856 )
 states/slide/node = SubResource( 33 )
-states/slide/position = Vector2( 284.687, 31.144 )
-transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "die", SubResource( 37 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "attack_3", "idle", SubResource( 74 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "combo3", "combo1", SubResource( 84 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "air_dash", "fall", SubResource( 92 ) ]
+states/slide/position = Vector2( 317.687, 31.144 )
+transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "combo3", "combo1", SubResource( 84 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "idle", "hurt", SubResource( 93 ), "hurt", "die", SubResource( 94 ), "hurt", "idle", SubResource( 95 ), "air_dash", "fall", SubResource( 96 ), "attack_3", "idle_sword", SubResource( 97 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -849.162, -429.165 )
+graph_offset = Vector2( -849.162, 22.6704 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
@@ -463,7 +474,7 @@ extents = Vector2( 17, 38.25 )
 extents = Vector2( 14.5, 7 )
 
 [node name="player" type="KinematicBody2D" groups=["player"]]
-position = Vector2( 104, 360 )
+position = Vector2( 512, 297 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -474,10 +485,8 @@ scale = Vector2( 2.2, 2.4 )
 texture = ExtResource( 2 )
 hframes = 7
 vframes = 11
-frame = 1
 
 [node name="Player_area" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0.5, 6 )
 shape = SubResource( 2 )
 
@@ -546,7 +555,6 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="attack_area1" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 37, -3 )
