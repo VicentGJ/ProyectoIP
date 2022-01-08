@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/life_bar2.png" type="Texture" id=1]
+[ext_resource path="res://sprites/life_bar3.png" type="Texture" id=2]
+[ext_resource path="res://sprites/life_bar1.png" type="Texture" id=3]
+
+[node name="GUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+anchor_left = 0.066
+anchor_right = 0.066
+margin_left = -28.584
+margin_top = 14.0
+margin_right = 96.416
+margin_bottom = 54.0
+rect_scale = Vector2( 1.426, 1 )
+value = 20.0
+texture_under = ExtResource( 3 )
+texture_over = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TextureProgress"]
+margin_left = -1.40252
+margin_top = -5.0
+margin_right = 16.5975
+margin_bottom = 9.0
+rect_scale = Vector2( 1.246, 1.393 )
+text = "HP"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
