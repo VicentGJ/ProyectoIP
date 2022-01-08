@@ -30,20 +30,17 @@ position = Vector2( 755, 80 )
 flip_h = true
 region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
 
+[node name="Player_area" parent="player" index="1"]
+visible = false
+
 [node name="AnimationPlayer" parent="player" index="2"]
 anims/hurt = SubResource( 2 )
 
 [node name="AnimationTree" parent="player" index="3"]
 parameters/playback = SubResource( 1 )
 
-[node name="ray_to_climb" parent="player" index="7"]
-visible = true
-
-[node name="ray_to_climb_2" parent="player" index="8"]
-visible = true
-
-[node name="ray_to_climb_3" parent="player" index="9"]
-visible = true
+[node name="Area2D" parent="player" index="11"]
+visible = false
 
 [node name="Node2D" parent="." instance=ExtResource( 74 )]
 position = Vector2( -1, -18 )
