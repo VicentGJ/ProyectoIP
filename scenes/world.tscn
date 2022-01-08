@@ -42,6 +42,37 @@ parameters/playback = SubResource( 1 )
 [node name="Area2D" parent="player" index="11"]
 visible = false
 
+[node name="HealthBar" parent="player" index="13"]
+margin_left = -425.0
+margin_top = -319.0
+margin_right = -425.0
+margin_bottom = -319.0
+
+[node name="health_under" parent="player/HealthBar" index="0"]
+margin_left = -53.0
+margin_top = 50.0
+margin_right = 72.0
+margin_bottom = 90.0
+
+[node name="health_over" parent="player/HealthBar" index="1"]
+margin_left = -53.0
+margin_top = 50.0
+margin_right = 72.0
+margin_bottom = 90.0
+
+[node name="HpLabel" parent="player/HealthBar" index="4"]
+margin_left = -48.0
+margin_top = 77.0
+margin_right = -30.0
+margin_bottom = 91.0
+
+[node name="current_hp" parent="player/HealthBar" index="5"]
+margin_left = -29.0
+margin_top = 77.0
+margin_right = 24.0
+margin_bottom = 91.0
+percent_visible = 1.0
+
 [node name="areas" parent="." instance=ExtResource( 74 )]
 position = Vector2( -1, -18 )
 

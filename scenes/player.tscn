@@ -587,14 +587,29 @@ margin_bottom = -286.0
 
 [node name="health_under" parent="HealthBar" index="0"]
 margin_left = -29.0
+margin_top = 2.0
 margin_right = 96.0
+margin_bottom = 42.0
 tint_progress = Color( 0.141176, 0.141176, 0.141176, 1 )
 
-[node name="HP_text" parent="HealthBar" index="2"]
-margin_left = -24.0
-margin_top = 8.0
-margin_right = -6.0
-margin_bottom = 22.0
+[node name="health_over" parent="HealthBar" index="1"]
+margin_left = -29.0
+margin_top = 3.0
+margin_right = 96.0
+margin_bottom = 43.0
+
+[node name="HpLabel" parent="HealthBar" index="4"]
+margin_left = -20.0
+margin_top = 28.0
+margin_right = -2.0
+margin_bottom = 42.0
+
+[node name="current_hp" parent="HealthBar" index="5"]
+margin_left = -4.0
+margin_top = 28.0
+margin_right = 49.0
+margin_bottom = 42.0
+percent_visible = 1.0
 
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
