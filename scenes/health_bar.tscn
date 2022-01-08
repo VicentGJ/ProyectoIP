@@ -56,8 +56,11 @@ align = 1
 valign = 1
 uppercase = true
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="."]
+[node name="update_hp_bar" type="Tween" parent="."]
+
+[node name="low_hp_pulse" type="Tween" parent="."]
+repeat = true
+playback/repeat = true

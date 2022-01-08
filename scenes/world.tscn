@@ -26,20 +26,20 @@ tracks/0/keys = {
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 772, 78 )
 
-[node name="Sprite" parent="player" index="1"]
+[node name="Sprite" parent="player" index="0"]
 flip_h = true
 region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
 
-[node name="Player_area" parent="player" index="2"]
+[node name="Player_area" parent="player" index="1"]
 visible = false
 
-[node name="AnimationPlayer" parent="player" index="3"]
+[node name="AnimationPlayer" parent="player" index="2"]
 anims/hurt = SubResource( 2 )
 
-[node name="AnimationTree" parent="player" index="4"]
+[node name="AnimationTree" parent="player" index="3"]
 parameters/playback = SubResource( 1 )
 
-[node name="Area2D" parent="player" index="12"]
+[node name="Area2D" parent="player" index="11"]
 visible = false
 
 [node name="areas" parent="." instance=ExtResource( 74 )]

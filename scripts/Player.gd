@@ -164,13 +164,19 @@ func climb_animation():
 	$Tween/Timer.start()
 
 func hurt_animation():
-#	$Tween.interpolate_property(self, "modulate", modulate, )
-#	tween para cambiar el color del player a rojo con la transicion bouncy y otro para hacerlo retroceder
-	pass
+	state_machine.travel("hurt")
+#	if not $Sprite.flip_h:
+#		$Tween.interpolate_property(self,"position", position, Vector2(position.x - 30, position.y), 0.3,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+#	else:
+#		$Tween.interpolate_property(self,"position", position, Vector2(position.x + 30, position.y), 0.3,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+#	$Tween.start()
+	#	add: tween para cambiar el color del player a rojo con la transicion bouncy, o atransparente para inmunidad
+	$HealthBar.hp_change(10) #cambiar parametro por el daño del enemigo(valores positivos hacen daño, y viceversa para curar)
 func death_animation():
 	state_machine.travel("die")
-#	endgame and respawn to an especific location (tween can do it...or tweentoo ...i think)
+	#endgame and respawn to an especific location (tween can do it...or tweentoo ...i think)
 	pass
+
 
 func get_input():
 	velocity.x = 0
@@ -184,6 +190,9 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	
+	if Input.is_action_just_pressed("test_action"): #t to test the animation
+		hurt_animation()
+	
 	if not crouching and not sliding and not attacking and not looking_up and not climbing:
 		restore_playerProperty()
 
@@ -194,7 +203,7 @@ func get_input():
 		$Area2D/attack_area1.disabled = true
 		$Area2D/attack_area2.disabled = true
 		
-	if not crouch and attack_counter == 1 and $attack_delay.get_time_left() == 0:
+	if not crouch and attack_counter == 1 and $attack_delay.get_time_left() == 0 and not $Tween.is_active():
 		player_movement(right, left)
 		if velocity.length() == 0:
 			idle_animation()
@@ -204,6 +213,7 @@ func get_input():
 	if is_on_floor():
 		if crouch:
 			crouch_animation()
+
 		else:
 			crouching = false
 			falling = false
@@ -228,6 +238,7 @@ func get_input():
 		climb_animation()
 	
 func _physics_process(delta):
+
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
