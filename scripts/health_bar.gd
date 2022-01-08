@@ -9,7 +9,7 @@ func damaged(damage):
 	tween.start()
 	health_over.value -= damage
 
-func _physics_process(delta):
-	if Input.is_action_just_pressed("attack"):
-		damaged(10)
+#func _physics_process(delta):
+#	if Input.is_action_just_pressed("attack"):
+#		damaged(10)
 	
