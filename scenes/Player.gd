@@ -4,8 +4,8 @@ export (int) var speed = 200
 export (int) var jump_speed = -450
 export (int) var gravity = 900
 var velocity = Vector2()
-var attack_counter = 1
 var state_machine
+var attack_counter = 1
 var sliding = false
 var crouching = false
 var attacking = false
@@ -22,15 +22,16 @@ func restore_playerProperty():
 	$Player_area.disabled = false                  #reactivar collision shape
 	
 	speed = 200                                    #restaurar velocidad 
-
+	gravity = 900
+	
 	$Camera2D.set_v_offset(0)                         #restaurar camara en Y
 	
 	set_collision_layer(1)                         #restaurar capa de collision del personaje
 	set_collision_mask(1)                          #restaurar mascara de collision del personaje
 	
-#	$ray_to_climb.set_collision_mask(1)            #restaurar mascara de collision de los raycast
-#	$ray_to_climb_2.set_collision_mask(1)
-#	$ray_to_climb_3.set_collision_mask(1)
+	$ray_to_climb.set_collision_mask(1)            #restaurar mascara de collision de los raycast
+	$ray_to_climb_2.set_collision_mask(1)
+	$ray_to_climb_3.set_collision_mask(1)
 	
 	if $Sprite.flip_h == false:                    #ajustar los raycast para el climb
 		$ray_to_climb.set_cast_to(Vector2(22,-33))
@@ -135,8 +136,9 @@ func do_jump():
 	velocity.y = jump_speed 
 	state_machine.travel("fall")
 func fall_animation():
-	state_machine.travel("fall")
-	falling = true
+	if not climbing:
+		state_machine.travel("fall")
+		falling = true
 func slide_animation():
 	if $slide_delay.get_time_left() == 0 and $attack_delay.get_time_left() == 0:
 		sliding = true
@@ -155,11 +157,19 @@ func climb_animation():
 	climbing = true
 	state_machine.travel("climb")
 	if not $Sprite.flip_h:
-		$Tween.interpolate_property(self,"position", position, Vector2(position.x+10, position.y-60), 0.3,Tween.TRANS_LINEAR)
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x+10, position.y-60), 0.3)
 	elif $Sprite.flip_h:
 		$Tween.interpolate_property(self,"position", position, Vector2(position.x-10, position.y-60), 0.3,Tween.TRANS_LINEAR)
 	$Tween.start()
 	$Tween/Timer.start()
+
+func hurt_animation():
+#tween para cambiar el color del player a rojo con la transicion bouncy
+	pass
+func death_animation():
+	state_machine.travel("die")
+#	endgame and respawn to an especific location (tween can do it...or tweentoo ...i think)
+	pass
 
 func get_input():
 	velocity.x = 0
@@ -173,9 +183,9 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	
-	if not crouching and not sliding and not attacking and not looking_up:
+	if not crouching and not sliding and not attacking and not looking_up and not climbing:
 		restore_playerProperty()
-	
+
 	if current_anim == "attack_1" or current_anim == "attack_2" or current_anim == "attack_3" or current_anim == "air_attack":
 		$Area2D/attack_area1.disabled = false
 		$Area2D/attack_area2.disabled = false
@@ -209,11 +219,10 @@ func get_input():
 				looking_up = true
 				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 					$Camera2D/camera_timer.start()
-	elif  not sliding and not climbing and not $Tween.is_active():
+	elif  not sliding and not climbing:
 		fall_animation()
 		if falling and attack:
 			air_attack_animation()
-
 	if  not $ray_to_climb_3.is_colliding() and $ray_to_climb_2.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
 		climb_animation()
 
@@ -222,6 +231,7 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
+#------------------------------------------------------------conecctions
 func _on_sliding_timeout():
 	sliding = false
 	restore_playerProperty()
@@ -244,4 +254,4 @@ func _on_camera_timer_timeout():
 		$Camera2D.offset_v = -0.5
 
 func _on_climb_timeout():
-	climbing= false
+	climbing = false
