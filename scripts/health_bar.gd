@@ -11,12 +11,14 @@ func hp_change(change):
 	if change > 0: #damage
 		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - change, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
 		update_tween.start()
+		$current_hp/numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
+		$current_hp/numeric_hp_update.start()
 		health_over.value -= change
 	elif change < 0: #healing
 		health_under.value -= change
 		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
 		update_tween.start()
-
+	$current_hp/numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
 	set_hpColor(health_over.value)
 	
 func set_hpColor(health):
@@ -36,3 +38,6 @@ func set_hpColor(health):
 	elif health > health_over.max_value * 0.6:
 		health_over.tint_progress = Color.green
 		hp_pulse.set_active(false)
+
+func numeric_hpCount(value):
+	$current_hp.text = str(round(value)) + " / " + str($health_over.max_value)
