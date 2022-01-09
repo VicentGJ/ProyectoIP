@@ -11,33 +11,41 @@ func hp_change(change):
 	if change > 0: #damage
 		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - change, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
 		update_tween.start()
-		$current_hp/numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
-		$current_hp/numeric_hp_update.start()
+		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
+		$numeric_hp_update.start()
 		health_over.value -= change
+	
 	elif change < 0: #healing
 		health_under.value -= change
 		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
 		update_tween.start()
-	$current_hp/numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
-	set_hpColor(health_over.value)
 	
+	$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	set_hpColor(health_over.value)
+
+
 func set_hpColor(health):
 	if health < health_over.max_value * 0.2:
 		health_over.tint_progress = Color.red
 		hp_pulse.interpolate_property(health_over, "tint_progress", Color.darkred, Color.red, 0.4, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
 		hp_pulse.start()
+
 	elif health < health_over.max_value * 0.4:
 		health_over.tint_progress = Color.orangered
 		hp_pulse.set_active(false)
+
 	elif health < health_over.max_value * 0.5:
 		health_over.tint_progress = Color.orange
 		hp_pulse.set_active(false)
+
 	elif health < health_over.max_value * 0.6:
 		health_over.tint_progress = Color.yellow
 		hp_pulse.set_active(false)
-	elif health > health_over.max_value * 0.6:
+
+	else:
 		health_over.tint_progress = Color.green
 		hp_pulse.set_active(false)
 
+
 func numeric_hpCount(value):
-	$current_hp.text = str(round(value)) + " / " + str($health_over.max_value)
+	$current_hp.text = "HP " + str(round(value)) + " / " + str($health_over.max_value)
