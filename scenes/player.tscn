@@ -1,8 +1,15 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/adventurer-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sprites/light.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=67]
+extents = Vector2( 17, 38.25 )
+
+[sub_resource type="RectangleShape2D" id=68]
+extents = Vector2( 14.5, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 19.5, 36 )
@@ -408,7 +415,6 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=93]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=94]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=95]
 switch_mode = 2
@@ -465,28 +471,108 @@ states/slide/position = Vector2( 317.687, 31.144 )
 transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "combo3", "combo1", SubResource( 84 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "idle", "hurt", SubResource( 93 ), "hurt", "die", SubResource( 94 ), "hurt", "idle", SubResource( 95 ), "air_dash", "fall", SubResource( 96 ), "attack_3", "idle_sword", SubResource( 97 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -849.162, 22.6704 )
+graph_offset = Vector2( -849.162, 73.2304 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
-[sub_resource type="RectangleShape2D" id=67]
-extents = Vector2( 17, 38.25 )
+[sub_resource type="ParticlesMaterial" id=98]
+emission_shape = 1
+emission_sphere_radius = 8.27
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, -15, 0 )
+angular_velocity = 265.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 5.0
+scale_random = 1.0
+color = Color( 0.192157, 0.192157, 0.192157, 1 )
 
-[sub_resource type="RectangleShape2D" id=68]
-extents = Vector2( 14.5, 7 )
+[sub_resource type="ParticlesMaterial" id=99]
+emission_shape = 1
+emission_sphere_radius = 24.0
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
 
 [node name="player" type="KinematicBody2D" groups=["player"]]
-position = Vector2( 523, 318 )
+position = Vector2( 515, 296 )
 script = ExtResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
+margin_left = -457.0
+margin_top = -268.0
+margin_right = -457.0
+margin_bottom = -268.0
+
+[node name="health_under" parent="HealthBar" index="0"]
+margin_left = -29.0
+margin_top = 2.0
+margin_right = 96.0
+margin_bottom = 42.0
+tint_progress = Color( 0.141176, 0.141176, 0.141176, 1 )
+
+[node name="health_over" parent="HealthBar" index="1"]
+anchor_left = 0.0
+margin_left = -29.0
+margin_top = 3.0
+margin_right = 96.0
+margin_bottom = 43.0
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="attack_area1" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 37, -3 )
+shape = SubResource( 67 )
+disabled = true
+
+[node name="attack_area2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 5, -37 )
+shape = SubResource( 68 )
+disabled = true
+
+[node name="attacking_1" type="Timer" parent="Area2D"]
+wait_time = 0.7
+
+[node name="attacking_2" type="Timer" parent="Area2D"]
+wait_time = 0.4
+
+[node name="attacking_3" type="Timer" parent="Area2D"]
+wait_time = 0.7
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="climbing_timer" type="Timer" parent="Tween"]
+wait_time = 0.3
+
+[node name="inmunity_timer" type="Timer" parent="Tween"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 1, 3 )
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_top = 0.7
+drag_margin_bottom = 0.7
+
+[node name="camera_timer" type="Timer" parent="Camera2D"]
+wait_time = 0.8
+one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2.2, 2.4 )
 texture = ExtResource( 2 )
 hframes = 7
 vframes = 11
+frame = 3
 
 [node name="Player_area" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, 6 )
+position = Vector2( 0, 6 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -526,98 +612,55 @@ wait_time = 1.3
 one_shot = true
 
 [node name="ray_to_climb" type="RayCast2D" parent="."]
-visible = false
 enabled = true
-cast_to = Vector2( 22, -33 )
+cast_to = Vector2( 21.5, -34.5 )
 
 [node name="ray_to_climb_2" type="RayCast2D" parent="."]
-visible = false
 enabled = true
 cast_to = Vector2( 22, -25 )
 
 [node name="ray_to_climb_3" type="RayCast2D" parent="."]
-visible = false
 enabled = true
-cast_to = Vector2( 25, -70 )
+cast_to = Vector2( 30, -90 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 1, 3 )
-current = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-drag_margin_top = 0.7
-drag_margin_bottom = 0.7
+[node name="ray_to_climb_4" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -90 )
 
-[node name="camera_timer" type="Timer" parent="Camera2D"]
-wait_time = 0.8
+[node name="slide_particles" type="Particles2D" parent="."]
+show_behind_parent = true
+position = Vector2( -12, 39 )
+emitting = false
+amount = 30
+lifetime = 0.8
 one_shot = true
+speed_scale = 2.0
+local_coords = false
+process_material = SubResource( 98 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="death_particles" type="Particles2D" parent="."]
+position = Vector2( -1, 13 )
+emitting = false
+process_material = SubResource( 99 )
 
-[node name="attack_area1" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 37, -3 )
-shape = SubResource( 67 )
-disabled = true
+[node name="Light2D3" type="Light2D" parent="."]
+position = Vector2( -2.00002, 11 )
+scale = Vector2( 0.34375, 0.299072 )
+texture = ExtResource( 4 )
+color = Color( 0.290196, 0.243137, 0.243137, 1 )
+energy = 0.8
+shadow_enabled = true
 
-[node name="attack_area2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 5, -37 )
-shape = SubResource( 68 )
-disabled = true
-
-[node name="attacking_1" type="Timer" parent="Area2D"]
-wait_time = 0.7
-
-[node name="attacking_2" type="Timer" parent="Area2D"]
-wait_time = 0.4
-
-[node name="attacking_3" type="Timer" parent="Area2D"]
-wait_time = 0.7
-
-[node name="Tween" type="Tween" parent="."]
-
-[node name="Timer" type="Timer" parent="Tween"]
-wait_time = 0.3
-
-[node name="HealthBar" parent="." instance=ExtResource( 3 )]
-margin_left = -463.0
-margin_top = -286.0
-margin_right = -463.0
-margin_bottom = -286.0
-
-[node name="health_under" parent="HealthBar" index="0"]
-margin_left = -29.0
-margin_top = 2.0
-margin_right = 96.0
-margin_bottom = 42.0
-tint_progress = Color( 0.141176, 0.141176, 0.141176, 1 )
-
-[node name="health_over" parent="HealthBar" index="1"]
-margin_left = -29.0
-margin_top = 3.0
-margin_right = 96.0
-margin_bottom = 43.0
-
-[node name="HpLabel" parent="HealthBar" index="4"]
-margin_left = -20.0
-margin_top = 28.0
-margin_right = -2.0
-margin_bottom = 42.0
-
-[node name="current_hp" parent="HealthBar" index="5"]
-margin_left = -4.0
-margin_top = 28.0
-margin_right = 49.0
-margin_bottom = 42.0
-percent_visible = 1.0
-
-[connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
-[connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
-[connection signal="timeout" from="slide_delay" to="." method="_on_slide_delay_timeout"]
-[connection signal="timeout" from="Camera2D/camera_timer" to="." method="_on_camera_timer_timeout"]
+[connection signal="value_changed" from="HealthBar/health_under" to="." method="_on_health_under_value_changed"]
+[connection signal="value_changed" from="HealthBar/health_over" to="." method="_on_health_over_value_changed"]
 [connection signal="timeout" from="Area2D/attacking_1" to="." method="_on_attacking_1_timeout"]
 [connection signal="timeout" from="Area2D/attacking_2" to="." method="_on_attacking_2_timeout"]
 [connection signal="timeout" from="Area2D/attacking_3" to="." method="_on_attacking_3_timeout"]
-[connection signal="timeout" from="Tween/Timer" to="." method="_on_climb_timeout"]
+[connection signal="timeout" from="Tween/climbing_timer" to="." method="_on_climbing_timer_timeout"]
+[connection signal="timeout" from="Tween/inmunity_timer" to="." method="_on_inmunity_timer_timeout"]
+[connection signal="timeout" from="Camera2D/camera_timer" to="." method="_on_camera_timer_timeout"]
+[connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
+[connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
+[connection signal="timeout" from="slide_delay" to="." method="_on_slide_delay_timeout"]
 
 [editable path="HealthBar"]

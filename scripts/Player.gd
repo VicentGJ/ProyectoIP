@@ -10,17 +10,29 @@ var sliding = false
 var crouching = false
 var attacking = false
 var falling = false
-var running = false
 var looking_up = false
 var climbing = false
+var dead = false
+var inmunity = false
+
+
+onready var playerSprite = $Sprite
+onready var climb_ray1 = $ray_to_climb
+onready var climb_ray2 = $ray_to_climb_2
+onready var climb_ray3 = $ray_to_climb_3
+onready var climb_ray4 = $ray_to_climb_4
+onready var playerCollision = $Player_area
+onready var attackArea_1 = $Area2D/attack_area1
+onready var attackArea_2 = $Area2D/attack_area2
+onready var particles_slide = $slide_particles
+onready var particles_death = $death_particles
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 func restore_playerProperty():
-	$Player_area.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
-	$Player_area.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
-	$Player_area.disabled = false                  #reactivar collision shape
-	
+	playerCollision.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
+	playerCollision.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
+	playerCollision.disabled = false                  #reactivar collision shape
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900
 	
@@ -29,20 +41,22 @@ func restore_playerProperty():
 	set_collision_layer(1)                         #restaurar capa de collision del personaje
 	set_collision_mask(1)                          #restaurar mascara de collision del personaje
 	
-	$ray_to_climb.set_collision_mask(1)            #restaurar mascara de collision de los raycast
-	$ray_to_climb_2.set_collision_mask(1)
-	$ray_to_climb_3.set_collision_mask(1)
+	climb_ray1.set_collision_mask(1)            #restaurar mascara de collision de los raycast
+	climb_ray2.set_collision_mask(1)
+	climb_ray3.set_collision_mask(1)
 	
-	if not $Sprite.flip_h:                    #ajustar los raycast para el climb
-		$ray_to_climb.set_cast_to(Vector2(22,-33))
-		$ray_to_climb_2.set_cast_to(Vector2(22,-25))
-		$ray_to_climb_3.set_cast_to(Vector2(25,-70))
+	if not playerSprite.flip_h:                    #ajustar los raycast para el climb
+		climb_ray1.set_cast_to(Vector2(21.5,-34.5))
+		climb_ray2.set_cast_to(Vector2(22,-25))
+		climb_ray3.set_cast_to(Vector2(30,-90))
 		$Camera2D.set_h_offset(300)                    #restaurar camara en X
+		particles_slide.set_position(Vector2(-12,39))
 	else:
-		$ray_to_climb.set_cast_to(Vector2(-22,-33))
-		$ray_to_climb_2.set_cast_to(Vector2(-22,-25))
-		$ray_to_climb_3.set_cast_to(Vector2(-25,-70))
-		$Camera2D.set_h_offset(-300)  
+		climb_ray1.set_cast_to(Vector2(-21.5,-34.5))
+		climb_ray2.set_cast_to(Vector2(-22,-25))
+		climb_ray3.set_cast_to(Vector2(-30,-90))
+		$Camera2D.set_h_offset(-300) 
+		particles_slide.set_position(Vector2(6,39)) 
 func player_movement(right, left):
 	if not sliding:
 		if right:
@@ -50,89 +64,87 @@ func player_movement(right, left):
 		elif left:
 			velocity.x -= speed
 	else:
-		if not $Sprite.flip_h:
-			velocity.x += speed
+		if not playerSprite.flip_h:
+			velocity.x += speed+200
 		else:
-			velocity.x -= speed
+			velocity.x -= speed+200
 		if is_on_wall():
-			if  $Sprite.flip_h:
+			if  playerSprite.flip_h:
 				$Tween.interpolate_property(self,"position", position,Vector2(position.x+1, position.y),$sliding.get_time_left(),Tween.TRANS_LINEAR)
 			else:
 				$Tween.interpolate_property(self,"position", position,Vector2(position.x-1, position.y),$sliding.get_time_left(),Tween.TRANS_LINEAR)
 			$Tween.start()
 func run_animation():
-	$Sprite.flip_h = velocity.x < 0
+	playerSprite.flip_h = velocity.x < 0
 	state_machine.travel("run")
-	running = true
 func idle_animation():
 	state_machine.travel("idle")
-	running = false
 func crouch_animation():
 	crouching = true
 	state_machine.travel("crouch")
-	$Player_area.shape.set_extents(Vector2(19.5,26.5))
-	$Player_area.set_position(Vector2(0.5, 15.5))
+	playerCollision.shape.set_extents(Vector2(19.5,26.5))
+	playerCollision.set_position(Vector2(0.5, 15.5))
 	if $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 		$Camera2D/camera_timer.start()
 func attack_animation():
 	attacking = true
 	if attack_counter == 1 and $attack_delay.get_time_left() == 0:
-		if $Sprite.flip_h == false:
-			$Area2D/attack_area1.shape.set_extents(Vector2(16.5,38.5))
-			$Area2D/attack_area2.shape.set_extents(Vector2(13,7))
-			$Area2D/attack_area1.set_position(Vector2(36.5,-5.5)) 
-			$Area2D/attack_area2.set_position(Vector2(7,-37))
+		if playerSprite.flip_h == false:
+			attackArea_1.shape.set_extents(Vector2(16.5,38.5))
+			attackArea_2.shape.set_extents(Vector2(13,7))
+			attackArea_1.set_position(Vector2(36.5,-5.5)) 
+			attackArea_2.set_position(Vector2(7,-37))
 		else:
-			$Area2D/attack_area1.shape.set_extents(Vector2(17,38.5))
-			$Area2D/attack_area2.shape.set_extents(Vector2(14.5,7))
-			$Area2D/attack_area1.set_position(Vector2(-36,-5.75)) 
-			$Area2D/attack_area2.set_position(Vector2(-4.5,-37))
+			attackArea_1.shape.set_extents(Vector2(17,38.5))
+			attackArea_2.shape.set_extents(Vector2(14.5,7))
+			attackArea_1.set_position(Vector2(-36,-5.75)) 
+			attackArea_2.set_position(Vector2(-4.5,-37))
 		state_machine.travel("attack_1")
 		attack_counter += 1
 		$attack_delay.start()
 		$Area2D/attacking_1.start()
 	elif attack_counter == 2 and $attack_delay.get_time_left() < 0.5:
-		if $Sprite.flip_h == false:
-			$Area2D/attack_area1.shape.set_extents(Vector2(15.5,35))
-			$Area2D/attack_area2.shape.set_extents(Vector2(16,12))
-			$Area2D/attack_area1.set_position(Vector2(35.5,7)) 
-			$Area2D/attack_area2.set_position(Vector2(-35,25))
+		if playerSprite.flip_h == false:
+			attackArea_1.shape.set_extents(Vector2(15.5,35))
+			attackArea_2.shape.set_extents(Vector2(16,12))
+			attackArea_1.set_position(Vector2(35.5,7)) 
+			attackArea_2.set_position(Vector2(-35,25))
 		else:
-			$Area2D/attack_area1.shape.set_extents(Vector2(16,35))
-			$Area2D/attack_area2.shape.set_extents(Vector2(15.5,11.5))
-			$Area2D/attack_area1.set_position(Vector2(-35,7)) 
-			$Area2D/attack_area2.set_position(Vector2(35.5,24.5))
+			attackArea_1.shape.set_extents(Vector2(16,35))
+			attackArea_2.shape.set_extents(Vector2(15.5,11.5))
+			attackArea_1.set_position(Vector2(-35,7)) 
+			attackArea_2.set_position(Vector2(35.5,24.5))
 		state_machine.travel("attack_2")
 		attack_counter += 1
 		$attack_delay.start()
 		$Area2D/attacking_2.start()
 	elif attack_counter == 3 and $attack_delay.get_time_left() < 0.65:
-		if $Sprite.flip_h == false:
-			$Area2D/attack_area1.shape.set_extents(Vector2(17.5,20.5))
-			$Area2D/attack_area2.shape.set_extents(Vector2(18,14.5))
-			$Area2D/attack_area1.set_position(Vector2(37.5,15.5)) 
-			$Area2D/attack_area2.set_position(Vector2(-37,18.5))
+		if playerSprite.flip_h == false:
+			attackArea_1.shape.set_extents(Vector2(17.5,20.5))
+			attackArea_2.shape.set_extents(Vector2(18,14.5))
+			attackArea_1.set_position(Vector2(37.5,15.5)) 
+			attackArea_2.set_position(Vector2(-37,18.5))
 		else:
-			$Area2D/attack_area1.shape.set_extents(Vector2(18,21.5))
-			$Area2D/attack_area2.shape.set_extents(Vector2(18,16.5))
-			$Area2D/attack_area1.set_position(Vector2(-37,14.5)) 
-			$Area2D/attack_area2.set_position(Vector2(38,20.75))
+			attackArea_1.shape.set_extents(Vector2(18,21.5))
+			attackArea_2.shape.set_extents(Vector2(18,16.5))
+			attackArea_1.set_position(Vector2(-37,14.5)) 
+			attackArea_2.set_position(Vector2(38,20.75))
 		state_machine.travel("attack_3")
 		attack_counter += 1
 		$attack_delay.start()
 		$Area2D/attacking_3.start()
 func air_attack_animation():
 	state_machine.travel("air_attack")
-	if $Sprite.flip_h == false:
-			$Area2D/attack_area1.shape.set_extents(Vector2(15.5,35))
-			$Area2D/attack_area2.shape.set_extents(Vector2(16,12))
-			$Area2D/attack_area1.set_position(Vector2(35.5,7)) 
-			$Area2D/attack_area2.set_position(Vector2(-35,25))
+	if playerSprite.flip_h == false:
+			attackArea_1.shape.set_extents(Vector2(15.5,35))
+			attackArea_2.shape.set_extents(Vector2(16,12))
+			attackArea_1.set_position(Vector2(35.5,7)) 
+			attackArea_2.set_position(Vector2(-35,25))
 	else:
-			$Area2D/attack_area1.shape.set_extents(Vector2(16,35))
-			$Area2D/attack_area2.shape.set_extents(Vector2(15.5,11.5))
-			$Area2D/attack_area1.set_position(Vector2(-35,7)) 
-			$Area2D/attack_area2.set_position(Vector2(35.5,24.5))
+			attackArea_1.shape.set_extents(Vector2(16,35))
+			attackArea_2.shape.set_extents(Vector2(15.5,11.5))
+			attackArea_1.set_position(Vector2(-35,7)) 
+			attackArea_2.set_position(Vector2(35.5,24.5))
 func do_jump():
 	velocity.y = jump_speed 
 	state_machine.travel("fall")
@@ -146,41 +158,42 @@ func slide_animation():
 		$slide_delay.start()
 		set_collision_layer(2) #cambiar la capa y mascara de colision del player
 		set_collision_mask(2)
-		$ray_to_climb.set_collision_mask(3) #cambiar la capa y mascara de colision de los ray
-		$ray_to_climb_2.set_collision_mask(3)
-		$ray_to_climb_3.set_collision_mask(3)
-		speed += 200
+		climb_ray1.set_collision_mask(3) #cambiar la capa y mascara de colision de los ray
+		climb_ray2.set_collision_mask(3)
+		climb_ray3.set_collision_mask(3)
 		state_machine.travel("slide")
-		$Player_area.shape.set_extents(Vector2(20,22))
-		$Player_area.set_position(Vector2(0, 19))
+		playerCollision.shape.set_extents(Vector2(20,22))
+		playerCollision.set_position(Vector2(0, 19))
+		particles_slide.set_emitting(true)
 func climb_animation():
 	climbing = true
 	state_machine.travel("climb")
-	if not $Sprite.flip_h:
+	if not playerSprite.flip_h:
 		$Tween.interpolate_property(self,"position", position, Vector2(position.x + 20, position.y - 60), 0.299)
 	else:
 		$Tween.interpolate_property(self,"position", position, Vector2(position.x - 20, position.y - 60), 0.299)
 	$Tween.start()
-	$Tween/Timer.start()
+	$Tween/climbing_timer.start()
 
 func hurt_animation():
 	state_machine.travel("hurt")
-#	if not $Sprite.flip_h:
-#		$Tween.interpolate_property(self,"position", position, Vector2(position.x - 30, position.y), 0.3,Tween.TRANS_LINEAR,Tween.EASE_OUT)
-#	else:
-#		$Tween.interpolate_property(self,"position", position, Vector2(position.x + 30, position.y), 0.3,Tween.TRANS_LINEAR,Tween.EASE_OUT)
-#	$Tween.start()
-	#	add: tween para cambiar el color del player a rojo con la transicion bouncy, o atransparente para inmunidad
-	$HealthBar.hp_change(10) #cambiar parametro por el daño del enemigo(valores positivos hacen daño, y viceversa para curar)
+	$Tween.interpolate_property(playerSprite, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE,Tween.EASE_OUT_IN)
+	$Tween.start()
+	$Tween/inmunity_timer.start()
+	inmunity = true
+	set_collision_layer(2) #cambiar la capa y mascara de colision del player( inmunidad)
+	set_collision_mask(2)
+
 func death_animation():
 	state_machine.travel("die")
-	#endgame and respawn to an especific location (tween can do it...or tweentoo ...i think)
-	pass
-
+	particles_death.set_emitting(true)
+	dead = true
+	if not is_on_floor():
+		move_and_collide(Vector2(0,10)) #para si muere en el aire no se quede flotando
 
 func get_input():
 	velocity.x = 0
-
+	
 	var current_anim = state_machine.get_current_node()
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
@@ -191,17 +204,18 @@ func get_input():
 	var attack = Input.is_action_just_pressed("attack")
 	
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
-		hurt_animation()
+		$HealthBar.hp_change(10) #cambiar por la señal de colision de daño o curacion [ > 0 damage, < 0 heal ]t
 	
-	if not crouching and not sliding and not attacking and not looking_up and not climbing:
+	if not crouching and not sliding and not attacking and not looking_up and not climbing and not inmunity:
 		restore_playerProperty()
+		
 
 	if current_anim == "attack_1" or current_anim == "attack_2" or current_anim == "attack_3" or current_anim == "air_attack":
-		$Area2D/attack_area1.disabled = false
-		$Area2D/attack_area2.disabled = false
+		attackArea_1.disabled = false
+		attackArea_2.disabled = false
 	else:
-		$Area2D/attack_area1.disabled = true
-		$Area2D/attack_area2.disabled = true
+		attackArea_1.disabled = true
+		attackArea_2.disabled = true
 		
 	if not crouch and attack_counter == 1 and $attack_delay.get_time_left() == 0 and not $Tween.is_active():
 		player_movement(right, left)
@@ -234,14 +248,20 @@ func get_input():
 		fall_animation()
 		if falling and attack:
 			air_attack_animation()
-	if  not $ray_to_climb_3.is_colliding() and $ray_to_climb_2.is_colliding() and not $ray_to_climb.is_colliding() and (right or left) and not sliding:
+	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
 		climb_animation()
 	
 func _physics_process(delta):
-
-	get_input()
-	velocity.y += gravity * delta
-	velocity = move_and_slide(velocity, Vector2(0, -1))
+	
+	if not dead:
+		get_input()
+		velocity.y += gravity * delta
+		velocity = move_and_slide(velocity, Vector2(0, -1))
+	else:
+		
+#		respawn etc
+#		dead = false ( maybe after a timer so the animations can happen...or maybe when user press a button)
+		pass
 
 #------------------------------------------------------------conecctions
 func _on_sliding_timeout():
@@ -265,5 +285,20 @@ func _on_camera_timer_timeout():
 	elif looking_up:
 		$Camera2D.offset_v = -0.5
 
-func _on_climb_timeout():
-	climbing = false
+func _on_climbing_timer_timeout():
+		climbing = false
+
+func _on_health_under_value_changed(value):
+	if value == 0:
+
+		death_animation() 
+func _on_health_over_value_changed(value):
+	if value > 0: 
+		hurt_animation()
+	elif value < 0:
+#		maybe add healing particles
+		pass
+func _on_inmunity_timer_timeout():
+	inmunity = false
+	set_collision_layer(1) #cambiar la capa y mascara de colision del player( inmunidad)
+	set_collision_mask(1)
