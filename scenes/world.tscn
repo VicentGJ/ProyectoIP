@@ -31,17 +31,7 @@ position = Vector2( -12, -7 )
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 752, 10 )
 
-[node name="Sprite" parent="player" index="0"]
-flip_h = true
-region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
-
-[node name="AnimationPlayer" parent="player" index="2"]
-anims/hurt = SubResource( 2 )
-
-[node name="AnimationTree" parent="player" index="3"]
-parameters/playback = SubResource( 1 )
-
-[node name="HealthBar" parent="player" index="14"]
+[node name="HealthBar" parent="player" index="0"]
 margin_left = -425.0
 margin_top = -319.0
 margin_right = -425.0
@@ -61,9 +51,19 @@ margin_bottom = 90.0
 
 [node name="current_hp" parent="player/HealthBar" index="5"]
 margin_left = -48.0
-margin_top = 67.0
-margin_right = 65.0
-margin_bottom = 104.0
+margin_top = 69.0
+margin_right = 47.0
+margin_bottom = 101.0
+
+[node name="Sprite" parent="player" index="4"]
+flip_h = true
+region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
+
+[node name="AnimationPlayer" parent="player" index="6"]
+anims/hurt = SubResource( 2 )
+
+[node name="AnimationTree" parent="player" index="7"]
+parameters/playback = SubResource( 1 )
 
 [node name="Light2D3" parent="player" index="17"]
 show_behind_parent = true

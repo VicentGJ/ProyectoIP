@@ -15,7 +15,6 @@ var climbing = false
 var dead = false
 var inmunity = false
 
-
 onready var playerSprite = $Sprite
 onready var climb_ray1 = $ray_to_climb
 onready var climb_ray2 = $ray_to_climb_2
@@ -177,20 +176,16 @@ func climb_animation():
 
 func hurt_animation():
 	state_machine.travel("hurt")
-	$Tween.interpolate_property(playerSprite, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE,Tween.EASE_OUT_IN)
+	$Tween.interpolate_property(playerSprite, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE)
 	$Tween.start()
 	$Tween/inmunity_timer.start()
 	inmunity = true
 	set_collision_layer(2) #cambiar la capa y mascara de colision del player( inmunidad)
 	set_collision_mask(2)
-
 func death_animation():
 	state_machine.travel("die")
 	particles_death.set_emitting(true)
 	dead = true
-	if not is_on_floor():
-		move_and_collide(Vector2(0,10)) #para si muere en el aire no se quede flotando
-
 func get_input():
 	velocity.x = 0
 	
@@ -204,7 +199,7 @@ func get_input():
 	var attack = Input.is_action_just_pressed("attack")
 	
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
-		$HealthBar.hp_change(10) #cambiar por la señal de colision de daño o curacion [ > 0 damage, < 0 heal ]t
+		$HealthBar.hp_change(80) #cambiar por la señal de colision de daño o curacion [ > 0 damage, < 0 heal ]t
 	
 	if not crouching and not sliding and not attacking and not looking_up and not climbing and not inmunity:
 		restore_playerProperty()
@@ -252,17 +247,14 @@ func get_input():
 		climb_animation()
 	
 func _physics_process(delta):
-	
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 	else:
-		
-#		respawn etc
-#		dead = false ( maybe after a timer so the animations can happen...or maybe when user press a button)
-		pass
-
+		move_and_collide(Vector2(0,10))
+	print(particles_death.get_amount())
+	
 #------------------------------------------------------------conecctions
 func _on_sliding_timeout():
 	sliding = false
@@ -300,5 +292,5 @@ func _on_health_over_value_changed(value):
 		pass
 func _on_inmunity_timer_timeout():
 	inmunity = false
-	set_collision_layer(1) #cambiar la capa y mascara de colision del player( inmunidad)
+	set_collision_layer(1) #reset la capa y mascara de colision del player(inmunidad)
 	set_collision_mask(1)

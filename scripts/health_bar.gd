@@ -25,20 +25,20 @@ func hp_change(change):
 
 
 func set_hpColor(health):
-	if health < health_over.max_value * 0.2:
+	if health <= health_over.max_value * 0.2:
 		health_over.tint_progress = Color.red
 		hp_pulse.interpolate_property(health_over, "tint_progress", Color.darkred, Color.red, 0.4, Tween.TRANS_SINE,Tween.EASE_IN_OUT)
 		hp_pulse.start()
 
-	elif health < health_over.max_value * 0.4:
+	elif health <= health_over.max_value * 0.4:
 		health_over.tint_progress = Color.orangered
 		hp_pulse.set_active(false)
 
-	elif health < health_over.max_value * 0.5:
+	elif health <= health_over.max_value * 0.5:
 		health_over.tint_progress = Color.orange
 		hp_pulse.set_active(false)
 
-	elif health < health_over.max_value * 0.6:
+	elif health <= health_over.max_value * 0.6:
 		health_over.tint_progress = Color.yellow
 		hp_pulse.set_active(false)
 
