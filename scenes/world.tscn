@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://sprites/light.png" type="Texture" id=2]
-[ext_resource path="res://sprites/spot.png" type="Texture" id=3]
 [ext_resource path="res://scenes/area+enemy_testingNODE.tscn" type="PackedScene" id=74]
 
 [sub_resource type="Animation" id=2]
@@ -31,7 +29,21 @@ position = Vector2( -12, -7 )
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 752, 10 )
 
-[node name="HealthBar" parent="player" index="0"]
+[node name="AnimationPlayer" parent="player" index="0"]
+anims/hurt = SubResource( 2 )
+
+[node name="AnimationTree" parent="player" index="1"]
+parameters/playback = SubResource( 1 )
+
+[node name="Light2D3" parent="player" index="10"]
+show_behind_parent = true
+light_mask = 3
+
+[node name="Sprite" parent="player" index="14"]
+flip_h = true
+region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
+
+[node name="HealthBar" parent="player" index="17"]
 margin_left = -425.0
 margin_top = -319.0
 margin_right = -425.0
@@ -54,35 +66,6 @@ margin_left = -48.0
 margin_top = 69.0
 margin_right = 47.0
 margin_bottom = 101.0
-
-[node name="Sprite" parent="player" index="4"]
-flip_h = true
-region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
-
-[node name="AnimationPlayer" parent="player" index="6"]
-anims/hurt = SubResource( 2 )
-
-[node name="AnimationTree" parent="player" index="7"]
-parameters/playback = SubResource( 1 )
-
-[node name="Light2D3" parent="player" index="17"]
-show_behind_parent = true
-light_mask = 3
-
-[node name="Light2D2" type="Light2D" parent="."]
-position = Vector2( -364, 372 )
-scale = Vector2( 0.414063, 0.416504 )
-texture = ExtResource( 2 )
-color = Color( 0, 0.160784, 0.894118, 1 )
-shadow_enabled = true
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Light2D2"]
-position = Vector2( 0, 15.1944 )
-scale = Vector2( 1, 0.762587 )
-texture = ExtResource( 3 )
 
 [editable path="player"]
 [editable path="player/HealthBar"]

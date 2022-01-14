@@ -45,14 +45,14 @@ func restore_playerProperty():
 	climb_ray3.set_collision_mask(1)
 	
 	if not playerSprite.flip_h:                    #ajustar los raycast para el climb
-		climb_ray1.set_cast_to(Vector2(21.5,-34.5))
-		climb_ray2.set_cast_to(Vector2(22,-25))
+		climb_ray1.set_cast_to(Vector2(22,0))
+		climb_ray2.set_cast_to(Vector2(22,0))
 		climb_ray3.set_cast_to(Vector2(30,-90))
 		$Camera2D.set_h_offset(300)                    #restaurar camara en X
 		particles_slide.set_position(Vector2(-12,39))
 	else:
-		climb_ray1.set_cast_to(Vector2(-21.5,-34.5))
-		climb_ray2.set_cast_to(Vector2(-22,-25))
+		climb_ray1.set_cast_to(Vector2(-22,0))
+		climb_ray2.set_cast_to(Vector2(-22,0))
 		climb_ray3.set_cast_to(Vector2(-30,-90))
 		$Camera2D.set_h_offset(-300) 
 		particles_slide.set_position(Vector2(6,39)) 
@@ -134,7 +134,7 @@ func attack_animation():
 		$Area2D/attacking_3.start()
 func air_attack_animation():
 	state_machine.travel("air_attack")
-	if playerSprite.flip_h == false:
+	if not playerSprite.flip_h:
 			attackArea_1.shape.set_extents(Vector2(15.5,35))
 			attackArea_2.shape.set_extents(Vector2(16,12))
 			attackArea_1.set_position(Vector2(35.5,7)) 
@@ -149,7 +149,6 @@ func do_jump():
 	state_machine.travel("fall")
 func fall_animation():
 	state_machine.travel("fall")
-	falling = true
 func slide_animation():
 	if $slide_delay.get_time_left() == 0 and $attack_delay.get_time_left() == 0:
 		sliding = true
@@ -167,10 +166,7 @@ func slide_animation():
 func climb_animation():
 	climbing = true
 	state_machine.travel("climb")
-	if not playerSprite.flip_h:
-		$Tween.interpolate_property(self,"position", position, Vector2(position.x + 20, position.y - 60), 0.299)
-	else:
-		$Tween.interpolate_property(self,"position", position, Vector2(position.x - 20, position.y - 60), 0.299)
+	$Tween.interpolate_property(self,"position", position, Vector2(position.x, position.y - 54), 0.2)
 	$Tween.start()
 	$Tween/climbing_timer.start()
 
@@ -240,7 +236,9 @@ func get_input():
 				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
 					$Camera2D/camera_timer.start()
 	elif  not sliding and not climbing:
-		fall_animation()
+		if falling:
+			fall_animation()
+		falling = true
 		if falling and attack:
 			air_attack_animation()
 	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
@@ -253,7 +251,6 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 	else:
 		move_and_collide(Vector2(0,10))
-	print(particles_death.get_amount())
 	
 #------------------------------------------------------------conecctions
 func _on_sliding_timeout():
@@ -278,7 +275,12 @@ func _on_camera_timer_timeout():
 		$Camera2D.offset_v = -0.5
 
 func _on_climbing_timer_timeout():
-		climbing = false
+	if not playerSprite.flip_h:
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x + 20, position.y), 0.1)
+	else:
+		$Tween.interpolate_property(self,"position", position, Vector2(position.x - 20, position.y), 0.1)
+	$Tween.start()
+	climbing = false
 
 func _on_health_under_value_changed(value):
 	if value == 0:
