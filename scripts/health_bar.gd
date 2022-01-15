@@ -1,6 +1,6 @@
 extends Control
 
-onready var health_over = $health_over
+onready var health_over = $health_under/health_over
 onready var health_under = $health_under
 onready var update_tween = $update_hp_bar
 onready var hp_pulse = $low_hp_pulse
@@ -48,4 +48,4 @@ func set_hpColor(health):
 
 
 func numeric_hpCount(value):
-	$current_hp.text = "HP " + str(round(value)) + " / " + str($health_over.max_value)
+	$health_under/current_hp.text = "HP " + str(round(value)) + " / " + str(health_over.max_value)

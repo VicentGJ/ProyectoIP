@@ -35,20 +35,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="health_over" type="TextureProgress" parent="."]
+[node name="health_over" type="TextureProgress" parent="health_under"]
 anchor_left = 0.1
 anchor_top = 0.183
 anchor_right = 0.1
 anchor_bottom = 0.183
-margin_left = -0.400002
-margin_top = 0.199992
-margin_right = 124.6
-margin_bottom = 40.2
-rect_scale = Vector2( 2, 1 )
+margin_left = -12.5
+margin_top = -7.32001
+margin_right = 112.5
+margin_bottom = 32.68
 value = 100.0
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
 tint_progress = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="current_hp" type="Label" parent="health_under"]
+margin_left = 2.0
+margin_top = 20.0
+margin_right = 97.0
+margin_bottom = 52.0
+rect_scale = Vector2( 0.5, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "HP 100 / 100"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -60,16 +73,3 @@ __meta__ = {
 [node name="low_hp_pulse" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
-
-[node name="current_hp" type="Label" parent="."]
-margin_left = 106.0
-margin_top = 127.0
-margin_right = 201.0
-margin_bottom = 159.0
-custom_fonts/font = SubResource( 1 )
-text = "HP 100 / 100"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}

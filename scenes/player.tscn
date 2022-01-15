@@ -388,10 +388,6 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=84]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
 switch_mode = 2
 
@@ -418,6 +414,10 @@ switch_mode = 2
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=18]
 states/air_attack/node = SubResource( 86 )
 states/air_attack/position = Vector2( -408.313, -122.856 )
@@ -432,11 +432,11 @@ states/attack_3/position = Vector2( -395.313, 156.144 )
 states/climb/node = SubResource( 23 )
 states/climb/position = Vector2( 179.687, -314.783 )
 states/combo1/node = SubResource( 79 )
-states/combo1/position = Vector2( -624.876, -199.856 )
+states/combo1/position = Vector2( -586.876, -225.856 )
 states/combo2/node = SubResource( 80 )
 states/combo2/position = Vector2( -763.876, -147.487 )
 states/combo3/node = SubResource( 81 )
-states/combo3/position = Vector2( -624.876, -92.856 )
+states/combo3/position = Vector2( -586.876, -122.856 )
 states/crouch/node = SubResource( 24 )
 states/crouch/position = Vector2( 108.687, 203.835 )
 states/die/node = SubResource( 25 )
@@ -459,10 +459,10 @@ states/run/node = SubResource( 32 )
 states/run/position = Vector2( 108.687, -79.856 )
 states/slide/node = SubResource( 33 )
 states/slide/position = Vector2( 317.687, 31.144 )
-transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "combo3", "combo1", SubResource( 84 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "idle", "hurt", SubResource( 93 ), "hurt", "die", SubResource( 94 ), "hurt", "idle", SubResource( 95 ), "air_dash", "fall", SubResource( 96 ), "attack_3", "idle_sword", SubResource( 97 ) ]
+transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "idle", "hurt", SubResource( 93 ), "hurt", "die", SubResource( 94 ), "hurt", "idle", SubResource( 95 ), "air_dash", "fall", SubResource( 96 ), "attack_3", "idle_sword", SubResource( 97 ), "combo3", "combo1", SubResource( 100 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -849.162, -93.6176 )
+graph_offset = Vector2( -849.162, -474.608 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
@@ -665,31 +665,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="HealthBar" parent="." instance=ExtResource( 3 )]
-margin_left = -457.0
-margin_top = -268.0
-margin_right = -457.0
-margin_bottom = -268.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="health_under" parent="HealthBar" index="0"]
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 3 )]
+
+[node name="health_under" parent="CanvasLayer/HealthBar" index="0"]
 margin_left = -29.0
 margin_top = 2.0
 margin_right = 96.0
 margin_bottom = 42.0
 tint_progress = Color( 0.141176, 0.141176, 0.141176, 1 )
-
-[node name="health_over" parent="HealthBar" index="1"]
-anchor_left = 0.0
-margin_left = -29.0
-margin_top = 3.0
-margin_right = 96.0
-margin_bottom = 43.0
-
-[node name="current_hp" parent="HealthBar" index="5"]
-margin_left = -23.0
-margin_top = 24.0
-margin_right = 72.0
-margin_bottom = 56.0
 
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
@@ -700,7 +685,6 @@ margin_bottom = 56.0
 [connection signal="timeout" from="Area2D/attacking_2" to="." method="_on_attacking_2_timeout"]
 [connection signal="timeout" from="Area2D/attacking_3" to="." method="_on_attacking_3_timeout"]
 [connection signal="timeout" from="Camera2D/camera_timer" to="." method="_on_camera_timer_timeout"]
-[connection signal="value_changed" from="HealthBar/health_under" to="." method="_on_health_under_value_changed"]
-[connection signal="value_changed" from="HealthBar/health_over" to="." method="_on_health_over_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/HealthBar/health_under" to="." method="_on_health_under_value_changed"]
 
-[editable path="HealthBar"]
+[editable path="CanvasLayer/HealthBar"]
