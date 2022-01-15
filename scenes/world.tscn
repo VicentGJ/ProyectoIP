@@ -43,29 +43,5 @@ light_mask = 3
 flip_h = true
 region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
 
-[node name="HealthBar" parent="player" index="17"]
-margin_left = -425.0
-margin_top = -319.0
-margin_right = -425.0
-margin_bottom = -319.0
-
-[node name="health_under" parent="player/HealthBar" index="0"]
-margin_left = -53.0
-margin_top = 50.0
-margin_right = 72.0
-margin_bottom = 90.0
-
-[node name="health_over" parent="player/HealthBar" index="1"]
-margin_left = -53.0
-margin_top = 50.0
-margin_right = 72.0
-margin_bottom = 90.0
-
-[node name="current_hp" parent="player/HealthBar" index="5"]
-margin_left = -48.0
-margin_top = 69.0
-margin_right = 47.0
-margin_bottom = 101.0
-
 [editable path="player"]
-[editable path="player/HealthBar"]
+[editable path="player/CanvasLayer/HealthBar"]

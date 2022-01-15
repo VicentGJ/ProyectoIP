@@ -195,7 +195,7 @@ func get_input():
 	var attack = Input.is_action_just_pressed("attack")
 	
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
-		$HealthBar.hp_change(80) #cambiar por la señal de colision de daño o curacion [ > 0 damage, < 0 heal ]t
+		$CanvasLayer/HealthBar.hp_change(15) #cambiar por la señal de colision de daño o curacion [ > 0 damage, < 0 heal ]
 	
 	if not crouching and not sliding and not attacking and not looking_up and not climbing and not inmunity:
 		restore_playerProperty()
