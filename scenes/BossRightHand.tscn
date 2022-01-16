@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/BossRightHand.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
 
 [sub_resource type="AnimationNodeStateMachine" id=1]
 
@@ -10,12 +14,20 @@
 extents = Vector2( 55, 71.5 )
 
 [node name="BossRightHand" type="KinematicBody2D"]
+position = Vector2( 111, 317 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.499996, -2.98023e-07 )
+scale = Vector2( 1.70313, 2.21875 )
+texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite")
+anims/RESET = SubResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 1 )
@@ -24,5 +36,4 @@ active = true
 parameters/playback = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 438, 128 )
 shape = SubResource( 3 )

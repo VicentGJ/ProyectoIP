@@ -6,7 +6,11 @@ onready var update_tween = $update_hp_bar
 onready var hp_pulse = $low_hp_pulse
 
 var will_pulse = false
+var state_machine
 
+func _ready():
+	state_machine = $AnimationTree.get("parameters/playback")
+	
 func hp_change(change):
 	if change > 0: #damage
 		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - change, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
@@ -14,7 +18,8 @@ func hp_change(change):
 		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
 		$numeric_hp_update.start()
 		health_over.value -= change
-	
+		state_machine.travel("shake")
+		
 	elif change < 0: #healing
 		health_under.value -= change
 		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
