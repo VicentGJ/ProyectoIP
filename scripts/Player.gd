@@ -287,8 +287,10 @@ func _on_health_under_value_changed(value):
 
 		death_animation() 
 func _on_health_over_value_changed(value):
+	
 	if value > 0: 
 		hurt_animation()
+		$hea
 	elif value < 0:
 #		maybe add healing particles
 		pass
