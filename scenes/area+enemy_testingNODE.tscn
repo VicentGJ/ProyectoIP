@@ -133,6 +133,7 @@ texture = ExtResource( 2 )
 shape = SubResource( 16 )
 
 [node name="Light2D" type="Light2D" parent="RIGID"]
+light_mask = 3
 position = Vector2( 33, 1.99997 )
 texture = ExtResource( 4 )
 shadow_enabled = true
