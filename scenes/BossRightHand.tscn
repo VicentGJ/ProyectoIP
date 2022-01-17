@@ -37,3 +37,9 @@ parameters/playback = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[node name="StandartMove" type="Tween" parent="."]
+
+[node name="HorizontalAttack" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="StandartMove" to="." method="_on_StandartMove_tween_completed"]
