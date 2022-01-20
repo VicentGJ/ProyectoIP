@@ -681,6 +681,8 @@ __meta__ = {
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 3 )]
 
 [node name="health_under" parent="CanvasLayer/HealthBar" index="0"]
+margin_left = 34.416
+margin_right = 159.417
 tint_progress = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [node name="health_over" parent="CanvasLayer/HealthBar/health_under" index="0"]

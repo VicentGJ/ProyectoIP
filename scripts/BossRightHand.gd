@@ -1,18 +1,19 @@
 extends KinematicBody2D
-var movementLimit
+
 var handLife = 21 #7 full combos of the player
-onready var handMove = $StandartMove
-onready var horizontalAttack = $HorizontalAttack
+
 func _ready():
 	pass
 
-#func damage
+#func doDamage():
+#	change for a signal with the int value of the damage
 
-func damaged():
-	handLife -= 1
+#func damaged():
+#	handLife -= 1
+#	if player attack area collides with self collision area
 
-func horizontalAttack():
-	horizontalAttack.interpolate_property(self,"position:x",position.x,position.x + 200, 1,Tween.TRANS_BACK,Tween.EASE_IN)
-	
+#func horizontalAttack():
+#	pass
+
 func _process(delta):
 	pass

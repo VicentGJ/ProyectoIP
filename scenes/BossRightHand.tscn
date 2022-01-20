@@ -1,12 +1,204 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/BossRightHand.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 111, 317 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("..:motion/sync_to_physics")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "horizontalAttack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.5, 0.6, 0.7, 1.1, 1.4, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 155, 260 ), Vector2( 155, 260 ), Vector2( 44, 398 ), Vector2( 50, 402 ), Vector2( 63, 412 ), Vector2( 74, 426 ), Vector2( 91, 437 ), Vector2( 800, 437 ), Vector2( 800, 437 ), Vector2( 692.5, 431 ), Vector2( 155, 250 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "idle"
+length = 4.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 155, 250 ), Vector2( 155, 270 ), Vector2( 155, 250 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "verticalAttack_1"
+length = 2.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.61, 1, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 155, 250 ), Vector2( 155, 121 ), Vector2( 155, 491 ), Vector2( 155, 491 ), Vector2( 155, 250 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.16, 0.22, 0.28, 0.33, 0.39 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "verticalAttack_2"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.89, 1.1, 1.49, 2.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 155, 250 ), Vector2( 337, 250 ), Vector2( 337, 200 ), Vector2( 337, 491 ), Vector2( 337, 491 ), Vector2( 155, 250 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "horizontalAttack"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "verticalAttack_1"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "verticalAttack_2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
 
 [sub_resource type="AnimationNodeStateMachine" id=1]
+states/horizontalAttack/node = SubResource( 10 )
+states/horizontalAttack/position = Vector2( 712, 76 )
+states/idle/node = SubResource( 11 )
+states/idle/position = Vector2( 527, 76 )
+states/verticalAttack_1/node = SubResource( 12 )
+states/verticalAttack_1/position = Vector2( 343, 178 )
+states/verticalAttack_2/node = SubResource( 13 )
+states/verticalAttack_2/position = Vector2( 527, 178 )
+transitions = [ "idle", "horizontalAttack", SubResource( 14 ), "horizontalAttack", "idle", SubResource( 15 ), "idle", "verticalAttack_1", SubResource( 16 ), "verticalAttack_1", "idle", SubResource( 17 ), "verticalAttack_2", "idle", SubResource( 18 ), "idle", "verticalAttack_2", SubResource( 19 ) ]
+start_node = "idle"
+graph_offset = Vector2( 0, 33.2494 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=2]
 
@@ -15,31 +207,31 @@ extents = Vector2( 55, 71.5 )
 
 [node name="BossRightHand" type="KinematicBody2D"]
 position = Vector2( 111, 317 )
+motion/sync_to_physics = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0.499996, -2.98023e-07 )
-scale = Vector2( 1.70313, 2.21875 )
+position = Vector2( 1.62492, -2.98023e-07 )
+scale = Vector2( 1.73828, 2.21875 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite")
 anims/RESET = SubResource( 4 )
+anims/horizontalAttack = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/verticalAttack_1 = SubResource( 8 )
+anims/verticalAttack_2 = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 1 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
 
-[node name="StandartMove" type="Tween" parent="."]
-
-[node name="HorizontalAttack" type="Tween" parent="."]
-
-[connection signal="tween_completed" from="StandartMove" to="." method="_on_StandartMove_tween_completed"]
+[node name="damaged" type="Tween" parent="."]

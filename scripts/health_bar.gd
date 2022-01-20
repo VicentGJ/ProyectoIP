@@ -13,7 +13,7 @@ func _ready():
 	
 func hp_change(change):
 	if change > 0: #damage
-		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - change, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
+		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - change, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
 		update_tween.start()
 		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
 		$numeric_hp_update.start()
@@ -22,9 +22,9 @@ func hp_change(change):
 		
 	elif change < 0: #healing
 		health_under.value -= change
-		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.2)
+		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
 		update_tween.start()
-	
+		$health_under/Particles2D.set_emitting(true)
 	$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	set_hpColor(health_over.value)
 
