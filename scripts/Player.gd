@@ -3,6 +3,7 @@ extends KinematicBody2D
 export (int) var speed = 200
 export (int) var jump_speed = -450
 export (int) var gravity = 900
+export (int) var attack_mov = 5
 var velocity = Vector2()
 var state_machine
 var attack_counter = 1
@@ -95,11 +96,13 @@ func attack_animation():
 			attackArea_2.shape.set_extents(Vector2(13,7))
 			attackArea_1.set_position(Vector2(36.5,-5.5)) 
 			attackArea_2.set_position(Vector2(7,-37))
+			position.x += attack_mov
 		else:
 			attackArea_1.shape.set_extents(Vector2(17,38.5))
 			attackArea_2.shape.set_extents(Vector2(14.5,7))
 			attackArea_1.set_position(Vector2(-36,-5.75)) 
 			attackArea_2.set_position(Vector2(-4.5,-37))
+			position.x -= attack_mov
 		state_machine.travel("attack_1")
 		attack_counter += 1
 		$attack_delay.start()
@@ -110,11 +113,13 @@ func attack_animation():
 			attackArea_2.shape.set_extents(Vector2(16,12))
 			attackArea_1.set_position(Vector2(35.5,7)) 
 			attackArea_2.set_position(Vector2(-35,25))
+			position.x += attack_mov
 		else:
 			attackArea_1.shape.set_extents(Vector2(16,35))
 			attackArea_2.shape.set_extents(Vector2(15.5,11.5))
 			attackArea_1.set_position(Vector2(-35,7)) 
 			attackArea_2.set_position(Vector2(35.5,24.5))
+			position.x -= attack_mov
 		state_machine.travel("attack_2")
 		attack_counter += 1
 		$attack_delay.start()
@@ -125,11 +130,13 @@ func attack_animation():
 			attackArea_2.shape.set_extents(Vector2(18,14.5))
 			attackArea_1.set_position(Vector2(37.5,15.5)) 
 			attackArea_2.set_position(Vector2(-37,18.5))
+			position.x += attack_mov
 		else:
 			attackArea_1.shape.set_extents(Vector2(18,21.5))
 			attackArea_2.shape.set_extents(Vector2(18,16.5))
 			attackArea_1.set_position(Vector2(-37,14.5)) 
 			attackArea_2.set_position(Vector2(38,20.75))
+			position.x -= attack_mov
 		state_machine.travel("attack_3")
 		attack_counter += 1
 		$attack_delay.start()
