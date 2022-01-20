@@ -1,26 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/area+enemy_testingNODE.tscn" type="PackedScene" id=74]
-
-[sub_resource type="Animation" id=2]
-resource_name = "hurt"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 59, 60, 61 ]
-}
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -29,27 +11,12 @@ tracks/0/keys = {
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 590, 254 )
 
-[node name="AnimationPlayer" parent="player" index="0"]
-anims/hurt = SubResource( 2 )
-
-[node name="AnimationTree" parent="player" index="1"]
-parameters/playback = SubResource( 1 )
-
-[node name="Light2D3" parent="player" index="10"]
-show_behind_parent = true
-light_mask = 3
-
-[node name="Camera2D" parent="player" index="13"]
-visible = true
-
-[node name="Sprite" parent="player" index="14"]
-flip_h = true
-region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 2 )]
 margin_right = -770.0
 margin_bottom = -552.0
 
-[editable path="player"]
+[connection signal="healthChange" from="player" to="CanvasLayer/HealthBar" method="_on_player_healthChange"]
+[connection signal="overHPchanged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_overHPchanged"]
+[connection signal="underHPchanged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_underHPchanged"]
