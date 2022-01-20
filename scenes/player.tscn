@@ -1,8 +1,7 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/adventurer-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://sprites/light.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=3]
@@ -496,8 +495,6 @@ orbit_velocity_random = 0.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 19.5, 36 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=101]
-
 [node name="player" type="KinematicBody2D" groups=["player"]]
 position = Vector2( 515, 296 )
 script = ExtResource( 1 )
@@ -676,24 +673,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 3 )]
-
-[node name="health_under" parent="CanvasLayer/HealthBar" index="0"]
-margin_left = 34.416
-margin_right = 159.417
-tint_progress = Color( 0.141176, 0.141176, 0.141176, 1 )
-
-[node name="health_over" parent="CanvasLayer/HealthBar/health_under" index="0"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-
-[node name="AnimationTree" parent="CanvasLayer/HealthBar" index="5"]
-parameters/playback = SubResource( 101 )
-
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
 [connection signal="timeout" from="slide_delay" to="." method="_on_slide_delay_timeout"]
@@ -703,7 +682,3 @@ parameters/playback = SubResource( 101 )
 [connection signal="timeout" from="Area2D/attacking_2" to="." method="_on_attacking_2_timeout"]
 [connection signal="timeout" from="Area2D/attacking_3" to="." method="_on_attacking_3_timeout"]
 [connection signal="timeout" from="Camera2D/camera_timer" to="." method="_on_camera_timer_timeout"]
-[connection signal="value_changed" from="CanvasLayer/HealthBar/health_under" to="." method="_on_health_under_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/HealthBar/health_under/health_over" to="." method="_on_health_over_value_changed"]
-
-[editable path="CanvasLayer/HealthBar"]
