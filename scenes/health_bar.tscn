@@ -115,10 +115,8 @@ __meta__ = {
 }
 
 [node name="health_under" type="TextureProgress" parent="."]
-margin_left = 102.0
-margin_top = 110.0
-margin_right = 227.001
-margin_bottom = 150.0
+margin_right = 125.001
+margin_bottom = 40.0
 rect_scale = Vector2( 2, 1 )
 value = 100.0
 texture_under = ExtResource( 4 )
@@ -130,14 +128,14 @@ __meta__ = {
 }
 
 [node name="health_over" type="TextureProgress" parent="health_under"]
-anchor_left = 0.1
-anchor_top = 0.183
-anchor_right = 0.1
-anchor_bottom = 0.183
-margin_left = 0.000142093
-margin_top = -1.0252e-05
-margin_right = 125.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -62.5
+margin_top = -20.0
+margin_right = 62.5
+margin_bottom = 20.0
 value = 100.0
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
@@ -189,5 +187,4 @@ anims/standart_position = SubResource( 4 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 9 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 10 )
