@@ -6,6 +6,8 @@ onready var update_tween = $update_hp_bar
 onready var hp_pulse = $low_hp_pulse
 
 signal healthChange(change)
+signal overHPchanged(value)
+signal underHPchanged(value)
 
 var will_pulse = false
 var state_machine
@@ -57,3 +59,11 @@ func _on_player_healthChange(value):
 		$health_under/Particles2D.set_emitting(true)
 	$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	set_hpColor(health_over.value)
+
+
+func _on_health_under_value_changed(value):
+	emit_signal("underHPchanged", value)
+
+
+func _on_health_over_value_changed(value):
+	emit_signal("overHPchanged", value)

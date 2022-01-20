@@ -188,3 +188,6 @@ anims/standart_position = SubResource( 4 )
 tree_root = SubResource( 9 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 10 )
+
+[connection signal="value_changed" from="health_under" to="." method="_on_health_under_value_changed"]
+[connection signal="value_changed" from="health_under/health_over" to="." method="_on_health_over_value_changed"]

@@ -284,14 +284,15 @@ func _on_climbing_timer_timeout():
 	$Tween.start()
 	climbing = false
 
-func _on_health_under_value_changed(value):
-	if value == 0:
-		death_animation() 
-func _on_health_over_value_changed(value):
-	if value > 0: 
-		hurt_animation()
-
 func _on_inmunity_timer_timeout():
 	inmunity = false
 	set_collision_layer(1) #reset la capa y mascara de colision del player(quitar inmunidad)
 	set_collision_mask(1)
+
+func _on_HealthBar_overHPchanged(value):
+	if value > 0: 
+		hurt_animation()
+
+func _on_HealthBar_underHPchanged(value):
+	if value == 0:
+		death_animation() 
