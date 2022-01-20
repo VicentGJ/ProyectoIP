@@ -1,6 +1,6 @@
 [gd_scene load_steps=78 format=2]
 
-[ext_resource path="res://scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/adventurer-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://sprites/light.png" type="Texture" id=4]
 
