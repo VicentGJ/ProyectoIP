@@ -26,6 +26,8 @@ onready var attackArea_2 = $Area2D/attack_area2
 onready var particles_slide = $slide_particles
 onready var particles_death = $death_particles
 
+signal healthChange(value)
+
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 func restore_playerProperty():
@@ -195,7 +197,7 @@ func get_input():
 	var attack = Input.is_action_just_pressed("attack")
 	
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
-		$CanvasLayer/HealthBar.hp_change(15) #cambiar por la señal de colision de daño o curacion [ > 0 damage, < 0 heal ]
+		emit_signal("healthChange",15)
 	
 	if not crouching and not sliding and not attacking and not looking_up and not climbing and not inmunity:
 		restore_playerProperty()

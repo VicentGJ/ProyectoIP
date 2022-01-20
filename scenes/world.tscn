@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/area+enemy_testingNODE.tscn" type="PackedScene" id=74]
 
 [sub_resource type="Animation" id=2]
@@ -23,13 +24,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
-[node name="testingWorld" type="Node"]
+[node name="testingWorld" type="Node2D"]
 
 [node name="areas" parent="." instance=ExtResource( 74 )]
-position = Vector2( -12, -7 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1286, 463 )
+position = Vector2( 590, 254 )
 
 [node name="AnimationPlayer" parent="player" index="0"]
 anims/hurt = SubResource( 2 )
@@ -48,14 +48,24 @@ visible = true
 flip_h = true
 region_rect = Rect2( 155.443, 301.766, 189.514, 35.4755 )
 
-[node name="HealthBar" parent="player/CanvasLayer" index="0"]
-margin_left = -83.0
-margin_top = -89.0
-margin_right = -83.0
-margin_bottom = -89.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="AnimationTree" parent="player/CanvasLayer/HealthBar" index="5"]
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 2 )]
+margin_right = -770.0
+margin_bottom = -552.0
+
+[node name="health_under" parent="CanvasLayer/HealthBar" index="0"]
+anchor_bottom = 1.0
+margin_bottom = 110.0
+
+[node name="health_over" parent="CanvasLayer/HealthBar/health_under" index="0"]
+margin_left = -12.4999
+margin_top = -8.78401
+margin_right = 112.5
+margin_bottom = 31.216
+
+[node name="AnimationTree" parent="CanvasLayer/HealthBar" index="5"]
 parameters/playback = SubResource( 3 )
 
 [editable path="player"]
-[editable path="player/CanvasLayer/HealthBar"]
+[editable path="CanvasLayer/HealthBar"]
