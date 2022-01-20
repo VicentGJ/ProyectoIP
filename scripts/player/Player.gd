@@ -15,6 +15,7 @@ var looking_up = false
 var climbing = false
 var dead = false
 var inmunity = false
+var dimension = 1
 
 onready var playerSprite = $Sprite
 onready var climb_ray1 = $ray_to_climb
@@ -26,11 +27,23 @@ onready var attackArea_1 = $Area2D/attack_area1
 onready var attackArea_2 = $Area2D/attack_area2
 onready var particles_slide = $slide_particles
 onready var particles_death = $death_particles
+onready var flash = $flash
 
 signal healthChange(value)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
+func changeWorld(dimension):
+	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE)
+	$Tween.start()
+	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
+	$Tween.start()
+	if dimension == 1:
+		dimension = 2
+#		subir 
+	else:
+		dimension = 1
+#		bajar
 func restore_playerProperty():
 	playerCollision.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
 	playerCollision.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
@@ -178,7 +191,6 @@ func climb_animation():
 	$Tween.interpolate_property(self,"position", position, Vector2(position.x, position.y - 54), 0.2)
 	$Tween.start()
 	$Tween/climbing_timer.start()
-
 func hurt_animation():
 	state_machine.travel("hurt")
 	$Tween.interpolate_property(playerSprite, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE)
@@ -202,9 +214,13 @@ func get_input():
 	var jump = Input.is_action_just_pressed("jump")
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
+	var change_world = Input.is_action_just_pressed("flash")
 	
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
 		emit_signal("healthChange",15)
+	
+	if change_world:
+		changeWorld(dimension)
 	
 	if not crouching and not sliding and not attacking and not looking_up and not climbing and not inmunity:
 		restore_playerProperty()
@@ -252,7 +268,7 @@ func get_input():
 			air_attack_animation()
 	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
 		climb_animation()
-	
+
 func _physics_process(delta):
 	if not dead:
 		get_input()

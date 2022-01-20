@@ -8,13 +8,13 @@
 
 [node name="areas" parent="." instance=ExtResource( 1 )]
 
-[node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 590, 254 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 3 )]
 
-[connection signal="healthChange" from="player" to="CanvasLayer/HealthBar" method="_on_player_healthChange"]
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 590, 254 )
+
 [connection signal="overHPchanged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_overHPchanged"]
 [connection signal="underHPchanged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_underHPchanged"]
+[connection signal="healthChange" from="player" to="CanvasLayer/HealthBar" method="_on_player_healthChange"]
