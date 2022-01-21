@@ -598,6 +598,7 @@ __meta__ = {
 }
 
 [node name="ray_to_slide" type="RayCast2D" parent="."]
+visible = false
 enabled = true
 cast_to = Vector2( 0, -50 )
 __meta__ = {
@@ -605,6 +606,7 @@ __meta__ = {
 }
 
 [node name="ray_to_slide_2" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 17, 0 )
 enabled = true
 cast_to = Vector2( 0, -50 )
@@ -613,6 +615,7 @@ __meta__ = {
 }
 
 [node name="ray_to_slide_3" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( -18, 0 )
 enabled = true
 cast_to = Vector2( 0, -50 )

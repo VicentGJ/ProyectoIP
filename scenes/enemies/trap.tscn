@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 27.5, 40.375 )
+
+[node name="trap" type="Area2D"]
+position = Vector2( 491, 468 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -38.625 )
+shape = SubResource( 23 )
+
+[node name="reactivate" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

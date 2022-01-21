@@ -12,5 +12,4 @@ func _on_Area2D_body_entered(body):
 		canTrigger = false
 
 func _on_reactivate_timeout():
-	$trap/CollisionShape2D.set_disabled(false)
 	canTrigger = true

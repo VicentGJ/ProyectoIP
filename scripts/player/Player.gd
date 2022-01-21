@@ -4,6 +4,7 @@ export (int) var speed = 200
 export (int) var jump_speed = -450
 export (int) var gravity = 900
 export (int) var attack_mov = 5
+
 var velocity = Vector2()
 var state_machine
 var attack_counter = 1
@@ -15,6 +16,7 @@ var climbing = false
 var dead = false
 var inmunity = false
 var dimension = 1
+var currentMoney  = 0
 
 onready var playerSprite = $Sprite
 onready var climb_ray1 = $ray_to_climb
@@ -31,6 +33,7 @@ onready var particles_slide = $slide_particles
 onready var particles_death = $death_particles
 onready var flash = $flash
 
+signal collect()
 signal healthChange(value)
 signal dead()
 
@@ -226,7 +229,7 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	var change_dimension = Input.is_action_just_pressed("flash")
-	
+	var collect = Input.is_action_just_pressed("collect")
 
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
 		emit_signal("healthChange",-20)
@@ -278,6 +281,7 @@ func get_input():
 		climb_animation()
 
 func _physics_process(delta):
+	print(currentMoney)
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta
@@ -328,3 +332,11 @@ func _on_HealthBar_damaged(currentHP):
 		hurt_animation()
 	if currentHP == 0:
 		death_animation() 
+
+
+func _on_coin_collected(coinValue):
+	currentMoney += coinValue
+
+
+func _on_coin_body_entered(body):
+	emit_signal("collect")

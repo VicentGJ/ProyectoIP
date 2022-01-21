@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/coin.tscn" type="PackedScene" id=4]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -34,13 +35,19 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 10240.0
-margin_bottom = 6000.0
+margin_right = 4096.0
+margin_bottom = 2400.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 59, 339 )
 
+[node name="coin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1610, 426 )
+
 [connection signal="trapTriggered" from="areas" to="player" method="_on_areas_trapTriggered"]
 [connection signal="trapTriggered" from="areas2" to="player" method="_on_areas_trapTriggered"]
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
+[connection signal="collect" from="player" to="coin" method="_on_player_collect"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
+[connection signal="body_entered" from="coin" to="player" method="_on_coin_body_entered"]
+[connection signal="collected" from="coin" to="player" method="_on_coin_collected"]
