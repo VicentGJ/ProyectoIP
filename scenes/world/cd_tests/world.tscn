@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://scenes/props/maxHP_powerUP.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/props/attackIncrease.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/world/cd_tests/platform.tscn" type="PackedScene" id=9]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 70.6116
 
 [node name="testingWorld" type="Node2D"]
 
@@ -40,8 +43,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 22528.0
-margin_bottom = 13200.0
+margin_right = 26624.0
+margin_bottom = 15600.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
@@ -75,6 +78,14 @@ position = Vector2( 1253, 387 )
 
 [node name="platform2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1397, 387 )
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2( 1339, 295 )
+shape = SubResource( 1 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
