@@ -3,7 +3,8 @@ extends KinematicBody2D
 export (int) var speed = 200
 export (int) var jump_speed = -450
 export (int) var gravity = 900
-export (int) var attack_mov = 5
+export (int) var attack_mov = 8
+export (int) var attackDamage = 20
 
 var velocity = Vector2()
 var state_machine
@@ -36,7 +37,7 @@ onready var flash = $flash
 signal collect()
 signal healthChange(value)
 signal dead()
-signal damage(damage)
+signal damage(attackDamage)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -135,6 +136,7 @@ func attack_animation():
 		attack_counter += 1
 		$attack_delay.start()
 		$Area2D/attacking_1.start()
+		emit_signal("damage",attackDamage)
 	elif attack_counter == 2 and $attack_delay.get_time_left() < 0.5:
 		if playerSprite.flip_h == false:
 			attackArea_1.shape.set_extents(Vector2(15.5,35))
@@ -152,6 +154,7 @@ func attack_animation():
 		attack_counter += 1
 		$attack_delay.start()
 		$Area2D/attacking_2.start()
+		emit_signal("damage",attackDamage)
 	elif attack_counter == 3 and $attack_delay.get_time_left() < 0.65:
 		if playerSprite.flip_h == false:
 			attackArea_1.shape.set_extents(Vector2(17.5,20.5))
@@ -169,6 +172,7 @@ func attack_animation():
 		attack_counter += 1
 		$attack_delay.start()
 		$Area2D/attacking_3.start()
+		emit_signal("damage",attackDamage)
 func air_attack_animation():
 	state_machine.travel("air_attack")
 	if not playerSprite.flip_h:
