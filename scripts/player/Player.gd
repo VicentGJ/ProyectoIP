@@ -32,6 +32,7 @@ onready var particles_death = $death_particles
 onready var flash = $flash
 
 signal healthChange(value)
+signal dead()
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -50,8 +51,14 @@ func changeDimension():
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
 	$Tween.start()
 func restore_playerProperty():
-	playerCollision.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
-	playerCollision.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
+	if not slide_ray1.is_colliding() and not slide_ray2.is_colliding() and not slide_ray3.is_colliding():
+		playerCollision.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
+		playerCollision.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
+	else:
+		if not playerSprite.flip_h:
+			position.x += 10
+		else:
+			position.x -= 10
 	playerCollision.disabled = false                  #reactivar collision shape
 	speed = 200                                    #restaurar velocidad 
 	gravity = 900
@@ -207,6 +214,7 @@ func death_animation():
 	state_machine.travel("die")
 	particles_death.set_emitting(true)
 	dead = true
+	emit_signal("dead")
 func get_input():
 	velocity.x = 0
 	
@@ -218,7 +226,7 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	var change_dimension = Input.is_action_just_pressed("flash")
-	var raysColliding = slide_ray1.is_colliding() or slide_ray2.is_colliding() or slide_ray3.is_colliding()
+	
 
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
 		emit_signal("healthChange",-20)
@@ -275,6 +283,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 	else:
+# warning-ignore:return_value_discarded
 		move_and_collide(Vector2(0,10))
 	
 #------------------------------------------------------------conections
@@ -306,6 +315,8 @@ func _on_inmunity_timer_timeout():
 	set_collision_layer(1) #reset la capa y mascara de colision del player(quitar inmunidad)
 	set_collision_mask(1)
 
+# warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func _on_DimensionChange_tween_completed(object, key):
 	$Camera2D.set_enable_follow_smoothing(true)
 

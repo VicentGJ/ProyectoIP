@@ -29,9 +29,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 3 )]
+[node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 10240.0
@@ -42,5 +42,5 @@ position = Vector2( 59, 339 )
 
 [connection signal="trapTriggered" from="areas" to="player" method="_on_areas_trapTriggered"]
 [connection signal="trapTriggered" from="areas2" to="player" method="_on_areas_trapTriggered"]
-[connection signal="damaged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_damaged"]
-[connection signal="healthChange" from="player" to="CanvasLayer/HealthBar" method="_on_player_healthChange"]
+[connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
+[connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
