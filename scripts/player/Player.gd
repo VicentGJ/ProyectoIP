@@ -11,7 +11,6 @@ var sliding = false
 var crouching = false
 var attacking = false
 var falling = false
-var looking_up = false
 var climbing = false
 var dead = false
 var inmunity = false
@@ -33,17 +32,20 @@ signal healthChange(value)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
-func changeWorld(dimension):
+func changeDimension():
+	$Camera2D.set_enable_follow_smoothing(false)
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE)
 	$Tween.start()
-	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
-	$Tween.start()
+	
 	if dimension == 1:
 		dimension = 2
-#		subir 
-	else:
+		position.y -= 2270
+	elif dimension == 2:
 		dimension = 1
-#		bajar
+		position.y += 2280
+		
+	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
+	$Tween.start()
 func restore_playerProperty():
 	playerCollision.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
 	playerCollision.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
@@ -99,8 +101,6 @@ func crouch_animation():
 	state_machine.travel("crouch")
 	playerCollision.shape.set_extents(Vector2(19.5,26.5))
 	playerCollision.set_position(Vector2(0.5, 15.5))
-	if $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
-		$Camera2D/camera_timer.start()
 func attack_animation():
 	attacking = true
 	if attack_counter == 1 and $attack_delay.get_time_left() == 0:
@@ -210,19 +210,18 @@ func get_input():
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	var crouch = Input.is_action_pressed("ui_down")
-	var up = Input.is_action_pressed("ui_up")
 	var jump = Input.is_action_just_pressed("jump")
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
-	var change_world = Input.is_action_just_pressed("flash")
+	var change_dimension = Input.is_action_just_pressed("flash")
 	
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
-		emit_signal("healthChange",15)
+		emit_signal("healthChange",-20)
+
+	if change_dimension and not climbing and not sliding and not $Tween.is_active():
+		changeDimension()
 	
-	if change_world:
-		changeWorld(dimension)
-	
-	if not crouching and not sliding and not attacking and not looking_up and not climbing and not inmunity:
+	if not crouching and not sliding and not attacking and not climbing and not inmunity:
 		restore_playerProperty()
 		
 
@@ -247,7 +246,6 @@ func get_input():
 		else:
 			crouching = false
 			falling = false
-			looking_up = false
 			if attack_counter == 4:
 				attack_counter = 1
 			if attack:
@@ -256,10 +254,7 @@ func get_input():
 				do_jump()
 			elif (slide) and (right or left) and (not crouch):
 				slide_animation()
-			elif up:
-				looking_up = true
-				if looking_up and $Camera2D/camera_timer.get_time_left() == 0 and $Camera2D.offset_v == 0:
-					$Camera2D/camera_timer.start()
+
 	elif  not sliding and not climbing:
 		if falling:
 			fall_animation()
@@ -277,7 +272,7 @@ func _physics_process(delta):
 	else:
 		move_and_collide(Vector2(0,10))
 	
-#------------------------------------------------------------conecctions
+#------------------------------------------------------------conections
 func _on_sliding_timeout():
 	sliding = false
 	restore_playerProperty()
@@ -293,12 +288,6 @@ func _on_attacking_2_timeout():
 func _on_attacking_3_timeout():
 	attacking = false
 
-func _on_camera_timer_timeout():
-	if crouching:
-		$Camera2D.offset_v = 0.5
-	elif looking_up:
-		$Camera2D.offset_v = -0.5
-
 func _on_climbing_timer_timeout():
 	if not playerSprite.flip_h:
 		$Tween.interpolate_property(self,"position", position, Vector2(position.x + 20, position.y), 0.1)
@@ -312,10 +301,15 @@ func _on_inmunity_timer_timeout():
 	set_collision_layer(1) #reset la capa y mascara de colision del player(quitar inmunidad)
 	set_collision_mask(1)
 
-func _on_HealthBar_overHPchanged(value):
-	if value > 0: 
-		hurt_animation()
+func _on_DimensionChange_tween_completed(object, key):
+	$Camera2D.set_enable_follow_smoothing(true)
 
-func _on_HealthBar_underHPchanged(value):
-	if value == 0:
+
+func _on_areas_trapTriggered(damage):
+	emit_signal("healthChange",damage)
+
+func _on_HealthBar_damaged(currentHP):
+	if currentHP != 0:
+		hurt_animation()
+	if currentHP == 0:
 		death_animation() 

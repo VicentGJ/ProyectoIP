@@ -8,13 +8,39 @@
 
 [node name="areas" parent="." instance=ExtResource( 1 )]
 
+[node name="dimension 1" type="Label" parent="areas"]
+margin_right = 89.0
+margin_bottom = 14.0
+rect_scale = Vector2( 9, 8 )
+text = "DIMENSION 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="areas2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 23, -2209 )
+
+[node name="dimension 2" type="Label" parent="areas2"]
+margin_right = 89.0
+margin_bottom = 14.0
+rect_scale = Vector2( 9, 8 )
+text = "DIMENSION 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 9216.0
+margin_bottom = 5400.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 590, 254 )
+position = Vector2( 59, 339 )
 
-[connection signal="overHPchanged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_overHPchanged"]
-[connection signal="underHPchanged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_underHPchanged"]
+[connection signal="trapTriggered" from="areas" to="player" method="_on_areas_trapTriggered"]
+[connection signal="trapTriggered" from="areas2" to="player" method="_on_areas_trapTriggered"]
+[connection signal="damaged" from="CanvasLayer/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="healthChange" from="player" to="CanvasLayer/HealthBar" method="_on_player_healthChange"]

@@ -4,18 +4,30 @@ onready var health_over = $health_under/health_over
 onready var health_under = $health_under
 onready var update_tween = $update_hp_bar
 onready var hp_pulse = $low_hp_pulse
-
-signal healthChange(change)
-signal overHPchanged(value)
-signal underHPchanged(value)
+onready var animPlay = $AnimationPlayer
 
 var will_pulse = false
-var state_machine
 
-func _ready():
-	state_machine = $AnimationTree.get("parameters/playback")
+signal damaged(currentHP)
+
+func _on_player_healthChange(value):
+	if value > 0: #damage
+		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
+		update_tween.start()
+		health_over.value -= value
+		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
+		$numeric_hp_update.start()
+		animPlay.play("shake")
+		emit_signal("damaged",health_over.value)
+	if value < 0: #healing
+		health_under.value -= value
+		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
+		update_tween.start()
+		$health_under/Particles2D.set_emitting(true)
+		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_over.value, health_under.value,0.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
+		$numeric_hp_update.start()
+	set_hpColor(health_over.value)
 	
-
 func set_hpColor(health):
 	if health <= health_over.max_value * 0.2:
 		health_over.tint_progress = Color.red
@@ -37,33 +49,5 @@ func set_hpColor(health):
 	else:
 		health_over.tint_progress = Color.green
 		hp_pulse.set_active(false)
-
-
 func numeric_hpCount(value):
 	$health_under/current_hp.text = "HP " + str(round(value)) + " / " + str(health_over.max_value)
-
-
-func _on_player_healthChange(value):
-	if value > 0: #damage
-		update_tween.interpolate_property(health_under, "value", health_over.value,health_over.value - value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
-		update_tween.start()
-		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
-		$numeric_hp_update.start()
-		health_over.value -= value
-		state_machine.travel("shake")
-		
-	elif value < 0: #healing
-		health_under.value -= value
-		update_tween.interpolate_property(health_over, "value", health_over.value,health_under.value, 0.4,Tween.TRANS_LINEAR,Tween.EASE_IN,0.5)
-		update_tween.start()
-		$health_under/Particles2D.set_emitting(true)
-	$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
-	set_hpColor(health_over.value)
-
-
-func _on_health_under_value_changed(value):
-	emit_signal("underHPchanged", value)
-
-
-func _on_health_over_value_changed(value):
-	emit_signal("overHPchanged", value)
