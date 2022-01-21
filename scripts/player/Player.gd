@@ -61,7 +61,7 @@ func restore_playerProperty():
 	if not slide_ray1.is_colliding() and not slide_ray2.is_colliding() and not slide_ray3.is_colliding():
 		playerCollision.shape.set_extents(Vector2(19.5,36)) #restaurar tamaño de la collision shape
 		playerCollision.set_position(Vector2(0.5, 6))       #restaurar posicion de la collision shape
-	else:
+	elif is_on_floor():
 		if not playerSprite.flip_h:
 			position.x += 10
 		else:
@@ -78,7 +78,8 @@ func restore_playerProperty():
 	climb_ray1.set_collision_mask(1)            #restaurar mascara de collision de los raycast
 	climb_ray2.set_collision_mask(1)
 	climb_ray3.set_collision_mask(1)
-	
+	climb_ray4.set_collision_mask(1)
+
 	if not playerSprite.flip_h:                    #ajustar los raycast para el climb
 		climb_ray1.set_cast_to(Vector2(22,0))
 		climb_ray2.set_cast_to(Vector2(22,0))
@@ -91,6 +92,7 @@ func restore_playerProperty():
 		climb_ray3.set_cast_to(Vector2(-30,-90))
 		$Camera2D.set_h_offset(-300) 
 		particles_slide.set_position(Vector2(6,39)) 
+
 func player_movement(right, left):
 	if not sliding:
 		if right:
@@ -198,9 +200,9 @@ func slide_animation():
 		$slide_delay.start()
 		set_collision_layer(2) #cambiar la capa y mascara de colision del player
 		set_collision_mask(2)
-		climb_ray1.set_collision_mask(3) #cambiar la capa y mascara de colision de los ray
-		climb_ray2.set_collision_mask(3)
-		climb_ray3.set_collision_mask(3)
+		climb_ray1.set_collision_mask(2) #cambiar la capa y mascara de colision de los ray
+		climb_ray2.set_collision_mask(2)
+		climb_ray3.set_collision_mask(2)
 		state_machine.travel("slide")
 		playerCollision.shape.set_extents(Vector2(20,22))
 		playerCollision.set_position(Vector2(0, 19))
@@ -238,7 +240,6 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	var change_dimension = Input.is_action_just_pressed("flash")
-	var collect = Input.is_action_just_pressed("collect")
 
 	if change_dimension and not climbing and not sliding and not $Tween.is_active():
 		changeDimension()
@@ -264,7 +265,6 @@ func get_input():
 	if is_on_floor():
 		if crouch:
 			crouch_animation()
-
 		else:
 			crouching = false
 			falling = false
@@ -286,15 +286,15 @@ func get_input():
 	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
 		climb_animation()
 func _physics_process(delta):
-	print(attackDamage)
-	print(money)
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 	else:
 		move_and_collide(Vector2(0,10))
+
 #------------------------------------------------------------conections
+#movements
 func _on_sliding_timeout():
 	sliding = false
 	restore_playerProperty()
@@ -322,6 +322,7 @@ func _on_inmunity_timer_timeout():
 	inmunity = false
 	set_collision_layer(1) #reset la capa y mascara de colision del player(quitar inmunidad)
 	set_collision_mask(1)
+	
 func _on_DimensionChange_tween_completed(object, key):
 	$Camera2D.set_enable_follow_smoothing(true)
 
@@ -342,3 +343,4 @@ func _on_maxHP_powerUP_increaseMaxHP(amount):
 	emit_signal("healthChange",-amount)
 func _on_attackIncrease_increaseAttack(amount):
 	attackDamage += amount
+	

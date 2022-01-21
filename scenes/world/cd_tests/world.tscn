@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/props/heal_item.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/props/maxHP_powerUP.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/props/attackIncrease.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/world/cd_tests/platform.tscn" type="PackedScene" id=9]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -39,8 +40,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 16384.0
-margin_bottom = 9600.0
+margin_right = 22528.0
+margin_bottom = 13200.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
@@ -68,6 +69,12 @@ position = Vector2( 1677, 425 )
 
 [node name="coin3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1782, 397 )
+
+[node name="platform" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1253, 387 )
+
+[node name="platform2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1397, 387 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
