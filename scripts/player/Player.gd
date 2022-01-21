@@ -21,6 +21,9 @@ onready var climb_ray1 = $ray_to_climb
 onready var climb_ray2 = $ray_to_climb_2
 onready var climb_ray3 = $ray_to_climb_3
 onready var climb_ray4 = $ray_to_climb_4
+onready var slide_ray1 = $ray_to_slide
+onready var slide_ray2 = $ray_to_slide_2
+onready var slide_ray3 = $ray_to_slide_3
 onready var playerCollision = $Player_area
 onready var attackArea_1 = $Area2D/attack_area1
 onready var attackArea_2 = $Area2D/attack_area2
@@ -91,6 +94,7 @@ func player_movement(right, left):
 			else:
 				$Tween.interpolate_property(self,"position", position,Vector2(position.x-1, position.y),$sliding.get_time_left(),Tween.TRANS_LINEAR)
 			$Tween.start()
+
 func run_animation():
 	playerSprite.flip_h = velocity.x < 0
 	state_machine.travel("run")
@@ -214,7 +218,8 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	var change_dimension = Input.is_action_just_pressed("flash")
-	
+	var raysColliding = slide_ray1.is_colliding() or slide_ray2.is_colliding() or slide_ray3.is_colliding()
+
 	if Input.is_action_just_pressed("test_action"): #t to test the animation
 		emit_signal("healthChange",-20)
 
@@ -303,7 +308,6 @@ func _on_inmunity_timer_timeout():
 
 func _on_DimensionChange_tween_completed(object, key):
 	$Camera2D.set_enable_follow_smoothing(true)
-
 
 func _on_areas_trapTriggered(damage):
 	emit_signal("healthChange",damage)
