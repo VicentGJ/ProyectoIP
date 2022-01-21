@@ -716,6 +716,9 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 scale = Vector2( 1.61667, 1.61667 )
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]

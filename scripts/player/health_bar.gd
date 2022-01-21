@@ -51,8 +51,12 @@ func set_hpColor(health):
 		hp_pulse.set_active(false)
 func numeric_hpCount(value):
 	$health_under/current_hp.text = "HP " + str(round(value)) + " / " + str(health_over.max_value)
-
+	$health_under/current_hp.set_modulate(health_over.get_tint_progress()) 
 
 func _on_player_maxHPincrease(amount):
 	health_over.max_value += amount
 	health_under.max_value += amount
+
+
+func _on_player_getMoney(amount):
+	$health_under/money.text = "GOLD " + str(round(amount))

@@ -17,7 +17,7 @@ var climbing = false
 var dead = false
 var inmunity = false
 var dimension = 1
-var currentMoney  = 0
+var money  = 0
 #var enemies_killed = 0
 
 onready var playerSprite = $Sprite
@@ -35,11 +35,11 @@ onready var particles_slide = $slide_particles
 onready var particles_death = $death_particles
 onready var flash = $flash
 
-signal collect()
 signal healthChange(value)
 signal dead()
 signal damage(attackDamage)
 signal maxHPincrease(amount)
+signal getMoney(amount)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -224,6 +224,9 @@ func death_animation():
 	particles_death.set_emitting(true)
 	dead = true
 	emit_signal("dead")
+func add_money(money):
+	self.money += money
+	emit_signal("getMoney", self.money)
 func get_input():
 	velocity.x = 0
 	
@@ -282,17 +285,15 @@ func get_input():
 			air_attack_animation()
 	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
 		climb_animation()
-
 func _physics_process(delta):
-	print(currentMoney)
+	print(attackDamage)
+	print(money)
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 	else:
-# warning-ignore:return_value_discarded
 		move_and_collide(Vector2(0,10))
-	
 #------------------------------------------------------------conections
 func _on_sliding_timeout():
 	sliding = false
@@ -321,31 +322,23 @@ func _on_inmunity_timer_timeout():
 	inmunity = false
 	set_collision_layer(1) #reset la capa y mascara de colision del player(quitar inmunidad)
 	set_collision_mask(1)
-
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
 func _on_DimensionChange_tween_completed(object, key):
 	$Camera2D.set_enable_follow_smoothing(true)
 
+#damage to player
 func _on_HealthBar_damaged(currentHP):
 	if currentHP != 0:
 		hurt_animation()
 	if currentHP == 0:
 		death_animation() 
-
-func _on_coin_collected(coinValue):
-	currentMoney += coinValue
-	
-func _on_coin_body_entered(body):
-	emit_signal("collect")
-
 func _on_trap_trapTriggered(damage):
 	emit_signal("healthChange",damage)
 
+#pickups
 func _on_heal_item_heal(healAmount):
 	emit_signal("healthChange",healAmount)
-
-
 func _on_maxHP_powerUP_increaseMaxHP(amount):
 	emit_signal("maxHPincrease", amount)
 	emit_signal("healthChange",-amount)
+func _on_attackIncrease_increaseAttack(amount):
+	attackDamage += amount

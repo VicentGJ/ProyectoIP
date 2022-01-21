@@ -1,7 +1,7 @@
 extends Area2D
 
 var canTrigger = true
-var trapDamage = 25
+export var trapDamage = 15
 
 signal trapTriggered(damage)
 
