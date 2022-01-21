@@ -106,7 +106,6 @@ func player_movement(right, left):
 			else:
 				$Tween.interpolate_property(self,"position", position,Vector2(position.x-1, position.y),$sliding.get_time_left(),Tween.TRANS_LINEAR)
 			$Tween.start()
-
 func run_animation():
 	playerSprite.flip_h = velocity.x < 0
 	state_machine.travel("run")
@@ -236,9 +235,6 @@ func get_input():
 	var change_dimension = Input.is_action_just_pressed("flash")
 	var collect = Input.is_action_just_pressed("collect")
 
-	if Input.is_action_just_pressed("test_action"): #t to test the animation
-		emit_signal("healthChange",-20)
-
 	if change_dimension and not climbing and not sliding and not $Tween.is_active():
 		changeDimension()
 	
@@ -343,3 +339,6 @@ func _on_coin_body_entered(body):
 
 func _on_trap_trapTriggered(damage):
 	emit_signal("healthChange",damage)
+
+func _on_heal_item_heal(healAmount):
+	emit_signal("healthChange",healAmount)

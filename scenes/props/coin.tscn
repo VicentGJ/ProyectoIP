@@ -20,8 +20,15 @@ scale = Vector2( 0.4375, 0.4375 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 one_way_collision_margin = 128.0
+
+[node name="right" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -20, 0 )
+
+[node name="left" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 20, 0 )
 
 [connection signal="timeout" from="queueFreeTimer" to="." method="_on_queueFree_Timer_timeout"]

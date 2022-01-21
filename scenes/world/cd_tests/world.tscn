@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/props/coin.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/enemies/trap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/props/heal_item.tscn" type="PackedScene" id=6]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -36,21 +37,42 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 6144.0
-margin_bottom = 3600.0
+margin_right = 7168.0
+margin_bottom = 4200.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
 
 [node name="coin" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1610, 426 )
+position = Vector2( 1579, 430 )
+
+[node name="coin2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1653, 430 )
+
+[node name="coin3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1726, 430 )
+
+[node name="heal_item" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1456, 555 )
+
+[node name="heal_item2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1856, 555 )
 
 [node name="trap" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1282, 571 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="collect" from="player" to="coin" method="_on_player_collect"]
+[connection signal="collect" from="player" to="heal_item" method="_on_player_collect"]
+[connection signal="collect" from="player" to="coin2" method="_on_player_collect"]
+[connection signal="collect" from="player" to="coin3" method="_on_player_collect"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
 [connection signal="body_entered" from="coin" to="player" method="_on_coin_body_entered"]
 [connection signal="collected" from="coin" to="player" method="_on_coin_collected"]
+[connection signal="body_entered" from="coin2" to="player" method="_on_coin_body_entered"]
+[connection signal="collected" from="coin2" to="player" method="_on_coin_collected"]
+[connection signal="body_entered" from="coin3" to="player" method="_on_coin_body_entered"]
+[connection signal="collected" from="coin3" to="player" method="_on_coin_collected"]
+[connection signal="heal" from="heal_item" to="player" method="_on_heal_item_heal"]
+[connection signal="heal" from="heal_item2" to="player" method="_on_heal_item_heal"]
 [connection signal="trapTriggered" from="trap" to="player" method="_on_trap_trapTriggered"]
