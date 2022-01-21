@@ -18,6 +18,7 @@ var dead = false
 var inmunity = false
 var dimension = 1
 var currentMoney  = 0
+#var enemies_killed = 0
 
 onready var playerSprite = $Sprite
 onready var climb_ray1 = $ray_to_climb
@@ -38,6 +39,7 @@ signal collect()
 signal healthChange(value)
 signal dead()
 signal damage(attackDamage)
+signal maxHPincrease(amount)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -342,3 +344,8 @@ func _on_trap_trapTriggered(damage):
 
 func _on_heal_item_heal(healAmount):
 	emit_signal("healthChange",healAmount)
+
+
+func _on_maxHP_powerUP_increaseMaxHP(amount):
+	emit_signal("maxHPincrease", amount)
+	emit_signal("healthChange",-amount)
