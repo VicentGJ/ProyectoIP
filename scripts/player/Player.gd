@@ -36,6 +36,7 @@ onready var flash = $flash
 signal collect()
 signal healthChange(value)
 signal dead()
+signal damage(damage)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -324,19 +325,17 @@ func _on_inmunity_timer_timeout():
 func _on_DimensionChange_tween_completed(object, key):
 	$Camera2D.set_enable_follow_smoothing(true)
 
-func _on_areas_trapTriggered(damage):
-	emit_signal("healthChange",damage)
-
 func _on_HealthBar_damaged(currentHP):
 	if currentHP != 0:
 		hurt_animation()
 	if currentHP == 0:
 		death_animation() 
 
-
 func _on_coin_collected(coinValue):
 	currentMoney += coinValue
-
-
+	
 func _on_coin_body_entered(body):
 	emit_signal("collect")
+
+func _on_trap_trapTriggered(damage):
+	emit_signal("healthChange",damage)
