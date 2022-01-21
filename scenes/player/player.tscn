@@ -623,6 +623,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="enemyCheck" type="RayCast2D" parent="."]
+enabled = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="slide_particles" type="Particles2D" parent="."]
 show_behind_parent = true
 position = Vector2( -12, 39 )

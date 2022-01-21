@@ -263,6 +263,11 @@ func get_input():
 			run_animation()
 		
 	if is_on_floor():
+		if $enemyCheck.get_collider() in get_tree().get_nodes_in_group("enemies"):
+			if not playerSprite.flip_h:
+				position.x += 50
+			else:
+				position.x -= 50
 		if crouch:
 			crouch_animation()
 		else:
@@ -280,6 +285,7 @@ func get_input():
 	elif  not sliding and not climbing:
 		if falling:
 			fall_animation()
+			
 		falling = true
 		if falling and attack:
 			air_attack_animation()
