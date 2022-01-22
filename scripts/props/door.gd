@@ -8,6 +8,7 @@ onready var door = $Sprite
 onready var player = get_parent().get_node("player")
 
 export var isDoorRare = false
+var opened = false
 
 func _ready():
 	if isDoorRare:
@@ -22,6 +23,7 @@ func open():
 		$AnimationPlayer.play("openRegular")
 
 func _process(delta):
-	if Input.is_action_just_pressed("interact") and (leftRay.get_collider() == player \
-	or rightRay.get_collider() == player):
+	if not opened and (Input.is_action_just_pressed("interact") and (leftRay.get_collider() == player \
+	or rightRay.get_collider() == player)):
 		open()
+		opened = true
