@@ -87,7 +87,6 @@ flip = true
 
 [node name="door" parent="." instance=ExtResource( 12 )]
 position = Vector2( 672, 335 )
-isDoorRare = true
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )

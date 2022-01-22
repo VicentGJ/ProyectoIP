@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/playerSlide.ogg-8b7b64b9939b32c9afec88b36676c1ce.oggstr"
+
+[deps]
+
+source_file="res://media/sound effects/player/playerSlide.ogg"
+dest_files=[ "res://.import/playerSlide.ogg-8b7b64b9939b32c9afec88b36676c1ce.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
