@@ -1,4 +1,4 @@
-extends Area2D
+extends StaticBody2D
 
 onready var leftRay = $left
 onready var rightRay = $right
@@ -11,13 +11,15 @@ export var isDoorRare = false
 
 func _ready():
 	if isDoorRare:
-		$Sprite.frame = 2
+		$Sprite.set_animation("door2")
 	else:
-		$Sprite.frame = 0
+		$Sprite.set_animation("door1")
 
 func open():
 	if isDoorRare:
-		$AnimationPlayer.play("open")
+		$AnimationPlayer.play("openRare")
+	else:
+		$AnimationPlayer.play("openRegular")
 
 func _process(delta):
 	if Input.is_action_just_pressed("interact") and (leftRay.get_collider() == player \

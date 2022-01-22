@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/props/keyRare.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/props/torch_1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/props/torch_2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/props/door.tscn" type="PackedScene" id=12]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -30,8 +31,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 34816.0
-margin_bottom = 20400.0
+margin_right = 37888.0
+margin_bottom = 22200.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
@@ -86,6 +87,10 @@ scale = Vector2( 1.44, 1.44 )
 position = Vector2( 374, 291 )
 scale = Vector2( 1.44, 1.44 )
 flip = true
+
+[node name="door" parent="." instance=ExtResource( 12 )]
+position = Vector2( 672, 335 )
+isDoorRare = true
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
