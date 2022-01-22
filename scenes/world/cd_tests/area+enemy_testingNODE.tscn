@@ -151,6 +151,7 @@ tile_data = PoolIntArray( 65547, 2, 0, 65548, 2, 0, 65549, 2, 0, 65550, 2, 0, 65
 
 [node name="RIGID" type="RigidBody2D" parent="." groups=["enemies"]]
 position = Vector2( 1241, 459 )
+scale = Vector2( 0.599995, 1 )
 mode = 1
 __meta__ = {
 "_edit_group_": true
