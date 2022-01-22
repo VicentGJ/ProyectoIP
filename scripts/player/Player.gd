@@ -237,9 +237,9 @@ func changeKeys(keyType, amount):
 		keys[1] += amount
 		emit_signal("getKey",1,amount)
 func changeStats(item, value):
-	if item == "heal":
+	if item == 0:
 		emit_signal("healthChange", -value)
-	elif item == "maxHP":
+	elif item == 1:
 		emit_signal("maxHPincrease", value)
 	else:
 		attackDamage += value
@@ -311,7 +311,6 @@ func get_input():
 		climb_animation()
 		
 func _physics_process(delta):
-	print(keys)
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta

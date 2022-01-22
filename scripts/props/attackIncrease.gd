@@ -8,6 +8,7 @@ onready var player = get_parent().get_node("player")
 onready var material_increaseAttack = preload("res://effects/powerUP_increaseAttack.tres")
 onready var material_increaseMaxHp = preload("res://effects/powerUP_increaseMaxHp.tres")
 onready var material_heal = preload("res://effects/powerUP_heal.tres")
+onready var particles = $Particles2D2
 
 export var value = 20
 export var price = 0
@@ -18,11 +19,26 @@ var velocity = Vector2()
 
 enum TYPE { random, heal, maxHP, maxAP }
 export (TYPE) var type = TYPE.random
-
 signal increaseAttack(amount)
 
 func _ready():
-	randomize()
+	print("here")
+	if type == TYPE.random:
+		print("here")
+		randomize()
+		var random = randi() % 21
+		if random < 15:
+			print("here1")
+			$Sprite.set_frame(0)
+			particles.set_process_material(material_heal)
+		elif random < 18:
+			print("here2")
+			$Sprite.set_frame(2)
+			particles.set_process_material(material_increaseMaxHp)
+		else:
+			$Sprite.set_frame(5)
+			print("here3")
+			particles.set_process_material(material_increaseAttack)
 	if price > 0:
 		$price.text =str(round(price))
 	
@@ -35,11 +51,9 @@ func _process(delta):
 			tween.start()
 			tween.interpolate_property(powerUp, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.5,Tween.TRANS_BOUNCE)
 			tween.start()
-			player.changeStats()
+			player.changeStats(type, value)
 			collected = true
 			toQueueFree.start()
-
-
 
 func _on_queueFreeTimer_timeout():
 	player.add_money(-price)
