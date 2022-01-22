@@ -4,10 +4,9 @@
 [ext_resource path="res://sprites/player/adventurer-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://effects/flash.png" type="Texture" id=3]
 [ext_resource path="res://effects/light.png" type="Texture" id=4]
-[ext_resource path="res://media/sound effects/attacks/A.ogg" type="AudioStream" id=5]
-[ext_resource path="res://media/sound effects/attacks/B.ogg" type="AudioStream" id=6]
-[ext_resource path="res://media/sound effects/attacks/C.ogg" type="AudioStream" id=7]
-
+[ext_resource path="res://media/sound effects/player/A.ogg" type="AudioStream" id=5]
+[ext_resource path="res://media/sound effects/player/B.ogg" type="AudioStream" id=6]
+[ext_resource path="res://media/sound effects/player/C.ogg" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=3]
 length = 0.001

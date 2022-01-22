@@ -31,8 +31,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 38912.0
-margin_bottom = 22800.0
+margin_right = 39936.0
+margin_bottom = 23400.0
 
 [node name="heal_item" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1801, 555 )
