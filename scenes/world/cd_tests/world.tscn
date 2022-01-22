@@ -34,9 +34,6 @@ anchor_bottom = 1.0
 margin_right = 38912.0
 margin_bottom = 22800.0
 
-[node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 209, 335 )
-
 [node name="heal_item" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1801, 555 )
 
@@ -92,11 +89,10 @@ flip = true
 position = Vector2( 672, 335 )
 isDoorRare = true
 
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 209, 335 )
+
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
-[connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
-[connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
-[connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
-[connection signal="maxHPincrease" from="player" to="GUI/HealthBar" method="_on_player_maxHPincrease"]
 [connection signal="heal" from="heal_item" to="player" method="_on_heal_item_heal"]
 [connection signal="heal" from="heal_item2" to="player" method="_on_heal_item_heal"]
 [connection signal="increaseMaxHP" from="maxHP_powerUP" to="player" method="_on_maxHP_powerUP_increaseMaxHP"]
@@ -107,3 +103,7 @@ isDoorRare = true
 [connection signal="collected" from="keyRare" to="player" method="_on_keyRare_collected"]
 [connection signal="collected" from="keyRare2" to="player" method="_on_keyRare_collected"]
 [connection signal="collected" from="keyRare3" to="player" method="_on_keyRare_collected"]
+[connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
+[connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
+[connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
+[connection signal="maxHPincrease" from="player" to="GUI/HealthBar" method="_on_player_maxHPincrease"]

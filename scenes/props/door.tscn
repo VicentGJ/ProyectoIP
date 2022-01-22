@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/props/door.gd" type="Script" id=1]
 [ext_resource path="res://sprites/props/lpc-doors-animated-1.png" type="Texture" id=2]
+[ext_resource path="res://media/sound effects/props/metal-door-sound.wav" type="AudioStream" id=3]
+[ext_resource path="res://media/sound effects/props/wood-door-sound.wav" type="AudioStream" id=4]
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 2 )
@@ -94,10 +96,46 @@ tracks/4/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("woodenDoor:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("woodenDoor:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("metalDoor:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "openRare"
-length = 0.1
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:disabled")
 tracks/0/interp = 1
@@ -158,10 +196,22 @@ tracks/4/keys = {
 "update": 1,
 "values": [ 0, 1 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("metalDoor:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.358824 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "openRegular"
-length = 0.1
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:animation")
 tracks/0/interp = 1
@@ -181,7 +231,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.0736931 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 0, 1 ]
@@ -222,6 +272,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("woodenDoor:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.359968 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 32 )
@@ -253,3 +315,9 @@ anims/openRegular = SubResource( 14 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.745001 )
 shape = SubResource( 1 )
+
+[node name="woodenDoor" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+
+[node name="metalDoor" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
