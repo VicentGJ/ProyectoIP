@@ -31,8 +31,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 44032.0
-margin_bottom = 25800.0
+margin_right = 45056.0
+margin_bottom = 26400.0
 
 [node name="heal_item" parent="." instance=ExtResource( 6 )]
 position = Vector2( 1801, 555 )
@@ -68,7 +68,7 @@ position = Vector2( -219, 368 )
 position = Vector2( 472, 242 )
 
 [node name="keyRare2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 282, 370 )
+position = Vector2( 235, 372 )
 
 [node name="keyRare3" parent="." instance=ExtResource( 9 )]
 position = Vector2( -162, 559 )
@@ -89,7 +89,7 @@ flip = true
 position = Vector2( 672, 335 )
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 268, 340 )
+position = Vector2( 266, 339 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="heal" from="heal_item" to="player" method="_on_heal_item_heal"]
