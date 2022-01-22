@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://background/pause_background.png" type="Texture" id=1]
+[ext_resource path="res://fonts/Pixeled.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://control/pause.gd" type="Script" id=3]
+[ext_resource path="res://sounds/cambiando de pestaña.mp3" type="AudioStream" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 15
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -168.0
+margin_top = -126.0
+margin_right = 170.0
+margin_bottom = 159.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 338.0
+margin_bottom = 92.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
+text = "Pause"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jugar" type="Button" parent="VBoxContainer"]
+margin_top = 96.0
+margin_right = 338.0
+margin_bottom = 144.0
+custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
+custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="Button" parent="VBoxContainer"]
+margin_top = 148.0
+margin_right = 338.0
+margin_bottom = 196.0
+custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
+custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Options"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="VBoxContainer"]
+margin_top = 200.0
+margin_right = 338.0
+margin_bottom = 248.0
+custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
+custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Exit"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Jugar" to="." method="_on_Jugar_pressed"]
+[connection signal="pressed" from="VBoxContainer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/exit" to="." method="_on_exit_pressed"]

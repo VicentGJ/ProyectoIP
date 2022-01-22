@@ -1,14 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/props/coin.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/props/keyRegular.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/props/powerUP.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/props/keyRare.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/props/torch_1.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/props/door.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/enemies/trap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/knigth/knight.tscn" type="PackedScene" id=5]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -28,108 +24,20 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 57344.0
-margin_bottom = 33600.0
-
-[node name="door" parent="." instance=ExtResource( 12 )]
-position = Vector2( 672, 335 )
-isDoorRare = true
+margin_right = 59392.0
+margin_bottom = 34800.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 266, 339 )
 
-[node name="attackIncrease" parent="." instance=ExtResource( 8 )]
-position = Vector2( 206, 371 )
+[node name="trap" parent="." instance=ExtResource( 4 )]
+position = Vector2( 640, 376 )
 
-[node name="attackIncrease2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 233, 372 )
-
-[node name="attackIncrease3" parent="." instance=ExtResource( 8 )]
-position = Vector2( 359, 369 )
-
-[node name="attackIncrease4" parent="." instance=ExtResource( 8 )]
-position = Vector2( 346, 326 )
-
-[node name="attackIncrease5" parent="." instance=ExtResource( 8 )]
-position = Vector2( 389, 235 )
-
-[node name="attackIncrease6" parent="." instance=ExtResource( 8 )]
-position = Vector2( 546, 241 )
-
-[node name="attackIncrease7" parent="." instance=ExtResource( 8 )]
-position = Vector2( 555, 362 )
-
-[node name="attackIncrease8" parent="." instance=ExtResource( 8 )]
-position = Vector2( 300, 348 )
-
-[node name="attackIncrease9" parent="." instance=ExtResource( 8 )]
-position = Vector2( 495, 242 )
-
-[node name="attackIncrease10" parent="." instance=ExtResource( 8 )]
-position = Vector2( 429, 242 )
-
-[node name="attackIncrease11" parent="." instance=ExtResource( 8 )]
-position = Vector2( 342, 273 )
-
-[node name="attackIncrease12" parent="." instance=ExtResource( 8 )]
-position = Vector2( 346, 237 )
-
-[node name="coin" parent="." instance=ExtResource( 4 )]
-position = Vector2( 752, 372 )
-
-[node name="coin2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 409, 242 )
-
-[node name="coin4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 781, 372 )
-
-[node name="coin5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 723, 372 )
-
-[node name="coin6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 781, 303 )
-
-[node name="coin7" parent="." instance=ExtResource( 4 )]
-position = Vector2( 722, 285 )
-
-[node name="coin8" parent="." instance=ExtResource( 4 )]
-position = Vector2( 784, 235 )
-
-[node name="coin9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 722, 213 )
-
-[node name="coin3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 521, 241 )
-
-[node name="keyRegular" parent="." instance=ExtResource( 5 )]
-position = Vector2( 332, 371 )
-
-[node name="keyRegular2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 577, 371 )
-
-[node name="keyRare" parent="." instance=ExtResource( 9 )]
-position = Vector2( 472, 242 )
-
-[node name="torch_1" parent="." instance=ExtResource( 10 )]
-position = Vector2( 448, 237 )
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 706, 361 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
 [connection signal="maxHPincrease" from="player" to="GUI/HealthBar" method="_on_player_maxHPincrease"]
-[connection signal="increaseAttack" from="attackIncrease" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease2" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease3" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease4" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease5" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease6" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease7" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease8" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease9" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease10" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease11" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="increaseAttack" from="attackIncrease12" to="player" method="_on_attackIncrease_increaseAttack"]
-[connection signal="collected" from="keyRegular" to="player" method="_on_keyRegular_collected"]
-[connection signal="collected" from="keyRegular2" to="player" method="_on_keyRegular_collected"]
-[connection signal="collected" from="keyRare" to="player" method="_on_keyRare_collected"]

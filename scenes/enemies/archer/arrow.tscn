@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/Arcane archer/Arcane archer/projectile.png" type="Texture" id=1]
+[ext_resource path="res://scenes/enemies/archer/arrow.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 21, 1.75 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 25, 2.5 )
+
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2( 252, 172 )
+linear_velocity = Vector2( 1000, 0 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 0.75 )
+shape = SubResource( 1 )
+
+[node name="Projectile" type="Sprite" parent="."]
+position = Vector2( 4.00001, 0.499996 )
+scale = Vector2( 1.35, 1 )
+texture = ExtResource( 1 )
+
+[node name="finish" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
+[node name="enemyDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemyDetector"]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 3, 0.5 )
+shape = SubResource( 2 )
+
+[node name="damaging" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="finish" to="." method="_on_finish_timeout"]
+[connection signal="body_entered" from="enemyDetector" to="." method="_on_enemyDetector_body_entered"]
+[connection signal="timeout" from="damaging" to="." method="_on_damaging_timeout"]

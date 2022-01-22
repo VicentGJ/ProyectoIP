@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Another Way.mp3-a2081ace1098a0ef29b6f65d3d5e47d0.mp3str"
+
+[deps]
+
+source_file="res://music/Another Way.mp3"
+dest_files=[ "res://.import/Another Way.mp3-a2081ace1098a0ef29b6f65d3d5e47d0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
