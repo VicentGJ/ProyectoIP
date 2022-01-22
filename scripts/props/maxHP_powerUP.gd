@@ -18,7 +18,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("interact") and player.money >= price:
 			tween.interpolate_property(self, "position", position,Vector2(position.x , position.y - 30),0.5,Tween.TRANS_LINEAR,Tween.EASE_IN) 
 			tween.start()
-			tween.interpolate_property(powerUp, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.5,Tween.TRANS_BOUNCE)
+			tween.interpolate_property(powerUp, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.5,Tween.TRANS_LINEAR)
 			tween.start()
 			emit_signal("increaseMaxHP",amount)
 			collected = true
