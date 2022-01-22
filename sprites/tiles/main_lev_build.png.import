@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spot.png-18511fae98530e22feedc606f2824924.stex"
+path="res://.import/main_lev_build.png-37e0323a39473a0c104b9cda9ba56307.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/spot.png"
-dest_files=[ "res://.import/spot.png-18511fae98530e22feedc606f2824924.stex" ]
+source_file="res://sprites/tiles/main_lev_build.png"
+dest_files=[ "res://.import/main_lev_build.png-37e0323a39473a0c104b9cda9ba56307.stex" ]
 
 [params]
 

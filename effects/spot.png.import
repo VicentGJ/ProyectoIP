@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/flash.png-bbd23b6870ec4d099934a610dc08bc15.stex"
+path="res://.import/spot.png-fd27a4f8d84ba89dd2de864c2c62d3e1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/flash.png"
-dest_files=[ "res://.import/flash.png-bbd23b6870ec4d099934a610dc08bc15.stex" ]
+source_file="res://effects/spot.png"
+dest_files=[ "res://.import/spot.png-fd27a4f8d84ba89dd2de864c2c62d3e1.stex" ]
 
 [params]
 
