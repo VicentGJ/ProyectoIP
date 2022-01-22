@@ -9,18 +9,20 @@ onready var material_increaseAttack = preload("res://effects/powerUP_increaseAtt
 onready var material_increaseMaxHp = preload("res://effects/powerUP_increaseMaxHp.tres")
 onready var material_heal = preload("res://effects/powerUP_heal.tres")
 
-export var attackIncrease = 20
+export var value = 20
 export var price = 0
-export var powerUP = [1,2,3]
 
 var collected = false
 var gravity = 200
 var velocity = Vector2()
 
+enum TYPE { random, heal, maxHP, maxAP }
+export (TYPE) var type = TYPE.random
+
 signal increaseAttack(amount)
 
 func _ready():
-	
+	randomize()
 	if price > 0:
 		$price.text =str(round(price))
 	
@@ -33,7 +35,7 @@ func _process(delta):
 			tween.start()
 			tween.interpolate_property(powerUp, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.5,Tween.TRANS_BOUNCE)
 			tween.start()
-			emit_signal("increaseAttack",attackIncrease)
+			player.changeStats()
 			collected = true
 			toQueueFree.start()
 

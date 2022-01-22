@@ -16,7 +16,6 @@ scale = Vector2( 1.5, 1.5 )
 collision_layer = 4
 collision_mask = 4
 script = ExtResource( 1 )
-attackIncrease = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

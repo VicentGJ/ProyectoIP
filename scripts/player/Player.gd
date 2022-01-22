@@ -236,6 +236,14 @@ func changeKeys(keyType, amount):
 	else:
 		keys[1] += amount
 		emit_signal("getKey",1,amount)
+func changeStats(item, value):
+	if item == "heal":
+		emit_signal("healthChange", -value)
+	elif item == "maxHP":
+		emit_signal("maxHPincrease", value)
+	else:
+		attackDamage += value
+	
 func get_input():
 	velocity.x = 0
 	
