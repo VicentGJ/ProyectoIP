@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gemRuby.png-d6bd7ae1a6ca9715efd279762eb2209b.stex"
+path="res://.import/gemSapphire.png-c54193135c094d183706c392bbe71041.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/props/gemRuby.png"
-dest_files=[ "res://.import/gemRuby.png-d6bd7ae1a6ca9715efd279762eb2209b.stex" ]
+source_file="res://sprites/props/gemSapphire.png"
+dest_files=[ "res://.import/gemSapphire.png-c54193135c094d183706c392bbe71041.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

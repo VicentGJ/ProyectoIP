@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/props/coin.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://sprites/props/gemCoin.png" type="Texture" id=2]
+[ext_resource path="res://effects/coinGoldParticles.tres" type="Material" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 14.9856
-height = 4.02874
+radius = 2.99993
+height = 0.0
 
 [node name="coin" type="Area2D"]
+scale = Vector2( 3, 3 )
 collision_layer = 7
 collision_mask = 7
 script = ExtResource( 1 )
@@ -19,21 +21,31 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.992157, 0.85098, 0.305882, 1 )
 scale = Vector2( 0.4375, 0.4375 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.57786
 shape = SubResource( 1 )
 
 [node name="right" type="RayCast2D" parent="."]
+visible = false
 enabled = true
-cast_to = Vector2( -20, 0 )
+cast_to = Vector2( -5, 0 )
 collision_mask = 7
 
 [node name="left" type="RayCast2D" parent="."]
+visible = false
 enabled = true
-cast_to = Vector2( 20, 0 )
+cast_to = Vector2( 5, 0 )
 collision_mask = 7
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 0.333333, 0.333333 )
+amount = 4
+lifetime = 0.4
+process_material = ExtResource( 3 )
 
 [connection signal="timeout" from="queueFreeTimer" to="." method="_on_queueFree_Timer_timeout"]

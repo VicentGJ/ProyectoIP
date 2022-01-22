@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/torch-C-01.png-5c51ee893e83d14ebae96d9686792b3a.stex"
+path="res://.import/gemRuppie.png-05ea289076afc5cd55d7cca4a35ade0a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/props/torch-C-01.png"
-dest_files=[ "res://.import/torch-C-01.png-5c51ee893e83d14ebae96d9686792b3a.stex" ]
+source_file="res://sprites/props/gemRuppie.png"
+dest_files=[ "res://.import/gemRuppie.png-05ea289076afc5cd55d7cca4a35ade0a.stex" ]
 
 [params]
 
