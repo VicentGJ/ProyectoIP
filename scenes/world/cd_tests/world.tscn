@@ -40,8 +40,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 28672.0
-margin_bottom = 16800.0
+margin_right = 29696.0
+margin_bottom = 17400.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
@@ -86,6 +86,7 @@ position = Vector2( -95, 558 )
 position = Vector2( -162, 559 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
+[connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
 [connection signal="maxHPincrease" from="player" to="GUI/HealthBar" method="_on_player_maxHPincrease"]

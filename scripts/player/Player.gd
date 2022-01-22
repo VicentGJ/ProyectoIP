@@ -42,6 +42,7 @@ signal dead()
 signal damage(attackDamage)
 signal maxHPincrease(amount)
 signal getMoney(amount)
+signal getKey(keyType, keyAmount)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -358,5 +359,7 @@ func _on_attackIncrease_increaseAttack(amount):
 	
 func _on_keyRegular_collected():
 	keys[0] += 1
+	emit_signal("getKey", 0, keys[0])
 func _on_keyRare_collected():
 	keys[1] += 1
+	emit_signal("getKey", 1,keys[1])

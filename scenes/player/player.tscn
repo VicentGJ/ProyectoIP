@@ -564,7 +564,6 @@ one_shot = true
 one_shot = true
 
 [node name="ray_to_climb" type="RayCast2D" parent="."]
-visible = false
 position = Vector2( 0, -26 )
 enabled = true
 cast_to = Vector2( 22, 0 )
@@ -624,10 +623,12 @@ __meta__ = {
 }
 
 [node name="enemyCheck" type="RayCast2D" parent="."]
+position = Vector2( -19, 0 )
 enabled = true
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="enemyCheck2" type="RayCast2D" parent="."]
+position = Vector2( 19, 0 )
+enabled = true
 
 [node name="slide_particles" type="Particles2D" parent="."]
 show_behind_parent = true
