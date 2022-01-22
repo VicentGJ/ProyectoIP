@@ -226,10 +226,17 @@ func death_animation():
 	particles_death.set_emitting(true)
 	dead = true
 	emit_signal("dead")
-func add_money(money):
-	self.money += money
-	emit_signal("getMoney", self.money)
-
+func add_money(addedMoney):
+	money += addedMoney
+	emit_signal("getMoney", money)
+	
+func changeKeys(keyType, amount):
+	if keyType == "common":
+		keys[0] += amount
+		emit_signal("getKey",0,amount)
+	else:
+		keys[1] += amount
+		emit_signal("getKey",1,amount)
 func get_input():
 	velocity.x = 0
 	
@@ -334,7 +341,7 @@ func _on_inmunity_timer_timeout():
 	set_collision_layer(1) #reset la capa y mascara de colision del player(quitar inmunidad)
 	set_collision_mask(1)
 	
-func _on_DimensionChange_tween_completed(object, key):
+func _on_DimensionChange_tween_completed(_object, _key):
 	$Camera2D.set_enable_follow_smoothing(true)
 
 #damage to player
@@ -357,7 +364,7 @@ func _on_attackIncrease_increaseAttack(amount):
 	
 func _on_keyRegular_collected():
 	keys[0] += 1
-	emit_signal("getKey", 0, keys[0])
+	emit_signal("getKey", 0, 1)
 func _on_keyRare_collected():
 	keys[1] += 1
-	emit_signal("getKey", 1,keys[1])
+	emit_signal("getKey", 1, 1)

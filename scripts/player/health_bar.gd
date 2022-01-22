@@ -62,10 +62,9 @@ func _on_player_getMoney(amount):
 	$health_under/money.text = "GOLD " + str(round(amount))
 
 
-
 func _on_player_getKey(keyType, keyAmount):
 	if keyType == 0:
-		keys[0] = keyAmount
+		keys[0] += keyAmount
 	else:
-		keys[1] = keyAmount
+		keys[1] += keyAmount
 	$health_under/keys.text = "KEYS (" + str(round(keys[0])) + ")  (" + str(round(keys[1])) + ")"
