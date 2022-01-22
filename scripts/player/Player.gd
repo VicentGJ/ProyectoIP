@@ -231,6 +231,7 @@ func death_animation():
 func add_money(money):
 	self.money += money
 	emit_signal("getMoney", self.money)
+
 func get_input():
 	velocity.x = 0
 	
