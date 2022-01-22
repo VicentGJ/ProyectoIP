@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://effects/light.png" type="Texture" id=1]
+[ext_resource path="res://sprites/props/torch-B-03.png" type="Texture" id=2]
+[ext_resource path="res://sprites/props/torch-B-04.png" type="Texture" id=3]
+[ext_resource path="res://sprites/props/torch-B-01.png" type="Texture" id=4]
+[ext_resource path="res://sprites/props/torch-B-02.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 6.0
+} ]
+
+[node name="torch_2" type="Node2D"]
+scale = Vector2( 1.2, 1.2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+color = Color( 1, 0.627451, 0.219608, 1 )
+energy = 0.5
+shadow_enabled = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 2
+frames = SubResource( 1 )
+animation = "idle"
+frame = 2
+playing = true

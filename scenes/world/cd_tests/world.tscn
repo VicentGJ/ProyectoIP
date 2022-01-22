@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/props/maxHP_powerUP.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/props/attackIncrease.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/props/keyRare.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/props/torch_1.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/props/torch_2.tscn" type="PackedScene" id=11]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -84,6 +86,13 @@ position = Vector2( -95, 558 )
 
 [node name="keyRare3" parent="." instance=ExtResource( 9 )]
 position = Vector2( -162, 559 )
+
+[node name="torch_1" parent="." instance=ExtResource( 10 )]
+position = Vector2( 691, 236 )
+
+[node name="torch_2" parent="." instance=ExtResource( 11 )]
+position = Vector2( -448, 394 )
+scale = Vector2( 1.44, 1.44 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
