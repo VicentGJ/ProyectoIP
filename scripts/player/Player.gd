@@ -94,7 +94,6 @@ func restore_playerProperty():
 		climb_ray3.set_cast_to(Vector2(-30,-90))
 		$Camera2D.set_h_offset(-300) 
 		particles_slide.set_position(Vector2(6,39)) 
-
 func player_movement(right, left):
 	if not sliding:
 		if right:
@@ -212,7 +211,7 @@ func slide_animation():
 func climb_animation():
 	climbing = true
 	state_machine.travel("climb")
-	$Tween.interpolate_property(self,"position", position, Vector2(position.x, position.y - 54), 0.2)
+	$Tween.interpolate_property(self,"position", position, Vector2(position.x, position.y - 50), 0.2)
 	$Tween.start()
 	$Tween/climbing_timer.start()
 func hurt_animation():
@@ -266,7 +265,7 @@ func get_input():
 			run_animation()
 		
 	if is_on_floor():
-		if $enemyCheck.get_collider() in get_tree().get_nodes_in_group("enemies"):
+		if ($enemyCheck.get_collider() in get_tree().get_nodes_in_group("enemies") or $enemyCheck2.get_collider() in get_tree().get_nodes_in_group("enemies")) and not sliding:
 			if not playerSprite.flip_h:
 				position.x += 10
 			else:
@@ -292,10 +291,13 @@ func get_input():
 		falling = true
 		if falling and attack:
 			air_attack_animation()
-	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
+	
+	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() \
+	and not climb_ray1.is_colliding() and not (climb_ray2.get_collider() in get_tree().get_nodes_in_group("enemies"))\
+	and (right or left) and not sliding:
 		climb_animation()
+		
 func _physics_process(delta):
-
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta
