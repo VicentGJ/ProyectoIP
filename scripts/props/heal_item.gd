@@ -8,6 +8,7 @@ onready var player = get_parent().get_node("player")
 
 export var healAmount = -10
 export var price = 0
+
 var collected = false
 
 signal heal(healAmount)

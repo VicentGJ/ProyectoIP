@@ -229,7 +229,6 @@ func death_animation():
 func add_money(addedMoney):
 	money += addedMoney
 	emit_signal("getMoney", money)
-	
 func changeKeys(keyType, amount):
 	if keyType == "common":
 		keys[0] += amount
@@ -304,6 +303,7 @@ func get_input():
 		climb_animation()
 		
 func _physics_process(delta):
+	print(keys)
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta

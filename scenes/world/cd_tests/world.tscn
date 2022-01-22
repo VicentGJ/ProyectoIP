@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/props/keyRegular.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/props/heal_item.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/props/maxHP_powerUP.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/props/attackIncrease.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/props/powerUP.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/props/keyRare.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/props/torch_1.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/props/door.tscn" type="PackedScene" id=12]
@@ -30,11 +30,12 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 49152.0
-margin_bottom = 28800.0
+margin_right = 54272.0
+margin_bottom = 31800.0
 
 [node name="door" parent="." instance=ExtResource( 12 )]
 position = Vector2( 672, 335 )
+isDoorRare = true
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 266, 339 )
@@ -50,6 +51,7 @@ position = Vector2( 352, 325 )
 
 [node name="attackIncrease" parent="." instance=ExtResource( 8 )]
 position = Vector2( 224, 326 )
+price = 20
 
 [node name="coin" parent="." instance=ExtResource( 4 )]
 position = Vector2( 752, 372 )
@@ -81,14 +83,14 @@ position = Vector2( 521, 241 )
 [node name="keyRegular" parent="." instance=ExtResource( 5 )]
 position = Vector2( 332, 371 )
 
+[node name="keyRegular2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 577, 371 )
+
 [node name="keyRare" parent="." instance=ExtResource( 9 )]
 position = Vector2( 472, 242 )
 
 [node name="torch_1" parent="." instance=ExtResource( 10 )]
-position = Vector2( 464, 239 )
-
-[node name="keyRegular4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 598, 369 )
+position = Vector2( 448, 237 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
@@ -100,4 +102,5 @@ position = Vector2( 598, 369 )
 [connection signal="increaseMaxHP" from="maxHP_powerUP" to="player" method="_on_maxHP_powerUP_increaseMaxHP"]
 [connection signal="increaseAttack" from="attackIncrease" to="player" method="_on_attackIncrease_increaseAttack"]
 [connection signal="collected" from="keyRegular" to="player" method="_on_keyRegular_collected"]
+[connection signal="collected" from="keyRegular2" to="player" method="_on_keyRegular_collected"]
 [connection signal="collected" from="keyRare" to="player" method="_on_keyRare_collected"]

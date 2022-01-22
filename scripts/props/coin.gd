@@ -11,7 +11,6 @@ onready var materialGold = preload("res://effects/coinGoldParticles.tres")
 onready var materialSapphire = preload("res://effects/coinSapphireParticles.tres")
 onready var materialRuppies = preload("res://effects/coinRupiesParticles.tres")
 
-export var coinType = [0, 1, 2]
 var random
 
 var collected = false
