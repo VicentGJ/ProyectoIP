@@ -1,9 +1,12 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/adventurer-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://sprites/flash.png" type="Texture" id=3]
 [ext_resource path="res://sprites/light.png" type="Texture" id=4]
+[ext_resource path="res://media/attacks/A.ogg" type="AudioStream" id=5]
+[ext_resource path="res://media/attacks/B.ogg" type="AudioStream" id=6]
+[ext_resource path="res://media/attacks/C.ogg" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -18,6 +21,54 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Area2D/attackSound_1:bus")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Master" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Area2D/attackSound_1:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Area2D/attackSound_3:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Area2D/attackSound_2:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=89]
@@ -40,7 +91,6 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "attack_1"
 length = 0.512
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -48,16 +98,27 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.01, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 42, 43, 44, 45, 46, 47 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Area2D/attackSound_1:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.124819, 0.32773 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=5]
 resource_name = "attack_2"
 length = 0.35
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -70,11 +131,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 49, 50, 51, 52 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Area2D/attackSound_2:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.0311868, 0.209135 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "attack_3"
 length = 0.55
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -86,6 +158,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 53, 54, 55, 56, 57, 58 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Area2D/attackSound_3:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.149054, 0.290771 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -479,7 +563,7 @@ states/slide/position = Vector2( 317.687, 31.144 )
 transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "idle", "hurt", SubResource( 93 ), "hurt", "die", SubResource( 94 ), "hurt", "idle", SubResource( 95 ), "air_dash", "fall", SubResource( 96 ), "attack_3", "idle_sword", SubResource( 97 ), "combo3", "combo1", SubResource( 100 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -849.162, -80.24 )
+graph_offset = Vector2( -751.94, -156.56 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
@@ -564,6 +648,7 @@ one_shot = true
 one_shot = true
 
 [node name="ray_to_climb" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 0, -26 )
 enabled = true
 cast_to = Vector2( 22, 0 )
@@ -623,10 +708,12 @@ __meta__ = {
 }
 
 [node name="enemyCheck" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( -19, 0 )
 enabled = true
 
 [node name="enemyCheck2" type="RayCast2D" parent="."]
+visible = false
 position = Vector2( 19, 0 )
 enabled = true
 
@@ -679,6 +766,18 @@ wait_time = 0.4
 [node name="attacking_3" type="Timer" parent="Area2D"]
 wait_time = 0.7
 
+[node name="attackSound_1" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 5 )
+max_distance = 1000.0
+
+[node name="attackSound_2" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 6 )
+max_distance = 1000.0
+
+[node name="attackSound_3" type="AudioStreamPlayer2D" parent="Area2D"]
+stream = ExtResource( 7 )
+max_distance = 1000.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
 position = Vector2( 1, 3 )
@@ -726,8 +825,6 @@ texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
