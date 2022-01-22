@@ -53,10 +53,8 @@ func changeDimension():
 	
 	if dimension == 1:
 		dimension = 2
-		position.y -= 2270
 	elif dimension == 2:
 		dimension = 1
-		position.y += 2280
 		
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
 	$Tween.start()

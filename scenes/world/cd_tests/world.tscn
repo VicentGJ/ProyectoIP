@@ -25,25 +25,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="areas2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 23, -2209 )
-
-[node name="dimension 2" type="Label" parent="areas2"]
-margin_right = 89.0
-margin_bottom = 14.0
-rect_scale = Vector2( 9, 8 )
-text = "DIMENSION 2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 32768.0
-margin_bottom = 19200.0
+margin_right = 33792.0
+margin_bottom = 19800.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
@@ -88,11 +76,16 @@ position = Vector2( -95, 558 )
 position = Vector2( -162, 559 )
 
 [node name="torch_1" parent="." instance=ExtResource( 10 )]
-position = Vector2( 691, 236 )
+position = Vector2( 464, 239 )
 
 [node name="torch_2" parent="." instance=ExtResource( 11 )]
-position = Vector2( -448, 394 )
+position = Vector2( 554, 293 )
 scale = Vector2( 1.44, 1.44 )
+
+[node name="torch_3" parent="." instance=ExtResource( 11 )]
+position = Vector2( 374, 291 )
+scale = Vector2( 1.44, 1.44 )
+flip = true
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
