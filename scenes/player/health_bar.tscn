@@ -101,23 +101,22 @@ __meta__ = {
 
 [node name="current_hp" type="Label" parent="health_under"]
 modulate = Color( 0.14902, 1, 0, 1 )
-margin_left = 2.0
-margin_top = 20.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -12.0
 margin_right = 97.0
-margin_bottom = 52.0
+margin_bottom = 20.0
 rect_scale = Vector2( 0.5, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "HP 100 / 100"
 align = 1
 valign = 1
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="money" type="Label" parent="health_under"]
 modulate = Color( 0.937255, 0.92549, 0.0431373, 1 )
-margin_left = 1.5
 margin_top = 44.0
 margin_right = 53.5
 margin_bottom = 76.0
@@ -129,10 +128,9 @@ __meta__ = {
 }
 
 [node name="keys" type="Label" parent="health_under"]
-margin_left = 1.5
-margin_top = 67.0
-margin_right = 109.5
-margin_bottom = 99.0
+margin_top = 65.0
+margin_right = 108.0
+margin_bottom = 97.0
 rect_scale = Vector2( 0.5, 1 )
 custom_fonts/font = SubResource( 15 )
 text = "KEYS (0)  (0)"
