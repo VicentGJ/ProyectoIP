@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A.mp3-e043b3674c2b7ced72c90d60bfebcda3.mp3str"
+
+[deps]
+
+source_file="res://media/attacks/A.mp3"
+dest_files=[ "res://.import/A.mp3-e043b3674c2b7ced72c90d60bfebcda3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

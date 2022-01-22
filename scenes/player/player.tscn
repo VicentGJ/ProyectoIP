@@ -726,6 +726,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
 [connection signal="timeout" from="slide_delay" to="." method="_on_slide_delay_timeout"]

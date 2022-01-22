@@ -5,11 +5,12 @@ onready var rightRay = $right
 onready var tween = $Tween
 onready var particles = $Particles2D
 onready var door = $Sprite
+onready var player = get_parent().get_node("player")
 
-func _ready():
-	pass # Replace with function body.
+func open():
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_pressed("collect") and (leftRay.get_collider() == player \
+	or rightRay.get_collider() == player):
+		open()
