@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/props/coin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/props/keyRegular.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/props/heal_item.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/props/maxHP_powerUP.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/props/attackIncrease.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/props/keyRare.tscn" type="PackedScene" id=9]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -38,8 +40,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 26624.0
-margin_bottom = 15600.0
+margin_right = 27648.0
+margin_bottom = 16200.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 209, 335 )
@@ -65,6 +67,24 @@ position = Vector2( 1677, 425 )
 [node name="coin3" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1782, 397 )
 
+[node name="keyRegular" parent="." instance=ExtResource( 5 )]
+position = Vector2( -343, 306 )
+
+[node name="keyRegular2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -279, 304 )
+
+[node name="keyRegular3" parent="." instance=ExtResource( 5 )]
+position = Vector2( -219, 368 )
+
+[node name="keyRare" parent="." instance=ExtResource( 9 )]
+position = Vector2( -23, 493 )
+
+[node name="keyRare2" parent="." instance=ExtResource( 9 )]
+position = Vector2( -95, 558 )
+
+[node name="keyRare3" parent="." instance=ExtResource( 9 )]
+position = Vector2( -162, 559 )
+
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
@@ -73,3 +93,9 @@ position = Vector2( 1782, 397 )
 [connection signal="heal" from="heal_item2" to="player" method="_on_heal_item_heal"]
 [connection signal="increaseMaxHP" from="maxHP_powerUP" to="player" method="_on_maxHP_powerUP_increaseMaxHP"]
 [connection signal="increaseAttack" from="attackIncrease" to="player" method="_on_attackIncrease_increaseAttack"]
+[connection signal="collected" from="keyRegular" to="player" method="_on_keyRegular_collected"]
+[connection signal="collected" from="keyRegular2" to="player" method="_on_keyRegular_collected"]
+[connection signal="collected" from="keyRegular3" to="player" method="_on_keyRegular_collected"]
+[connection signal="collected" from="keyRare" to="player" method="_on_keyRare_collected"]
+[connection signal="collected" from="keyRare2" to="player" method="_on_keyRare_collected"]
+[connection signal="collected" from="keyRare3" to="player" method="_on_keyRare_collected"]

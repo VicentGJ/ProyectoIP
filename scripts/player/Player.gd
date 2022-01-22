@@ -18,6 +18,8 @@ var dead = false
 var inmunity = false
 var dimension = 1
 var money  = 0
+var keys = [0,0]
+
 #var enemies_killed = 0
 
 onready var playerSprite = $Sprite
@@ -265,9 +267,9 @@ func get_input():
 	if is_on_floor():
 		if $enemyCheck.get_collider() in get_tree().get_nodes_in_group("enemies"):
 			if not playerSprite.flip_h:
-				position.x += 50
+				position.x += 10
 			else:
-				position.x -= 50
+				position.x -= 10
 		if crouch:
 			crouch_animation()
 		else:
@@ -292,6 +294,7 @@ func get_input():
 	if  not climb_ray4.is_colliding() and not climb_ray3.is_colliding() and climb_ray2.is_colliding() and not climb_ray1.is_colliding() and (right or left) and not sliding:
 		climb_animation()
 func _physics_process(delta):
+
 	if not dead:
 		get_input()
 		velocity.y += gravity * delta
@@ -350,3 +353,7 @@ func _on_maxHP_powerUP_increaseMaxHP(amount):
 func _on_attackIncrease_increaseAttack(amount):
 	attackDamage += amount
 	
+func _on_keyRegular_collected():
+	keys[0] += 1
+func _on_keyRare_collected():
+	keys[1] += 1
