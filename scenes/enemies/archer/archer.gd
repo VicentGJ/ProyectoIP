@@ -26,14 +26,14 @@ func _ready():
 	
 	
 func _physics_process(delta):
-	velocity.y+=gravity*delta
+	velocity.y += gravity * delta
 	if health > 0: #si esta vivo
 		#ataque
 		if state!=State.Hit:
-			if $vision.get_collider()==player:
+			if $vision.get_collider() == player:
 				state=State.Attack
-			elif $visionBack.get_collider()==player:
-				if dir==Direction.Right:
+			elif $visionBack.get_collider() == player:
+				if dir == Direction.Right:
 					turnDir(false)
 				else:
 					turnDir(true)
@@ -76,9 +76,10 @@ func _physics_process(delta):
 			yield(get_tree().create_timer(0.6),"timeout")
 			state=State.Idle
 		
-		elif state==State.Attack:
+		elif state == State.Attack and $TimerAttack.get_time_left() == 0:
 			velocity.x=0
 			stateMachine.travel("attack")
+			$TimerAttack.start()
 			
 #			yield(get_tree().create_timer(0.7),"timeout")
 			state=State.Idle
@@ -86,10 +87,7 @@ func _physics_process(delta):
 		if health!=0:
 			velocity = move_and_slide(velocity,Vector2(0,-1))
 
-
-	#c muere
 	else:
-#		sprite.stop()
 		health=0;
 		stateMachine.travel("death")
 
@@ -117,15 +115,12 @@ func recieveDamage(value):
 
 
 func _on_Timer_timeout():
-#	var a =rand_range(0,1)
-	
 	if state==State.Idle:
 		state=State.Walking
 	elif state==State.Walking:
 		state=State.Idle
 		
 func launchArrow():
-#	print("arrow")
 	var newArrow=load("res://scenes/enemies/archer/arrow.tscn").instance()
 	get_parent().add_child(newArrow)
 	

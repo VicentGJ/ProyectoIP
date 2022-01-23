@@ -20,7 +20,6 @@ var dimension = 1
 var money  = 0
 var keys = [0,0]
 
-#var enemies_killed = 0
 onready var animationPlayer = $AnimationPlayer
 onready var playerSprite = $Sprite
 onready var climb_ray1 = $ray_to_climb
@@ -36,6 +35,8 @@ onready var attackArea_2 = $Area2D/attack_area2
 onready var particles_slide = $slide_particles
 onready var particles_death = $death_particles
 onready var flash = $flash
+onready var dimension1 = get_parent().get_node("Dimension1")
+onready var dimension2 = get_parent().get_node("Dimension2")
 
 signal healthChange(value)
 signal dead()
@@ -46,6 +47,7 @@ signal getKey(keyType, keyAmount)
 
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
+	
 func changeDimension():
 	$Camera2D.set_enable_follow_smoothing(false)
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE)
@@ -53,8 +55,13 @@ func changeDimension():
 	
 	if dimension == 1:
 		dimension = 2
+		dimension1.queue_free()
+		get_parent().add_child(dimension2)
 	elif dimension == 2:
 		dimension = 1
+		dimension2.queue_free()
+		get_parent().add_child(dimension1)
+		
 		
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
 	$Tween.start()
