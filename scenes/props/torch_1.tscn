@@ -24,6 +24,7 @@ __meta__ = {
 light_mask = 2
 frames = SubResource( 1 )
 animation = "idle"
+frame = 3
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
