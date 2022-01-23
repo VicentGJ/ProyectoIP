@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/collectKey.ogg-a9124ca449269a14527867aa5e7e399c.oggstr"
+
+[deps]
+
+source_file="res://media/sound effects/player/collectKey.ogg"
+dest_files=[ "res://.import/collectKey.ogg-a9124ca449269a14527867aa5e7e399c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

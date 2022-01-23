@@ -230,6 +230,7 @@ func death_animation():
 func add_money(addedMoney):
 	money += addedMoney
 	emit_signal("getMoney", money)
+	animationPlayer.play("collectCoin")
 func changeKeys(keyType, amount):
 	if keyType == 0:
 		keys[0] += amount
@@ -376,7 +377,7 @@ func _on_keyRegular_collected():
 func _on_keyRare_collected():
 	keys[1] += 1
 	emit_signal("getKey", 1, 1)
-
+	
 func _on_Area2D_body_entered(body):
 	if body in get_tree().get_nodes_in_group("enemies"):
 		body.recieveDamage(attackDamage)
