@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Bow and Arrow.ogg-1680bb031fafd420d5524d658fb38406.oggstr"
+
+[deps]
+
+source_file="res://sounds/archer/Bow and Arrow.ogg"
+dest_files=[ "res://.import/Bow and Arrow.ogg-1680bb031fafd420d5524d658fb38406.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

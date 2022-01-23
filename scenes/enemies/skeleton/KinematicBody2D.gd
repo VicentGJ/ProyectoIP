@@ -13,6 +13,7 @@ enum State{Walking, Idle, Attack, Death, Hit}
 
 onready var derecha=get_node("Derecha")
 onready var izquierda=get_node("Izquierda")
+onready var player=get_parent().get_node("player")
 onready var sprite = $Sprite
 
 var dir=Direction.Right
@@ -30,10 +31,10 @@ func _physics_process(delta):
 	velocity.y+=gravity*delta
 	if health > 0: #si esta vivo
 		#ataque
-		if state!=State.Hit:
-			if $detectAttack.get_collider()==get_parent().get_node("player"):
+		if state!=State.Hit and not player.dead:
+			if $detectAttack.get_collider()==player:
 				state=State.Attack
-			elif $detectAttackBack.get_collider()==get_parent().get_node("player"):
+			elif $detectAttackBack.get_collider()==player:
 				if dir==Direction.Right:
 					turnDir(false)
 				else:
@@ -80,8 +81,8 @@ func _physics_process(delta):
 			velocity.x=0
 			stateMachine.travel("attack")
 			if $attackRaycast.enabled:
-				if $attackRaycast.get_collider() == get_parent().get_node("player"):
-					emit_signal("damage_player", damage)
+				if $attackRaycast.get_collider() == player:
+					player.changeStats(0, -damage)
 #			yield(get_tree().create_timer(0.7),"timeout")
 			state=State.Idle
 		
@@ -119,10 +120,7 @@ func _on_Timer_timeout():
 
 
 
-func _on_player_damage(damage,enemy):
-	
-	if enemy==self:
-		print(enemy)
-		health -=damage
-		state=State.Hit
+func recieveDamage(value):
+	health -= value
+	state=State.Hit
 

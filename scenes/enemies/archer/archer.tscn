@@ -1,152 +1,124 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scenes/enemies/archer/archer.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Arcane archer/Arcane archer/spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://sounds/archer/Bow and Arrow.ogg" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=112]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 320, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=113]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 320, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=114]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 320, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=115]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 192, 320, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=116]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=117]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 64, 448, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=126]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=127]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 64, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=128]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=129]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 192, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=130]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 256, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=131]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 320, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=132]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 384, 64, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=133]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 448, 64, 64, 64 )
-
 [sub_resource type="AtlasTexture" id=134]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=135]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=136]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=137]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 192, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=138]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 256, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=139]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 320, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=140]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 384, 192, 64, 64 )
 
+[sub_resource type="AtlasTexture" id=126]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=127]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=129]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=130]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=131]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=132]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=133]
+atlas = ExtResource( 2 )
+region = Rect2( 448, 64, 64, 64 )
+
 [sub_resource type="AtlasTexture" id=118]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=119]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=120]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=121]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 192, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=122]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 256, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=123]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=124]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 384, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=125]
-flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 448, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=116]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 448, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=117]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 448, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
@@ -155,9 +127,9 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 116 ), SubResource( 117 ) ],
+"frames": [ SubResource( 134 ), SubResource( 135 ), SubResource( 136 ), SubResource( 137 ), SubResource( 138 ), SubResource( 139 ), SubResource( 140 ) ],
 "loop": true,
-"name": "hit",
+"name": "attack",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ), SubResource( 131 ), SubResource( 132 ), SubResource( 133 ) ],
@@ -165,14 +137,14 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 134 ), SubResource( 135 ), SubResource( 136 ), SubResource( 137 ), SubResource( 138 ), SubResource( 139 ), SubResource( 140 ) ],
-"loop": true,
-"name": "attack",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 118 ), SubResource( 119 ), SubResource( 120 ), SubResource( 121 ), SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ) ],
 "loop": true,
 "name": "walking",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 116 ), SubResource( 117 ) ],
+"loop": true,
+"name": "hit",
 "speed": 5.0
 } ]
 
@@ -234,6 +206,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [ "idle" ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=108]
 resource_name = "attack"
@@ -270,12 +266,36 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.697 ),
+"times": PoolRealArray( 0.7 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "launchArrow"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( -1.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=79]
@@ -414,7 +434,7 @@ graph_offset = Vector2( -175.361, -33.4773 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=89]
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=["enemies"]]
 position = Vector2( 328, 235 )
 script = ExtResource( 1 )
 
@@ -470,5 +490,8 @@ autostart = true
 [node name="TimerAttack" type="Timer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

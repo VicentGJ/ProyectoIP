@@ -11,6 +11,7 @@ enum State{Walking, Idle, Attack, Death, Hit}
 
 onready var derecha=get_node("Derecha")
 onready var izquierda=get_node("Izquierda")
+onready var player=get_parent().get_node("player")
 var dir=Direction.Right
 
 var health = 100
@@ -29,9 +30,9 @@ func _physics_process(delta):
 	if health > 0: #si esta vivo
 		#ataque
 		if state!=State.Hit:
-			if $vision.get_collider()==get_parent().get_node("player"):
+			if $vision.get_collider()==player:
 				state=State.Attack
-			elif $visionBack.get_collider()==get_parent().get_node("player"):
+			elif $visionBack.get_collider()==player:
 				if dir==Direction.Right:
 					turnDir(false)
 				else:
@@ -110,12 +111,9 @@ func turnDir(right):
 
 
 
-func _on_player_damage(damage,enemy):
-	
-	if enemy==self:
-		print(enemy)
-		health -=damage
-		state=State.Hit
+func recieveDamage(value):
+	health -= value
+	state=State.Hit
 
 
 func _on_Timer_timeout():
@@ -127,6 +125,7 @@ func _on_Timer_timeout():
 		state=State.Idle
 		
 func launchArrow():
+#	print("arrow")
 	var newArrow=load("res://scenes/enemies/archer/arrow.tscn").instance()
 	get_parent().add_child(newArrow)
 	

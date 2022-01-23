@@ -226,6 +226,9 @@ func death_animation():
 	particles_death.set_emitting(true)
 	dead = true
 	emit_signal("dead")
+	#menu
+	var menu=load("res://control/gameOver.tscn").instance()
+	get_parent().get_node("GUI").add_child(menu)
 func add_money(addedMoney):
 	money += addedMoney
 	emit_signal("getMoney", money)
@@ -245,6 +248,14 @@ func changeStats(item, value):
 		attackDamage += value
 	
 func get_input():
+	
+	#pause
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().set_pause(true)
+		var menu=load("res://control/pause.tscn").instance()
+		get_parent().get_node("GUI").add_child(menu)
+		
+		
 	velocity.x = 0
 	
 	var current_anim = state_machine.get_current_node()

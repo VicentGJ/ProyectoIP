@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hit arrow.ogg-634dfe91d85e27928ce8deec3cf675ba.oggstr"
+
+[deps]
+
+source_file="res://sounds/archer/hit arrow.ogg"
+dest_files=[ "res://.import/hit arrow.ogg-634dfe91d85e27928ce8deec3cf675ba.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

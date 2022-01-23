@@ -1,9 +1,9 @@
 extends RigidBody2D
 var damaging=true
 var count=0
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
+export var damage=20
+onready var player=get_parent().get_node("player")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +29,10 @@ func _on_enemyDetector_body_entered(body):
 		damaging=false
 	if body==get_parent().get_node("player") and damaging:
 		#daño de flecha aqui
+		player.changeStats(0, -damage)
 		queue_free()
+	else:
+		$hitArrowSound.play()
 
 
 #func _on_damaging_timeout():
