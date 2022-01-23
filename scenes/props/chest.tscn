@@ -1,12 +1,25 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://effects/coinGoldParticles.tres" type="Material" id=1]
-[ext_resource path="res://scenes/props/chest.gd" type="Script" id=2]
-[ext_resource path="res://media/sound effects/player/collectCcoin.ogg" type="AudioStream" id=3]
+[ext_resource path="res://media/sound effects/player/collectCcoin.ogg" type="AudioStream" id=2]
+[ext_resource path="res://fonts/Pixeled.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scenes/props/chest.gd" type="Script" id=4]
+[ext_resource path="res://sprites/props/chest.png" type="Texture" id=5]
+[ext_resource path="res://media/sound effects/props/chestOpen.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.99993
 height = 0.0
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+angular_velocity = 141.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0.901961, 0.505882, 0.121569, 1 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -20,7 +33,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 3 ) ]
+"values": [ ExtResource( 2 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("chestOpen:playing")
@@ -34,69 +47,113 @@ tracks/1/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=3]
-resource_name = "coinCollected"
+resource_name = "openChest"
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("chestOpen:stream")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
+"values": [ 0, 1, 2, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("chestOpen:playing")
+tracks/1/path = NodePath("chestOpen:stream")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.36982 ),
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("chestOpen:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
 
-[node name="chest" type="KinematicBody2D"]
-script = ExtResource( 2 )
+[sub_resource type="DynamicFont" id=4]
+size = 5
+font_data = ExtResource( 3 )
 
-[node name="queueFreeTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
+[node name="chest" type="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+collision_layer = 4
+collision_mask = 4
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.992157, 0.85098, 0.305882, 1 )
+modulate = Color( 0.901961, 0.505882, 0.121569, 1 )
 scale = Vector2( 0.4375, 0.4375 )
+texture = ExtResource( 5 )
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = 1.57786
 shape = SubResource( 1 )
 
 [node name="right" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( -5, 0 )
+cast_to = Vector2( -10, 0 )
 collision_mask = 7
 
 [node name="left" type="RayCast2D" parent="."]
 enabled = true
-cast_to = Vector2( 5, 0 )
+cast_to = Vector2( 10, 0 )
 collision_mask = 7
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0.333333, 0.333333 )
+position = Vector2( 0, -3.5 )
 amount = 4
-lifetime = 0.4
-process_material = ExtResource( 1 )
+lifetime = 0.5
+process_material = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
-anims/coinCollected = SubResource( 3 )
+anims/openChest = SubResource( 3 )
 
 [node name="chestOpen" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+position = Vector2( 0, 0.5 )
+stream = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = -46.0
+margin_top = -42.8
+margin_right = 48.0
+margin_bottom = -28.8
+custom_fonts/font = SubResource( 4 )
+text = "Press \"E\" to open"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

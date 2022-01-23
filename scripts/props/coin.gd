@@ -4,7 +4,7 @@ onready var coin = $Sprite
 onready var toQueueFree = $queueFreeTimer
 onready var leftRay = $left
 onready var rightRay = $right
-onready var player = get_parent().get_node("player")
+onready var player = get_parent().get_parent().get_node("player")
 export var coinValue = 10
 onready var particles = $Particles2D
 onready var materialGold = preload("res://effects/coinGoldParticles.tres")
@@ -47,4 +47,4 @@ func _on_queueFree_Timer_timeout():
 	queue_free()
 
 func addMoneyToPlayer(value):
-	get_parent().get_node("player").add_money(value)
+	player.add_money(value)

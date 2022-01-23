@@ -1,6 +1,6 @@
 extends Sprite
 
-onready var player = get_parent().get_node("player")
+onready var player = get_parent().get_parent().get_node("player")
 onready var leftRay = $left
 onready var rightRay = $right
 onready var particles = $Particles2D
@@ -16,6 +16,7 @@ func _process(delta):
 			label.set_modulate(Color(1,1,1,0))
 			particles.set_emitting(false)
 			player.changeDimension()
+			player.hasVerj = true
 			collected = true
 	else:
 		label.set_modulate(Color(1,1,1,0))

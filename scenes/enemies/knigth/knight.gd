@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (int) var gravity = 500
 export (int) var linealVelocity = 150
-onready var player = get_parent().get_node("player")
+onready var player = get_parent().get_parent().get_node("player")
 onready var sprite = $Sprite
 export var velocity = Vector2.ZERO
 var stateMachine
@@ -99,6 +99,7 @@ func _physics_process(delta):
 		get_parent().add_child(load("res://scenes/props/coin.tscn").instance())
 		health=0;
 		stateMachine.travel("death")
+		player.changeStats(0, -900)
 
 		$CollisionShape2D.set_disabled(true)
 		

@@ -5,7 +5,7 @@ onready var rightRay = $right
 onready var tween = $Tween
 onready var particles = $Particles2D
 onready var door = $Sprite
-onready var player = get_parent().get_node("player")
+onready var player = get_parent().get_parent().get_node("player")
 
 export var isDoorRare = false
 var opened = false

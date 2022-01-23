@@ -19,6 +19,7 @@ var inmunity = false
 var dimension = 1
 var money  = 0
 var keys = [0,0]
+var hasVerj = false
 
 onready var animationPlayer = $AnimationPlayer
 onready var playerSprite = $Sprite
@@ -54,7 +55,6 @@ func changeDimension():
 	$Camera2D.set_enable_follow_smoothing(false)
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 0.0), Color(1.0, 1.0, 1.0, 1.0), 0.5,Tween.TRANS_BOUNCE)
 	$Tween.start()
-	
 	if dimension == 1:
 		dimension = 2
 		dimension1.set_position(Vector2(0, 1000))
@@ -278,9 +278,7 @@ func get_input():
 	var slide = Input.is_action_just_pressed("slide")
 	var attack = Input.is_action_just_pressed("attack")
 	var change_dimension = Input.is_action_just_pressed("flash")
-
-	if change_dimension and not climbing and not sliding and not $Tween.is_active():
-		changeDimension()
+	
 	
 	if not crouching and not sliding and not attacking and not climbing and not inmunity:
 		restore_playerProperty()
@@ -293,13 +291,14 @@ func get_input():
 		attackArea_1.disabled = true
 		attackArea_2.disabled = true
 		
-	if not crouch and attack_counter == 1 and $attack_delay.get_time_left() == 0 and not $Tween.is_active():
+	if not crouch and attack_counter == 1 and $attack_delay.get_time_left() == 0:
 		player_movement(right, left)
 		if velocity.length() == 0:
 			idle_animation()
 		elif velocity.x != 0 and not sliding and not attacking and not $Tween.is_active() and not climbing: 
 			run_animation()
-		
+	if hasVerj and change_dimension and not climbing and not sliding :
+		changeDimension()
 	if is_on_floor():
 		if ($enemyCheck.get_collider() in get_tree().get_nodes_in_group("enemies") or $enemyCheck2.get_collider() in get_tree().get_nodes_in_group("enemies")) and not sliding:
 			if not playerSprite.flip_h:

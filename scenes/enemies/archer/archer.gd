@@ -11,15 +11,14 @@ enum State{Walking, Idle, Attack, Death, Hit}
 
 onready var derecha=get_node("Derecha")
 onready var izquierda=get_node("Izquierda")
-onready var player=get_parent().get_node("player")
+onready var player=get_parent().get_parent().get_node("player")
 var dir=Direction.Right
 
 export var health = 40
 var state=State.Walking
 var canAttack = true
 export var damage = 20
-
-signal damage_player(damage)
+var droped = false
 
 func _ready():
 	stateMachine = $AnimationTree.get("parameters/playback")
@@ -111,11 +110,11 @@ func turnDir(right):
 
 
 func dropCoin():
-	var droped = false
 	var coinDrop = load("res://scenes/props/coin.tscn").instance()
 	if not droped:
 		get_parent().add_child(coinDrop)
-		coinDrop.position=Vector2(0,0)
+		coinDrop.set_position(Vector2(position.x,position.y))
+		coinDrop.velocity.y -= 30
 		droped = true
 
 
