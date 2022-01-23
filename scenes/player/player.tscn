@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/player/adventurer-Sheet.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://media/sound effects/player/B.ogg" type="AudioStream" id=6]
 [ext_resource path="res://media/sound effects/player/C.ogg" type="AudioStream" id=7]
 [ext_resource path="res://media/sound effects/player/playerSlide.ogg" type="AudioStream" id=8]
+[ext_resource path="res://media/sound effects/player/Jump.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -78,6 +79,18 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../jump:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -328,16 +341,16 @@ tracks/0/keys = {
 resource_name = "jump"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath("../jump:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.170983 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 13, 14, 15, 16, 17 ]
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -848,6 +861,9 @@ texture = ExtResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
 
 [connection signal="timeout" from="attack_delay" to="." method="_on_attack_delay_timeout"]
 [connection signal="timeout" from="sliding" to="." method="_on_sliding_timeout"]
