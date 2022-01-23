@@ -16,16 +16,19 @@ animations = [ {
 
 [node name="torch_1" type="Node2D"]
 scale = Vector2( 1.2, 1.2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 light_mask = 2
 frames = SubResource( 1 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 texture = ExtResource( 1 )
-color = Color( 1, 0.627451, 0.219608, 1 )
+color = Color( 1, 0.882353, 0.752941, 1 )
 energy = 0.5
 shadow_enabled = true

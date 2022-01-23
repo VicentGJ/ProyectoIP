@@ -14,9 +14,9 @@ onready var izquierda=get_node("Izquierda")
 onready var player=get_parent().get_node("player")
 var dir=Direction.Right
 
-var health = 100
+export var health = 40
 var state=State.Walking
-var damage = 25
+export var damage = 20
 
 signal damage_player(damage)
 

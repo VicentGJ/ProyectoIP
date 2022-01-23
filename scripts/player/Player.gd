@@ -370,6 +370,7 @@ func _on_HealthBar_damaged(currentHP):
 		hurt_animation()
 	if currentHP == 0:
 		death_animation() 
+
 func _on_trap_trapTriggered(damage):
 	emit_signal("healthChange",damage)
 
@@ -392,3 +393,10 @@ func _on_keyRare_collected():
 func _on_Area2D_body_entered(body):
 	if body in get_tree().get_nodes_in_group("enemies"):
 		body.recieveDamage(attackDamage)
+
+
+func _on_HUD_damaged(currentHP):
+	if currentHP != 0:
+		hurt_animation()
+	if currentHP == 0:
+		death_animation() 

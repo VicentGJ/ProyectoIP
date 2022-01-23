@@ -16,7 +16,7 @@ func _ready():
 
 
 func _on_Jugar_pressed():
-	get_tree().change_scene("res://scenes/world/cd_tests/world.tscn")
+	get_tree().change_scene("res://scenes/world/final/GameWorld.tscn")
 
 
 func _on_Quit_pressed():
