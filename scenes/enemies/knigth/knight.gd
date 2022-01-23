@@ -25,6 +25,7 @@ func _ready():
 	$attackRaycast.enabled=false
 	
 func _physics_process(delta):
+	var current_anim = stateMachine.get_current_node()
 	velocity.y+=gravity*delta
 	if player.inmunity:
 		$detectAttack.set_collision_mask(2)
@@ -51,16 +52,9 @@ func _physics_process(delta):
 				state=State.Idle
 			
 		#caminando
+		
 		if state==State.Walking:
 			stateMachine.travel("walking")
-			
-			#chocando un muro
-#			if is_on_wall():
-#				if dir==Direction.Right:
-#					turnDir(false)
-#				else:
-#					turnDir(true)
-			#borde del precipicio
 			if dir==Direction.Left:
 				if derecha.is_colliding() and !izquierda.is_colliding():
 					velocity.x=0
@@ -73,8 +67,8 @@ func _physics_process(delta):
 					state = State.Idle
 				else:
 					velocity.x=linealVelocity
-			
-			
+			if current_anim == "attack":
+				velocity.x=0
 		
 		elif state==State.Idle:
 			 velocity.x=0
@@ -94,8 +88,6 @@ func _physics_process(delta):
 			if $attackRaycast.enabled:
 				if $attackRaycast.get_collider() == player:
 					player.changeStats(0, -damage)
-					#emit_signal("damage_player", damage)
-#			yield(get_tree().create_timer(0.7),"timeout")
 			state=State.Idle
 		
 		if health!=0:
@@ -114,17 +106,18 @@ func turnDir(right):
 	if right:
 		dir=Direction.Right
 		sprite.set_flip_h(false)
-		$detectAttack.cast_to=Vector2(30,0)
-		$attackRaycast.cast_to=Vector2(30,0)
+		$detectAttack.cast_to=Vector2(40,0)
+		$attackRaycast.cast_to=Vector2(40,0)
 		$vision.cast_to=Vector2(200,0)
 		$visionBack.cast_to=Vector2(-150,0)
 	else:
 		dir=Direction.Left
 		sprite.set_flip_h(true)
-		$detectAttack.cast_to=Vector2(-30,0)
-		$attackRaycast.cast_to=Vector2(-30,0)
+		$detectAttack.cast_to=Vector2(-40,0)
+		$attackRaycast.cast_to=Vector2(-40,0)
 		$vision.cast_to=Vector2(-200,0)
 		$visionBack.cast_to=Vector2(150,0)
 
-func damage():
-	pass
+func recieveDamage(value):
+	health -= value
+	state=State.Hit

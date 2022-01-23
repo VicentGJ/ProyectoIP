@@ -29,4 +29,8 @@ position = Vector2( 285, 303 )
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 73, 279 )
 
+[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 789, 320 )
+
 [connection signal="damaged" from="CanvasLayer/HUD" to="player" method="_on_HealthBar_damaged"]
+[connection signal="healthChange" from="player" to="CanvasLayer/HUD" method="_on_player_healthChange"]

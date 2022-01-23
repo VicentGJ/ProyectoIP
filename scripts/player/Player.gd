@@ -375,3 +375,7 @@ func _on_keyRegular_collected():
 func _on_keyRare_collected():
 	keys[1] += 1
 	emit_signal("getKey", 1, 1)
+
+func _on_Area2D_body_entered(body):
+	if body in get_tree().get_nodes_in_group("enemies"):
+		body.recieveDamage(attackDamage)

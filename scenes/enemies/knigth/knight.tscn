@@ -83,18 +83,6 @@ region = Rect2( 640, 0, 128, 64 )
 atlas = ExtResource( 4 )
 region = Rect2( 768, 0, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=120]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=121]
-atlas = ExtResource( 5 )
-region = Rect2( 128, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=122]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 64, 128, 64 )
-
 [sub_resource type="AtlasTexture" id=131]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 128, 64 )
@@ -143,6 +131,18 @@ region = Rect2( 0, 192, 128, 64 )
 atlas = ExtResource( 3 )
 region = Rect2( 128, 192, 128, 64 )
 
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 64, 128, 64 )
+
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 142 ), SubResource( 143 ), SubResource( 144 ), SubResource( 145 ), SubResource( 146 ), SubResource( 147 ), SubResource( 148 ), SubResource( 149 ), SubResource( 150 ), SubResource( 151 ), SubResource( 152 ), SubResource( 153 ) ],
@@ -155,11 +155,6 @@ animations = [ {
 "name": "attack",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 120 ), SubResource( 121 ), SubResource( 122 ) ],
-"loop": true,
-"name": "hit",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 131 ), SubResource( 132 ), SubResource( 133 ), SubResource( 134 ) ],
 "loop": false,
 "name": "death",
@@ -169,10 +164,16 @@ animations = [ {
 "loop": true,
 "name": "walking",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 120 ), SubResource( 121 ), SubResource( 122 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=76]
-extents = Vector2( 26.5, 32.5 )
+[sub_resource type="CapsuleShape2D" id=154]
+radius = 10.8333
+height = 44.0001
 
 [sub_resource type="Animation" id=77]
 resource_name = "Idle"
@@ -403,22 +404,22 @@ position = Vector2( 8.90456, -19.4523 )
 scale = Vector2( 1.36087, 1.36087 )
 frames = SubResource( 11 )
 animation = "walking"
-frame = 5
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7.5, -7.49997 )
 rotation = -3.14159
-shape = SubResource( 76 )
+shape = SubResource( 154 )
 
 [node name="Derecha" type="RayCast2D" parent="."]
 position = Vector2( 28, 9 )
 enabled = true
-cast_to = Vector2( 0, 25 )
+cast_to = Vector2( 0, 80 )
 
 [node name="Izquierda" type="RayCast2D" parent="."]
 position = Vector2( -18, 5 )
 enabled = true
-cast_to = Vector2( 0, 25 )
+cast_to = Vector2( 0, 85 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 77 )
