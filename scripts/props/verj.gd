@@ -17,4 +17,6 @@ func _process(delta):
 			particles.set_emitting(false)
 			player.changeDimension()
 			collected = true
+	else:
+		label.set_modulate(Color(1,1,1,0))
 
