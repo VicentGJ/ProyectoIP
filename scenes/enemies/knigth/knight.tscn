@@ -378,7 +378,7 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachine" id=74]
 states/Idle/node = SubResource( 80 )
-states/Idle/position = Vector2( 436.037, 177.667 )
+states/Idle/position = Vector2( 436.383, 177.667 )
 states/attack/node = SubResource( 109 )
 states/attack/position = Vector2( 631.787, 43.1689 )
 states/death/node = SubResource( 83 )
@@ -388,7 +388,7 @@ states/hit/position = Vector2( 436.037, -30.3333 )
 states/walking/node = SubResource( 73 )
 states/walking/position = Vector2( 223, 186.161 )
 transitions = [ "Idle", "walking", SubResource( 81 ), "walking", "Idle", SubResource( 82 ), "Idle", "death", SubResource( 84 ), "Idle", "hit", SubResource( 87 ), "hit", "Idle", SubResource( 88 ), "Idle", "attack", SubResource( 110 ), "attack", "Idle", SubResource( 111 ) ]
-start_node = "Idle"
+start_node = "walking"
 end_node = "death"
 graph_offset = Vector2( -175.361, 1.21385 )
 
@@ -404,7 +404,7 @@ position = Vector2( 8.90456, -19.4523 )
 scale = Vector2( 1.36087, 1.36087 )
 frames = SubResource( 11 )
 animation = "walking"
-frame = 2
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7.5, -7.49997 )

@@ -28,26 +28,12 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-<<<<<<< HEAD
-margin_right = 68608.0
-margin_bottom = 40200.0
-
-[node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 469, 216 )
-=======
 margin_right = 75776.0
 margin_bottom = 44400.0
->>>>>>> 1b1c29643f2ad25bf35c56f4df851b84a3b44884
 
 [node name="trap" parent="." instance=ExtResource( 4 )]
 position = Vector2( 596, 368 )
 
-<<<<<<< HEAD
-[node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 766, 360 )
-
-=======
->>>>>>> 1b1c29643f2ad25bf35c56f4df851b84a3b44884
 [node name="door" parent="." instance=ExtResource( 6 )]
 position = Vector2( 722, 335 )
 
