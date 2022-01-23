@@ -637,7 +637,7 @@ states/slide/position = Vector2( 317.687, 31.144 )
 transitions = [ "idle", "attack_1", SubResource( 34 ), "idle", "run", SubResource( 39 ), "idle", "fall", SubResource( 40 ), "idle", "slide", SubResource( 41 ), "slide", "idle", SubResource( 43 ), "run", "idle", SubResource( 45 ), "crouch", "idle", SubResource( 46 ), "idle", "crouch", SubResource( 47 ), "climb", "idle", SubResource( 53 ), "fall", "idle", SubResource( 61 ), "idle", "attack_2", SubResource( 62 ), "idle", "attack_3", SubResource( 63 ), "attack_1", "idle_sword", SubResource( 70 ), "attack_2", "idle_sword", SubResource( 71 ), "idle_sword", "idle", SubResource( 73 ), "fall", "climb", SubResource( 76 ), "run", "climb", SubResource( 77 ), "idle", "climb", SubResource( 78 ), "combo1", "combo2", SubResource( 82 ), "combo2", "combo3", SubResource( 83 ), "slide", "climb", SubResource( 85 ), "fall", "air_attack", SubResource( 87 ), "air_attack", "fall", SubResource( 88 ), "fall", "air_dash", SubResource( 91 ), "idle", "hurt", SubResource( 93 ), "hurt", "die", SubResource( 94 ), "hurt", "idle", SubResource( 95 ), "air_dash", "fall", SubResource( 96 ), "attack_3", "idle_sword", SubResource( 97 ), "combo3", "combo1", SubResource( 100 ) ]
 start_node = "idle"
 end_node = "die"
-graph_offset = Vector2( -698.942, -151.504 )
+graph_offset = Vector2( -698.942, -323.408 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=19]
 
