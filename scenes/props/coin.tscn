@@ -64,7 +64,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[node name="coin" type="Area2D"]
+[node name="coin" type="KinematicBody2D"]
 scale = Vector2( 3, 3 )
 collision_layer = 7
 collision_mask = 7
@@ -84,6 +84,7 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = 1.57786
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="right" type="RayCast2D" parent="."]

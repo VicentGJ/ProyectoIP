@@ -99,6 +99,18 @@ region = Rect2( 0, 64, 128, 64 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 64, 128, 64 )
 
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 64, 128, 64 )
+
 [sub_resource type="AtlasTexture" id=123]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 64 )
@@ -131,18 +143,6 @@ region = Rect2( 0, 192, 128, 64 )
 atlas = ExtResource( 3 )
 region = Rect2( 128, 192, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=120]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=121]
-atlas = ExtResource( 5 )
-region = Rect2( 128, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=122]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 64, 128, 64 )
-
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 142 ), SubResource( 143 ), SubResource( 144 ), SubResource( 145 ), SubResource( 146 ), SubResource( 147 ), SubResource( 148 ), SubResource( 149 ), SubResource( 150 ), SubResource( 151 ), SubResource( 152 ), SubResource( 153 ) ],
@@ -160,14 +160,14 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ) ],
-"loop": true,
-"name": "walking",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 120 ), SubResource( 121 ), SubResource( 122 ) ],
 "loop": true,
 "name": "hit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ) ],
+"loop": true,
+"name": "walking",
 "speed": 5.0
 } ]
 
@@ -404,7 +404,6 @@ position = Vector2( 8.90456, -19.4523 )
 scale = Vector2( 1.36087, 1.36087 )
 frames = SubResource( 11 )
 animation = "walking"
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7.5, -7.49997 )

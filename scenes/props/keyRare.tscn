@@ -85,7 +85,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[node name="keyRare" type="Area2D"]
+[node name="keyRare" type="KinematicBody2D"]
 light_mask = 2
 scale = Vector2( 3.5, 3.5 )
 script = ExtResource( 1 )
@@ -98,6 +98,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57786
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="right" type="RayCast2D" parent="."]

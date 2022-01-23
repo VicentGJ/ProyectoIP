@@ -90,8 +90,10 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity,Vector2(0,-1))
 
 	else:
+		get_parent().add_child(load("res://scenes/props/coin.tscn").instance())
 		health=0;
 		stateMachine.travel("death")
+		
 
 		$CollisionShape2D.set_disabled(true)
 		
@@ -127,7 +129,7 @@ func launchArrow():
 	get_parent().add_child(newArrow)
 	
 	if dir==Direction.Right:
-		newArrow.position=Vector2(position.x,position.y-8.5)
+		newArrow.position=Vector2(position.x+20,position.y-8.5)
 		newArrow.linear_velocity=Vector2(1000,0)
 	else:
 		newArrow.position=Vector2(position.x-13,position.y-13.5)

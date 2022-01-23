@@ -96,7 +96,7 @@ func _physics_process(delta):
 
 	#c muere
 	else:
-#		sprite.stop()
+		get_parent().add_child(load("res://scenes/props/coin.tscn").instance())
 		health=0;
 		stateMachine.travel("death")
 

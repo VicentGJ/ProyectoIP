@@ -85,7 +85,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[node name="keyRegular" type="Area2D"]
+[node name="keyRegular" type="KinematicBody2D"]
 scale = Vector2( 3.5, 3.5 )
 script = ExtResource( 2 )
 
@@ -102,6 +102,7 @@ hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57786
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="right" type="RayCast2D" parent="."]
