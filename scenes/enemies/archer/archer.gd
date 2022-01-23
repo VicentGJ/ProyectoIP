@@ -90,7 +90,7 @@ func _physics_process(delta):
 			velocity = move_and_slide(velocity,Vector2(0,-1))
 
 	else:
-		get_parent().add_child(load("res://scenes/props/coin.tscn").instance())
+		dropCoin()
 		health=0;
 		stateMachine.travel("death")
 		
@@ -110,7 +110,13 @@ func turnDir(right):
 		$visionBack.cast_to=Vector2(250,0)
 
 
-
+func dropCoin():
+	var droped = false
+	var coinDrop = load("res://scenes/props/coin.tscn").instance()
+	if not droped:
+		get_parent().add_child(coinDrop)
+		coinDrop.position=Vector2(0,0)
+		droped = true
 
 
 func recieveDamage(value):
