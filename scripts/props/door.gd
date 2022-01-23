@@ -15,10 +15,10 @@ var neededKey
 func _ready():
 	if isDoorRare:
 		$Sprite.set_animation("door2")
-		neededKey = "rare"
+		neededKey = 1
 	else:
 		$Sprite.set_animation("door1")
-		neededKey = "common"
+		neededKey = 0
 		
 func open():
 	if isDoorRare:
@@ -29,11 +29,11 @@ func open():
 func _process(delta):
 	if not opened and (Input.is_action_just_pressed("interact") and (leftRay.get_collider() == player \
 	or rightRay.get_collider() == player)):
-		if neededKey == "common" and player.keys[0] >= 1:
+		if neededKey == 0 and player.keys[0] >= 1:
 			player.changeKeys(neededKey, -1)
 			open()
 			opened = true
-		elif neededKey == "rare" and player.keys[0] >= 1:
+		elif neededKey == 1 and player.keys[0] >= 1:
 			player.changeKeys(neededKey, -1)
 			open()
 			opened = true

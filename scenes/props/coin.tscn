@@ -1,12 +1,68 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/props/coin.gd" type="Script" id=1]
 [ext_resource path="res://sprites/props/gemCoin.png" type="Texture" id=2]
 [ext_resource path="res://effects/coinGoldParticles.tres" type="Material" id=3]
+[ext_resource path="res://media/sound effects/player/collectCcoin.ogg" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 2.99993
 height = 0.0
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("coinCollect:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("coinCollect:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "coinCollected"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("coinCollect:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("coinCollect:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.36982 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="coin" type="Area2D"]
 scale = Vector2( 3, 3 )
@@ -47,5 +103,12 @@ position = Vector2( 0.333333, 0.333333 )
 amount = 4
 lifetime = 0.4
 process_material = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/coinCollected = SubResource( 3 )
+
+[node name="coinCollect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="timeout" from="queueFreeTimer" to="." method="_on_queueFree_Timer_timeout"]

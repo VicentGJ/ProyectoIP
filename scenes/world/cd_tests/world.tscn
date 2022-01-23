@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/trap.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemies/knigth/knight.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/props/powerUP.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/props/door.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/props/verj.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/props/keyRegular.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/props/coin.tscn" type="PackedScene" id=9]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -26,26 +28,71 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
+<<<<<<< HEAD
 margin_right = 68608.0
 margin_bottom = 40200.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 469, 216 )
+=======
+margin_right = 75776.0
+margin_bottom = 44400.0
+>>>>>>> 1b1c29643f2ad25bf35c56f4df851b84a3b44884
 
 [node name="trap" parent="." instance=ExtResource( 4 )]
 position = Vector2( 596, 368 )
 
+<<<<<<< HEAD
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 766, 360 )
 
+=======
+>>>>>>> 1b1c29643f2ad25bf35c56f4df851b84a3b44884
 [node name="door" parent="." instance=ExtResource( 6 )]
 position = Vector2( 722, 335 )
 
-[node name="Sprite2" parent="." instance=ExtResource( 7 )]
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 469, 216 )
+
+[node name="verj" parent="." instance=ExtResource( 7 )]
 position = Vector2( 237, 343 )
+
+[node name="coin4" parent="." instance=ExtResource( 9 )]
+position = Vector2( 657, 286 )
+
+[node name="coin5" parent="." instance=ExtResource( 9 )]
+position = Vector2( 624, 297 )
+
+[node name="coin6" parent="." instance=ExtResource( 9 )]
+position = Vector2( 651, 314 )
+
+[node name="powerUP" parent="." instance=ExtResource( 5 )]
+position = Vector2( 663, 366 )
+
+[node name="powerUP2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 516, 225 )
+
+[node name="powerUP3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 440, 195 )
+
+[node name="powerUP4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 349, 189 )
+
+[node name="powerUP5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 292, 185 )
+
+[node name="powerUP6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 240, 188 )
+
+[node name="powerUP7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 240, 188 )
+
+[node name="keyRegular" parent="." instance=ExtResource( 8 )]
+position = Vector2( 391, 242 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
 [connection signal="maxHPincrease" from="player" to="GUI/HealthBar" method="_on_player_maxHPincrease"]
+[connection signal="collected" from="keyRegular" to="player" method="_on_keyRegular_collected"]

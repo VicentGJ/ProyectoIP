@@ -18,6 +18,7 @@ func _on_player_healthChange(value):
 		$numeric_hp_update.interpolate_method(self, "numeric_hpCount",health_under.value, health_over.value,0.4,Tween.TRANS_EXPO,Tween.EASE_IN)
 		$numeric_hp_update.start()
 		animPlay.play("shake")
+		animPlay.play("hurt")
 		emit_signal("damaged",health_over.value)
 	if value < 0: #healing
 		health_under.value -= value

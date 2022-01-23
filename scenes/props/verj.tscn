@@ -10,10 +10,11 @@ emission_sphere_radius = 5.0
 flag_disable_z = true
 flatness = 1.0
 gravity = Vector3( 0, -98, 0 )
-angular_velocity = 141.0
+angular_velocity = -720.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+scale = 3.0
 scale_random = 1.0
 color = Color( 0.831373, 0.152941, 0.815686, 1 )
 
@@ -34,7 +35,7 @@ script = ExtResource( 2 )
 position = Vector2( 2.8, 12.8 )
 amount = 6
 lifetime = 0.7
-speed_scale = 0.5
+speed_scale = 0.4
 process_material = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]

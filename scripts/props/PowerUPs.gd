@@ -17,28 +17,25 @@ var collected = false
 var gravity = 200
 var velocity = Vector2()
 
-enum TYPE { random, heal, maxHP, maxAP }
+enum TYPE { heal, maxHP, maxAP, random }
 export (TYPE) var type = TYPE.random
-signal increaseAttack(amount)
 
 func _ready():
-	print("here")
 	if type == TYPE.random:
-		print("here")
 		randomize()
 		var random = randi() % 21
 		if random < 15:
-			print("here1")
 			$Sprite.set_frame(0)
 			particles.set_process_material(material_heal)
+			type = TYPE.heal
 		elif random < 18:
-			print("here2")
 			$Sprite.set_frame(2)
 			particles.set_process_material(material_increaseMaxHp)
+			type = TYPE.maxHP
 		else:
 			$Sprite.set_frame(5)
-			print("here3")
 			particles.set_process_material(material_increaseAttack)
+			type = TYPE.maxAP
 	if price > 0:
 		$price.text =str(round(price))
 	
@@ -53,6 +50,14 @@ func _process(delta):
 			tween.start()
 			player.changeStats(type, value)
 			collected = true
+			print(type)
+			if type == 0:
+				$AnimationPlayer.play("heal")
+			elif type == 1:
+				player.changeStats(0,value)
+				$AnimationPlayer.play("maxHpPowerUP")
+			else:
+				$AnimationPlayer.play("attackPowerUP")
 			toQueueFree.start()
 
 func _on_queueFreeTimer_timeout():

@@ -36,6 +36,7 @@ func _physics_process(delta):
 		tween.interpolate_property(coin, "modulate", coin.get_modulate(), Color(1, 1, 1, 0), 0.5,Tween.TRANS_LINEAR)
 		tween.start()
 		collected = true
+		$AnimationPlayer.play("coinCollected")
 		toQueueFree.start()
 
 func _on_queueFree_Timer_timeout():

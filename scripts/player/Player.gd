@@ -21,7 +21,7 @@ var money  = 0
 var keys = [0,0]
 
 #var enemies_killed = 0
-
+onready var animationPlayer = $AnimationPlayer
 onready var playerSprite = $Sprite
 onready var climb_ray1 = $ray_to_climb
 onready var climb_ray2 = $ray_to_climb_2
@@ -191,6 +191,7 @@ func air_attack_animation():
 func do_jump():
 	velocity.y = jump_speed 
 	state_machine.travel("fall")
+	animationPlayer.play("jump")
 func fall_animation():
 	state_machine.travel("fall")
 func slide_animation():
@@ -232,6 +233,7 @@ func death_animation():
 func add_money(addedMoney):
 	money += addedMoney
 	emit_signal("getMoney", money)
+	animationPlayer.play("collectCoin")
 func changeKeys(keyType, amount):
 	if keyType == 0:
 		keys[0] += amount
@@ -386,7 +388,7 @@ func _on_keyRegular_collected():
 func _on_keyRare_collected():
 	keys[1] += 1
 	emit_signal("getKey", 1, 1)
-
+	
 func _on_Area2D_body_entered(body):
 	if body in get_tree().get_nodes_in_group("enemies"):
 		body.recieveDamage(attackDamage)

@@ -21,8 +21,9 @@ func _physics_process(delta):
 			tween.interpolate_property(key, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 0.5,Tween.TRANS_BOUNCE)
 			tween.start()
 			collected = true
+			$AnimationPlayer.play("keyCollected")
 			toQueueFree.start()
-		
+			
 		
 func _on_queueFreeTimer_timeout():
 	emit_signal("collected")
