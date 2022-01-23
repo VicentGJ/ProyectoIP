@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 onready var tween = $Tween
 onready var coin = $Sprite
 onready var toQueueFree = $queueFreeTimer
@@ -12,7 +12,8 @@ onready var materialSapphire = preload("res://effects/coinSapphireParticles.tres
 onready var materialRuppies = preload("res://effects/coinRupiesParticles.tres")
 
 var random
-
+var goToFloor = 200
+var velocity = Vector2()
 var collected = false
 func _ready():
 	randomize()
@@ -30,6 +31,8 @@ func _ready():
 		coinValue = 30
 		particles.set_process_material(materialRuppies)
 func _physics_process(delta):
+	velocity.y += goToFloor * delta
+	velocity = move_and_slide(velocity, Vector2(0, -1))
 	if not collected and (leftRay.get_collider() == player or leftRay.get_collider() == player):
 		tween.interpolate_property(self, "position", position,Vector2(position.x , position.y - 30),0.5,Tween.TRANS_LINEAR,Tween.EASE_IN) 
 		tween.start()

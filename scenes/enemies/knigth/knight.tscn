@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://scenes/enemies/knigth/knight.gd" type="Script" id=1]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Death.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Attacks.png" type="Texture" id=4]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Hurt.png" type="Texture" id=5]
 [ext_resource path="res://sprites/2D_SL_Knight_v1.0/Pray.png" type="Texture" id=6]
+[ext_resource path="res://effects/enemies/59990__qubodup__swosh-03.ogg" type="AudioStream" id=7]
 
 [sub_resource type="AtlasTexture" id=142]
 atlas = ExtResource( 6 )
@@ -99,6 +100,18 @@ region = Rect2( 0, 64, 128, 64 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 64, 128, 64 )
 
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 64 )
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 64, 128, 64 )
+
 [sub_resource type="AtlasTexture" id=123]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 64 )
@@ -131,18 +144,6 @@ region = Rect2( 0, 192, 128, 64 )
 atlas = ExtResource( 3 )
 region = Rect2( 128, 192, 128, 64 )
 
-[sub_resource type="AtlasTexture" id=120]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=121]
-atlas = ExtResource( 5 )
-region = Rect2( 128, 0, 128, 64 )
-
-[sub_resource type="AtlasTexture" id=122]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 64, 128, 64 )
-
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 142 ), SubResource( 143 ), SubResource( 144 ), SubResource( 145 ), SubResource( 146 ), SubResource( 147 ), SubResource( 148 ), SubResource( 149 ), SubResource( 150 ), SubResource( 151 ), SubResource( 152 ), SubResource( 153 ) ],
@@ -160,14 +161,14 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ) ],
-"loop": true,
-"name": "walking",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 120 ), SubResource( 121 ), SubResource( 122 ) ],
 "loop": true,
 "name": "hit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ) ],
+"loop": true,
+"name": "walking",
 "speed": 5.0
 } ]
 
@@ -218,6 +219,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("attack:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 7 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("attack:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=108]
 resource_name = "attack"
@@ -256,6 +281,30 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("attack:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("attack:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=79]
@@ -390,7 +439,7 @@ states/walking/position = Vector2( 223, 186.161 )
 transitions = [ "Idle", "walking", SubResource( 81 ), "walking", "Idle", SubResource( 82 ), "Idle", "death", SubResource( 84 ), "Idle", "hit", SubResource( 87 ), "hit", "Idle", SubResource( 88 ), "Idle", "attack", SubResource( 110 ), "attack", "Idle", SubResource( 111 ) ]
 start_node = "walking"
 end_node = "death"
-graph_offset = Vector2( -175.361, 1.21385 )
+graph_offset = Vector2( -175.361, -106.957 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=89]
 
@@ -403,8 +452,8 @@ script = ExtResource( 1 )
 position = Vector2( 8.90456, -19.4523 )
 scale = Vector2( 1.36087, 1.36087 )
 frames = SubResource( 11 )
-animation = "walking"
-frame = 1
+animation = "idle"
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 7.5, -7.49997 )
@@ -457,3 +506,7 @@ enabled = true
 cast_to = Vector2( -150, 0 )
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="attack" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0.666672, 0.666672 )
+stream = ExtResource( 7 )

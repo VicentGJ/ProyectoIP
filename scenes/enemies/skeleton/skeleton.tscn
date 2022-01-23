@@ -255,6 +255,38 @@ region = Rect2( 429, 0, 33, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 462, 0, 33, 32 )
 
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 5 )
+region = Rect2( 30, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 5 )
+region = Rect2( 60, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 5 )
+region = Rect2( 90, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 5 )
+region = Rect2( 120, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 5 )
+region = Rect2( 150, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 5 )
+region = Rect2( 180, 0, 30, 32 )
+
+[sub_resource type="AtlasTexture" id=71]
+atlas = ExtResource( 5 )
+region = Rect2( 210, 0, 30, 32 )
+
 [sub_resource type="AtlasTexture" id=51]
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 22, 33 )
@@ -307,38 +339,6 @@ region = Rect2( 242, 0, 22, 33 )
 atlas = ExtResource( 4 )
 region = Rect2( 264, 0, 22, 33 )
 
-[sub_resource type="AtlasTexture" id=64]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=65]
-atlas = ExtResource( 5 )
-region = Rect2( 30, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=66]
-atlas = ExtResource( 5 )
-region = Rect2( 60, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=67]
-atlas = ExtResource( 5 )
-region = Rect2( 90, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=68]
-atlas = ExtResource( 5 )
-region = Rect2( 120, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=69]
-atlas = ExtResource( 5 )
-region = Rect2( 150, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=70]
-atlas = ExtResource( 5 )
-region = Rect2( 180, 0, 30, 32 )
-
-[sub_resource type="AtlasTexture" id=71]
-atlas = ExtResource( 5 )
-region = Rect2( 210, 0, 30, 32 )
-
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
 "frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ) ],
@@ -356,14 +356,14 @@ animations = [ {
 "name": "death",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ) ],
-"loop": true,
-"name": "walking",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ), SubResource( 71 ) ],
 "loop": true,
 "name": "hit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ) ],
+"loop": true,
+"name": "walking",
 "speed": 5.0
 } ]
 

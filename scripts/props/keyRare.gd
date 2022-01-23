@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 
 onready var tween = $Tween
 onready var key = $Sprite
@@ -9,10 +9,13 @@ onready var player = get_parent().get_node("player")
 onready var particles = $Particles2D
 export var price = 0
 var collected = false
-
+var goToFloor = 200
+var velocity = Vector2()
 signal collected()
 
 func _physics_process(delta):
+	velocity.y += goToFloor * delta
+	velocity = move_and_slide(velocity, Vector2(0, -1))
 	if not collected and (leftRay.get_collider() == player or leftRay.get_collider() == player):
 		if Input.is_action_just_pressed("interact") and player.money >= price:
 			particles.set_emitting(false)

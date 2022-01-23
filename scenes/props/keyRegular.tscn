@@ -85,7 +85,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[node name="keyRegular" type="Area2D"]
+[node name="keyRegular" type="KinematicBody2D"]
 scale = Vector2( 3.5, 3.5 )
 script = ExtResource( 2 )
 

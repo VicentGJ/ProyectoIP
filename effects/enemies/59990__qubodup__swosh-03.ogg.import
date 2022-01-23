@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/59990__qubodup__swosh-03.ogg-d6f8bd46a6bad8f71f8f926e40c77e27.oggstr"
+
+[deps]
+
+source_file="res://effects/enemies/59990__qubodup__swosh-03.ogg"
+dest_files=[ "res://.import/59990__qubodup__swosh-03.ogg-d6f8bd46a6bad8f71f8f926e40c77e27.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
