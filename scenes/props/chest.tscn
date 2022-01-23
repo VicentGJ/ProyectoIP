@@ -76,7 +76,6 @@ scale = Vector2( 0.4375, 0.4375 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57786
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="right" type="RayCast2D" parent="."]
