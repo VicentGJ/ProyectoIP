@@ -144,7 +144,7 @@ position = Vector2( 2062.5, 603.333 )
 scale = Vector2( 1, 1 )
 
 [node name="Enemy" parent="Dimension2" instance=ExtResource( 11 )]
-position = Vector2( 2553.33, 1130.83 )
+position = Vector2( 2660.83, 1131.67 )
 
 [node name="trap23" parent="Dimension2" instance=ExtResource( 12 )]
 position = Vector2( 1648.33, 767.5 )
