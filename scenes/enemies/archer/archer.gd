@@ -16,6 +16,7 @@ var dir=Direction.Right
 
 export var health = 40
 var state=State.Walking
+var canAttack = true
 export var damage = 20
 
 signal damage_player(damage)
@@ -76,9 +77,10 @@ func _physics_process(delta):
 			yield(get_tree().create_timer(0.6),"timeout")
 			state=State.Idle
 		
-		elif state == State.Attack and $TimerAttack.get_time_left() == 0:
+		elif state == State.Attack and canAttack:
 			velocity.x=0
 			stateMachine.travel("attack")
+			canAttack = false
 			$TimerAttack.start()
 			
 #			yield(get_tree().create_timer(0.7),"timeout")
@@ -132,3 +134,7 @@ func launchArrow():
 		newArrow.linear_velocity=Vector2(-1000,0)
 		newArrow.get_node("Projectile").set_flip_h(true)
 		
+
+
+func _on_TimerAttack_timeout():
+	canAttack = true
