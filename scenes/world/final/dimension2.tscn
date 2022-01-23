@@ -3,6 +3,7 @@
 [ext_resource path="res://sprites/tiles/cementeryBiome.tres" type="TileSet" id=1]
 
 [node name="Dimension2" type="Node2D"]
+scale = Vector2( 1.2, 1.2 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

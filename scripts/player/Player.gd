@@ -35,8 +35,10 @@ onready var attackArea_2 = $Area2D/attack_area2
 onready var particles_slide = $slide_particles
 onready var particles_death = $death_particles
 onready var flash = $flash
-onready var dimension1 = get_parent().get_node("Dimension1")
-onready var dimension2 = get_parent().get_node("Dimension2")
+onready var Dimension1 = preload("res://scenes/world/final/dimension1.tscn")
+onready var Dimension2 = preload("res://scenes/world/final/dimension2.tscn")
+var dimension1
+var dimension2
 
 signal healthChange(value)
 signal dead()
@@ -46,6 +48,10 @@ signal getMoney(amount)
 signal getKey(keyType, keyAmount)
 
 func _ready():
+	dimension1 = preload("res://scenes/world/final/dimension1.tscn").instace()
+	dimension2 = load("res://scenes/world/final/dimension2.tscn").instace()
+	get_parent().add_child_below_node(get_parent().get_node("GUI") , dimension1)
+	
 	state_machine = $AnimationTree.get("parameters/playback")
 	
 func changeDimension():
@@ -56,11 +62,11 @@ func changeDimension():
 	if dimension == 1:
 		dimension = 2
 		dimension1.queue_free()
-		get_parent().add_child(dimension2)
+		get_parent().add_child_below_node(get_parent().get_node("GUI") , dimension2)
 	elif dimension == 2:
 		dimension = 1
 		dimension2.queue_free()
-		get_parent().add_child(dimension1)
+		get_parent().add_child_below_node(get_parent().get_node("GUI") , dimension1)
 		
 		
 	$Tween.interpolate_property(flash, "modulate", Color(1.0, 1.0, 1.0, 1.0), Color(1.0, 1.0, 1.0, 0), 0.5,Tween.TRANS_BOUNCE)
