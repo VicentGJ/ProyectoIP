@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/enemies/skeleton/Skeleton Sprite Pack/Skeleton/Sprite Sheets/Skeleton Dead.png" type="Texture" id=1]
+[ext_resource path="res://scripts/props/verj.gd" type="Script" id=2]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -22,6 +23,7 @@ scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 1 )
 hframes = 14
 frame = 11
+script = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 2.8, 12.8 )
@@ -29,3 +31,13 @@ amount = 6
 lifetime = 0.7
 speed_scale = 0.5
 process_material = SubResource( 1 )
+
+[node name="right" type="RayCast2D" parent="."]
+position = Vector2( 2, 10 )
+enabled = true
+cast_to = Vector2( 25, 0 )
+
+[node name="left" type="RayCast2D" parent="."]
+position = Vector2( 2, 10 )
+enabled = true
+cast_to = Vector2( -25, 0 )
