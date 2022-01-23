@@ -230,7 +230,7 @@ func add_money(addedMoney):
 	money += addedMoney
 	emit_signal("getMoney", money)
 func changeKeys(keyType, amount):
-	if keyType == "common":
+	if keyType == 0:
 		keys[0] += amount
 		emit_signal("getKey",0,amount)
 	else:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/world/cd_tests/area+enemy_testingNODE.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/trap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/enemies/knigth/knight.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/props/door.tscn" type="PackedScene" id=6]
 
 [node name="testingWorld" type="Node2D"]
 
@@ -24,17 +25,20 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 59392.0
-margin_bottom = 34800.0
+margin_right = 60416.0
+margin_bottom = 35400.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 266, 339 )
+position = Vector2( 220, 340 )
 
 [node name="trap" parent="." instance=ExtResource( 4 )]
-position = Vector2( 640, 376 )
+position = Vector2( 596, 368 )
 
-[node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 706, 361 )
+[node name="Enemy" parent="." groups=["enemies"] instance=ExtResource( 5 )]
+position = Vector2( 766, 360 )
+
+[node name="door" parent="." instance=ExtResource( 6 )]
+position = Vector2( 722, 335 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
