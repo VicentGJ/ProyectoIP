@@ -816,7 +816,6 @@ max_distance = 1000.0
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
 position = Vector2( 1, 3 )
-current = true
 zoom = Vector2( 0.8, 0.8 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
