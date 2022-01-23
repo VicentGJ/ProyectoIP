@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export (int) var gravity = 500
-export (int) var linealVelocity = 200
+export (int) var linealVelocity = 150
 onready var player = get_parent().get_node("player")
 onready var sprite = $Sprite
 export var velocity = Vector2.ZERO
@@ -24,8 +24,6 @@ func _ready():
 	stateMachine = $AnimationTree.get("parameters/playback")
 	$attackRaycast.enabled=false
 	
-	
-	
 func _physics_process(delta):
 	velocity.y+=gravity*delta
 	if player.inmunity:
@@ -38,7 +36,7 @@ func _physics_process(delta):
 		$visionBack.set_collision_mask(1)
 	if health > 0: #si esta vivo
 		#ataque
-		if state!=State.Hit and not player.dead:		
+		if state!=State.Hit and not player.dead:
 			if $detectAttack.get_collider()==player:
 					state=State.Attack
 			elif $vision.get_collider()==player:
@@ -95,7 +93,8 @@ func _physics_process(delta):
 			stateMachine.travel("attack")
 			if $attackRaycast.enabled:
 				if $attackRaycast.get_collider() == player:
-					emit_signal("damage_player", damage)
+					player.changeStats(0, -damage)
+					#emit_signal("damage_player", damage)
 #			yield(get_tree().create_timer(0.7),"timeout")
 			state=State.Idle
 		
@@ -127,13 +126,5 @@ func turnDir(right):
 		$vision.cast_to=Vector2(-200,0)
 		$visionBack.cast_to=Vector2(150,0)
 
-
-
-
-
-func _on_player_damage(damage,enemy):
-	
-	if enemy==self:
-		print(enemy)
-		health -=damage
-		state=State.Hit
+func damage():
+	pass

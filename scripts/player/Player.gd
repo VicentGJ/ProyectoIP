@@ -376,25 +376,6 @@ func _on_keyRare_collected():
 	keys[1] += 1
 	emit_signal("getKey", 1, 1)
 
-<<<<<<< HEAD
 
 func _on_Sprite2_varjCollected():
 	changeDimension()
-=======
-#dano desde los enemigos
-func _on_Enemy2_damage_player(damage):
-	emit_signal("healthChange",damage)
-	
-func _on_Enemy_damage_player(damage):
-	emit_signal("healthChange",damage)
-
-#dano a los enemigos
-func _on_Area2D_body_entered(body):
-	var enemy = get_parent().get_node(body.name)
-	emit_signal("damage",attackDamage,body)
-		#emit_signal("damage",20)
-
-
-
-
->>>>>>> 55f071d (resolved)
