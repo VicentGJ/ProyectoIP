@@ -9,7 +9,6 @@
 [ext_resource path="res://scenes/props/verj.tscn" type="PackedScene" id=7]
 
 [node name="testingWorld" type="Node2D"]
-script = ExtResource( 6 )
 
 [node name="areas" parent="." instance=ExtResource( 1 )]
 
@@ -27,11 +26,11 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 60416.0
-margin_bottom = 35400.0
+margin_right = 63488.0
+margin_bottom = 37200.0
 
 [node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 223, 340 )
+position = Vector2( 469, 216 )
 
 [node name="trap" parent="." instance=ExtResource( 4 )]
 position = Vector2( 596, 368 )
@@ -42,25 +41,11 @@ position = Vector2( 766, 360 )
 [node name="door" parent="." instance=ExtResource( 6 )]
 position = Vector2( 722, 335 )
 
-<<<<<<< HEAD
 [node name="Sprite2" parent="." instance=ExtResource( 7 )]
-=======
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Enemy2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 437, 202 )
->>>>>>> 55f071d (resolved)
+position = Vector2( 237, 343 )
 
 [connection signal="damaged" from="GUI/HealthBar" to="player" method="_on_HealthBar_damaged"]
-[connection signal="damage" from="player" to="Enemy" method="_on_player_damage"]
-[connection signal="damage" from="player" to="Enemy2" method="_on_player_damage"]
 [connection signal="getKey" from="player" to="GUI/HealthBar" method="_on_player_getKey"]
 [connection signal="getMoney" from="player" to="GUI/HealthBar" method="_on_player_getMoney"]
 [connection signal="healthChange" from="player" to="GUI/HealthBar" method="_on_player_healthChange"]
 [connection signal="maxHPincrease" from="player" to="GUI/HealthBar" method="_on_player_maxHPincrease"]
-<<<<<<< HEAD
-[connection signal="varjCollected" from="Sprite2" to="player" method="_on_Sprite2_varjCollected"]
-=======
-[connection signal="damage_player" from="Enemy" to="player" method="_on_Enemy_damage_player"]
-[connection signal="damage_player" from="Enemy2" to="player" method="_on_Enemy2_damage_player"]
->>>>>>> 55f071d (resolved)
