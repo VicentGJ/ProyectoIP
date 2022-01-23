@@ -64,7 +64,7 @@ margin_top = 45.0
 margin_right = 270.0
 margin_bottom = 267.0
 custom_fonts/font = SubResource( 1 )
-text = "Vicente Garófalo
+text = "Vicente Garofalo
 Game Direction
 
 Carlos Daniel Vilaseca
@@ -79,7 +79,7 @@ margin_top = 45.0
 margin_right = 527.0
 margin_bottom = 267.0
 custom_fonts/font = SubResource( 1 )
-text = "Richard Operasa
+text = "Richard Oropesa
 Programming
 
 Javier García
@@ -97,7 +97,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Isabel Canales
 Art design
 
-William
+William Rivero
 Music and Sound"
 __meta__ = {
 "_edit_use_anchors_": false

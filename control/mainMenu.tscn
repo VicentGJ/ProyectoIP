@@ -107,14 +107,19 @@ text = "Quit"
 flat = true
 align = 0
 
-[node name="Dxb-01" type="Sprite" parent="."]
-position = Vector2( 922, 547 )
-scale = Vector2( 0.122483, 0.122483 )
-texture = ExtResource( 3 )
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 autoplay = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -113.0
+margin_top = -80.0
+texture = ExtResource( 3 )
+expand = true
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Jugar" to="." method="_on_Jugar_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Opciones" to="." method="_on_Opciones_pressed"]

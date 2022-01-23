@@ -1,15 +1,15 @@
 extends Control
 
 var fullScreen
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var volumen
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fullScreen=OS.window_fullscreen
+	volumen=AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 	$VBoxContainer/HBoxContainer/CheckBox.pressed=fullScreen
+	$VBoxContainer/HBoxContainer2/HSlider.value=volumen
 	
 	
 
