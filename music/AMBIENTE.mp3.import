@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AMBIENTE.mp3-111e458e2cd4dd8ebfbe5783f08479b9.mp3str"
+
+[deps]
+
+source_file="res://music/AMBIENTE.mp3"
+dest_files=[ "res://.import/AMBIENTE.mp3-111e458e2cd4dd8ebfbe5783f08479b9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
