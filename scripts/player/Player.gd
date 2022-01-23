@@ -375,3 +375,7 @@ func _on_keyRegular_collected():
 func _on_keyRare_collected():
 	keys[1] += 1
 	emit_signal("getKey", 1, 1)
+
+
+func _on_Sprite2_varjCollected():
+	changeDimension()
