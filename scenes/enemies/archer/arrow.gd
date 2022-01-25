@@ -27,8 +27,6 @@ func _on_enemyDetector_body_entered(body):
 		#daño de flecha aqui
 		player.changeStats(0, -damage)
 		queue_free()
-	else:
-		$hitArrowSound.play()
 
 
 #func _on_damaging_timeout():

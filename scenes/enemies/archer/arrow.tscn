@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/Arcane archer/Arcane archer/projectile.png" type="Texture" id=1]
 [ext_resource path="res://scenes/enemies/archer/arrow.gd" type="Script" id=2]
-[ext_resource path="res://sounds/archer/hit arrow.ogg" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 21, 1.75 )
@@ -43,9 +42,6 @@ shape = SubResource( 2 )
 wait_time = 3.0
 one_shot = true
 autostart = true
-
-[node name="hitArrowSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
 
 [connection signal="timeout" from="finish" to="." method="_on_finish_timeout"]
 [connection signal="body_entered" from="enemyDetector" to="." method="_on_enemyDetector_body_entered"]

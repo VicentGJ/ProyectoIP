@@ -18,6 +18,8 @@ var health = 100
 var state=State.Walking
 var damage = 25
 
+var win = false
+
 signal damage_player(damage)
 
 func _ready():
@@ -96,13 +98,14 @@ func _physics_process(delta):
 
 	#c muere
 	else:
-		get_parent().add_child(load("res://scenes/props/coin.tscn").instance())
-		health=0;
-		stateMachine.travel("death")
-		player.changeStats(0, -900)
+		if !win:
+			get_parent().add_child(load("res://scenes/props/coin.tscn").instance())
+			health=0;
+			stateMachine.travel("death")
+			$CollisionShape2D.set_disabled(true)
+			win = true
+			player.win()
 
-		$CollisionShape2D.set_disabled(true)
-		
 func turnDir(right):
 	if right:
 		dir=Direction.Right

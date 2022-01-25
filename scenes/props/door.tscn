@@ -5,14 +5,6 @@
 [ext_resource path="res://media/sound effects/props/metal-door-sound.wav" type="AudioStream" id=3]
 [ext_resource path="res://media/sound effects/props/wood-door-sound.wav" type="AudioStream" id=4]
 
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 77, 59, 77 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 59, 77, 59, 77 )
-
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 59, 77 )
@@ -21,16 +13,24 @@ region = Rect2( 0, 0, 59, 77 )
 atlas = ExtResource( 2 )
 region = Rect2( 59, 0, 59, 77 )
 
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 77, 59, 77 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 59, 77, 59, 77 )
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ SubResource( 10 ), SubResource( 11 ) ],
-"loop": true,
-"name": "door2",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "door1",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "door2",
 "speed": 5.0
 } ]
 

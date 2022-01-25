@@ -29,3 +29,7 @@ func _on_Creditos_pressed():
 
 func _on_Opciones_pressed():
 	get_tree().change_scene("res://control/options.tscn")
+
+
+func _on_Controls_pressed():
+	get_tree().change_scene("res://control/tutorial.tscn")

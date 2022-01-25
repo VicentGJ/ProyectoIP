@@ -60,45 +60,32 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-margin_top = 45.0
-margin_right = 270.0
-margin_bottom = 267.0
+margin_top = 22.0
+margin_right = 219.0
+margin_bottom = 289.0
 custom_fonts/font = SubResource( 1 )
-text = "Vicente Garofalo
-Game Direction
-
-Carlos Daniel Vilaseca
-Generalist"
+text = "Movement
+Jump
+Attack
+Slide and Dodge
+Switch Dimension
+Pick and Interact"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
-margin_left = 320.0
-margin_top = 45.0
-margin_right = 527.0
-margin_bottom = 267.0
+margin_left = 269.0
+margin_top = 22.0
+margin_right = 392.0
+margin_bottom = 289.0
 custom_fonts/font = SubResource( 1 )
-text = "Richard Oropesa
-Programming
-
-Javier Garcia
-Programming"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="HBoxContainer"]
-margin_left = 577.0
-margin_top = 45.0
-margin_right = 778.0
-margin_bottom = 267.0
-custom_fonts/font = SubResource( 1 )
-text = "Isabel Canales
-Art design
-
-William Rivero
-Music and Sound"
+text = "A and D
+Space
+Left Click
+Shift
+F
+E"
 __meta__ = {
 "_edit_use_anchors_": false
 }

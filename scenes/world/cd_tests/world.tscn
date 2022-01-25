@@ -31,8 +31,8 @@ __meta__ = {
 [node name="HealthBar" parent="GUI" instance=ExtResource( 3 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 76800.0
-margin_bottom = 45000.0
+margin_right = 78848.0
+margin_bottom = 46200.0
 
 [node name="trap" parent="." instance=ExtResource( 4 )]
 position = Vector2( 596, 368 )
@@ -47,7 +47,6 @@ position = Vector2( 469, 216 )
 parameters/playback = SubResource( 1 )
 
 [node name="Light2D3" parent="player" index="17"]
-color = Color( 1, 1, 1, 1 )
 energy = 9.07
 range_item_cull_mask = 3
 

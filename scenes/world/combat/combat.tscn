@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/tiles/cementeryBiome.tres" type="TileSet" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/player/health_bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/enemies/trap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/enemies/skeleton/skeleton.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/enemies/archer/archer.tscn" type="PackedScene" id=7]
 
 [node name="combat" type="Node2D"]
 
@@ -36,9 +35,6 @@ position = Vector2( 789, 320 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 6 )]
 position = Vector2( 691, 268 )
-
-[node name="Enemy4" parent="." instance=ExtResource( 7 )]
-position = Vector2( 228, 299 )
 
 [connection signal="damaged" from="GUI/HUD" to="player" method="_on_HealthBar_damaged"]
 [connection signal="healthChange" from="player" to="GUI/HUD" method="_on_player_healthChange"]

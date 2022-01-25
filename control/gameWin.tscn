@@ -1,0 +1,128 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://background/pause_background.png" type="Texture" id=1]
+[ext_resource path="res://fonts/Pixeled.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://control/gameWin.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 15
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Control" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -168.0
+margin_top = -126.0
+margin_right = 170.0
+margin_bottom = 159.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 33.0
+margin_right = 338.0
+margin_bottom = 148.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 1 )
+text = "Finished Prototipe
+(More Coming Soon)"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jugar" type="Button" parent="VBoxContainer"]
+margin_top = 152.0
+margin_right = 338.0
+margin_bottom = 200.0
+custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
+custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Restart"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Button" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 338.0
+margin_bottom = 252.0
+custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
+custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Exit"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/fade = SubResource( 4 )
+
+[connection signal="pressed" from="VBoxContainer/Jugar" to="." method="_on_Jugar_pressed"]
+[connection signal="pressed" from="VBoxContainer/exit" to="." method="_on_exit_pressed"]

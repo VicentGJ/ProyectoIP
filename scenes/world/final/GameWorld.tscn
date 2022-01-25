@@ -8,17 +8,102 @@
 [ext_resource path="res://scenes/world/final/dimension2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/props/chest.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/props/door.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/props/platform.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/props/powerUP.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/enemies/knigth/knight.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/enemies/trap.tscn" type="PackedScene" id=12]
 [ext_resource path="res://music/AMBIENTE.mp3" type="AudioStream" id=13]
+[ext_resource path="res://background/bg1_11.png" type="Texture" id=14]
 
 [node name="GameWorld" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="GUI" instance=ExtResource( 1 )]
+
+[node name="Dimension2" parent="." instance=ExtResource( 6 )]
+
+[node name="Enemy3" parent="Dimension2" instance=ExtResource( 2 )]
+position = Vector2( 866.667, 603.333 )
+scale = Vector2( 1, 1 )
+
+[node name="Enemy4" parent="Dimension2" instance=ExtResource( 2 )]
+position = Vector2( 1764.17, 604.167 )
+scale = Vector2( 1, 1 )
+
+[node name="Enemy" parent="Dimension2" instance=ExtResource( 11 )]
+position = Vector2( 2660.83, 1131.67 )
+
+[node name="trap23" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1648.33, 767.5 )
+
+[node name="trap24" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1680, 766.667 )
+
+[node name="trap25" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1714.17, 766.667 )
+
+[node name="trap26" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1745, 767.5 )
+
+[node name="trap27" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1776.67, 768.333 )
+
+[node name="trap28" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1810.83, 768.333 )
+
+[node name="trap29" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1841.67, 767.5 )
+
+[node name="trap30" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1873.33, 766.667 )
+
+[node name="trap31" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1905.83, 768.333 )
+
+[node name="trap32" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1936.67, 767.5 )
+
+[node name="trap33" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 1968.33, 766.667 )
+
+[node name="trap34" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2001.67, 768.333 )
+
+[node name="trap35" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2032.5, 767.5 )
+
+[node name="trap36" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2064.17, 766.667 )
+
+[node name="trap37" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2096.67, 769.167 )
+
+[node name="trap38" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2127.5, 768.333 )
+
+[node name="trap39" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2159.17, 767.5 )
+
+[node name="trap40" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2193.33, 769.167 )
+
+[node name="trap41" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2224.17, 768.333 )
+
+[node name="trap42" parent="Dimension2" instance=ExtResource( 12 )]
+position = Vector2( 2255.83, 767.5 )
 
 [node name="Dimension1" parent="." instance=ExtResource( 4 )]
 
@@ -34,16 +119,17 @@ scale = Vector2( 1, 1 )
 position = Vector2( 1144.17, 470 )
 scale = Vector2( 1, 1 )
 
+[node name="Enemy4" parent="Dimension1" instance=ExtResource( 2 )]
+position = Vector2( 2110, 604.167 )
+scale = Vector2( 1, 1 )
+
 [node name="verj" parent="Dimension1" instance=ExtResource( 5 )]
 position = Vector2( 80.8333, 465 )
 scale = Vector2( 2.08333, 2.08333 )
 
-[node name="platform" parent="Dimension1" instance=ExtResource( 9 )]
-position = Vector2( 1285, 727.5 )
-scale = Vector2( 0.833333, 0.833333 )
-
 [node name="door" parent="Dimension1" instance=ExtResource( 8 )]
 position = Vector2( 312.5, 447.5 )
+scale = Vector2( 2.8, 1.5 )
 isDoorRare = true
 
 [node name="powerUP" parent="Dimension1" instance=ExtResource( 10 )]
@@ -133,85 +219,13 @@ position = Vector2( 2255.83, 767.5 )
 [node name="trap23" parent="Dimension1" instance=ExtResource( 12 )]
 position = Vector2( 1089.17, 480.833 )
 
-[node name="Dimension2" parent="." instance=ExtResource( 6 )]
-
-[node name="Enemy3" parent="Dimension2" instance=ExtResource( 2 )]
-position = Vector2( 866.667, 603.333 )
-scale = Vector2( 1, 1 )
-
-[node name="Enemy4" parent="Dimension2" instance=ExtResource( 2 )]
-position = Vector2( 2062.5, 603.333 )
-scale = Vector2( 1, 1 )
-
-[node name="Enemy" parent="Dimension2" instance=ExtResource( 11 )]
-position = Vector2( 2660.83, 1131.67 )
-
-[node name="trap23" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1648.33, 767.5 )
-
-[node name="trap24" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1680, 766.667 )
-
-[node name="trap25" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1714.17, 766.667 )
-
-[node name="trap26" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1745, 767.5 )
-
-[node name="trap27" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1776.67, 768.333 )
-
-[node name="trap28" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1810.83, 768.333 )
-
-[node name="trap29" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1841.67, 767.5 )
-
-[node name="trap30" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1873.33, 766.667 )
-
-[node name="trap31" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1905.83, 768.333 )
-
-[node name="trap32" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1936.67, 767.5 )
-
-[node name="trap33" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 1968.33, 766.667 )
-
-[node name="trap34" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2001.67, 768.333 )
-
-[node name="trap35" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2032.5, 767.5 )
-
-[node name="trap36" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2064.17, 766.667 )
-
-[node name="trap37" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2096.67, 769.167 )
-
-[node name="trap38" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2127.5, 768.333 )
-
-[node name="trap39" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2159.17, 767.5 )
-
-[node name="trap40" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2193.33, 769.167 )
-
-[node name="trap41" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2224.17, 768.333 )
-
-[node name="trap42" parent="Dimension2" instance=ExtResource( 12 )]
-position = Vector2( 2255.83, 767.5 )
-
 [node name="player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 208, 516 )
+position = Vector2( 209, 556 )
 
 [node name="soundAmbient" type="AudioStreamPlayer" parent="."]
 pause_mode = 2
 stream = ExtResource( 13 )
+volume_db = -15.0
 autoplay = true
 
 [connection signal="damaged" from="GUI/HUD" to="player" method="_on_HUD_damaged"]

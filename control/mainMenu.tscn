@@ -46,24 +46,24 @@ __meta__ = {
 
 [node name="logo juego" type="TextureRect" parent="VBoxContainer"]
 margin_right = 803.0
-margin_bottom = 116.0
+margin_bottom = 50.0
 size_flags_vertical = 3
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 153.0
+margin_top = 87.0
 margin_right = 803.0
 margin_bottom = 413.0
 
 [node name="buttons" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 140.0
-margin_bottom = 260.0
+margin_right = 152.0
+margin_bottom = 326.0
 
 [node name="Jugar" type="Button" parent="VBoxContainer/HBoxContainer/buttons"]
 pause_mode = 2
-margin_right = 140.0
+margin_right = 152.0
 margin_bottom = 62.0
 custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
 custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
@@ -73,10 +73,22 @@ text = "Play"
 flat = true
 align = 0
 
-[node name="Opciones" type="Button" parent="VBoxContainer/HBoxContainer/buttons"]
+[node name="Controls" type="Button" parent="VBoxContainer/HBoxContainer/buttons"]
 margin_top = 66.0
-margin_right = 140.0
+margin_right = 152.0
 margin_bottom = 128.0
+custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
+custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
+custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Tutorial"
+flat = true
+align = 0
+
+[node name="Opciones" type="Button" parent="VBoxContainer/HBoxContainer/buttons"]
+margin_top = 132.0
+margin_right = 152.0
+margin_bottom = 194.0
 custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
 custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
@@ -86,9 +98,9 @@ flat = true
 align = 0
 
 [node name="Creditos" type="Button" parent="VBoxContainer/HBoxContainer/buttons"]
-margin_top = 132.0
-margin_right = 140.0
-margin_bottom = 194.0
+margin_top = 198.0
+margin_right = 152.0
+margin_bottom = 260.0
 custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
 custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
@@ -98,9 +110,9 @@ flat = true
 align = 0
 
 [node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer/buttons"]
-margin_top = 198.0
-margin_right = 140.0
-margin_bottom = 260.0
+margin_top = 264.0
+margin_right = 152.0
+margin_bottom = 326.0
 custom_colors/font_color_focus = Color( 0.937255, 0.992157, 0.996078, 1 )
 custom_colors/font_color_hover = Color( 0, 0.811765, 1, 1 )
 custom_colors/font_color_pressed = Color( 0.0509804, 0.466667, 0.466667, 1 )
@@ -124,6 +136,7 @@ texture = ExtResource( 3 )
 expand = true
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Jugar" to="." method="_on_Jugar_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Controls" to="." method="_on_Controls_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Opciones" to="." method="_on_Opciones_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Creditos" to="." method="_on_Creditos_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/buttons/Quit" to="." method="_on_Quit_pressed"]

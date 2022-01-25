@@ -1,5 +1,5 @@
 extends StaticBody2D
-onready var player = get_parent().get_node("player")
+onready var player = get_parent().get_parent().get_node("player")
 
 func _process(delta):
 	if (Input.is_action_pressed("ui_down") and Input.is_action_pressed("jump"))\

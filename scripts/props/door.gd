@@ -2,8 +2,6 @@ extends StaticBody2D
 
 onready var leftRay = $left
 onready var rightRay = $right
-onready var tween = $Tween
-onready var particles = $Particles2D
 onready var door = $Sprite
 onready var player = get_parent().get_parent().get_node("player")
 

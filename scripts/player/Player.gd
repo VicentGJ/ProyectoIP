@@ -47,7 +47,7 @@ signal getMoney(amount)
 signal getKey(keyType, keyAmount)
 
 func _ready():
-	dimension2.set_position(Vector2(0, 1000))
+	dimension2.set_position(Vector2(0, 10000))
 	
 	state_machine = $AnimationTree.get("parameters/playback")
 	
@@ -57,11 +57,11 @@ func changeDimension():
 	$Tween.start()
 	if dimension == 1:
 		dimension = 2
-		dimension1.set_position(Vector2(0, 1000))
+		dimension1.set_position(Vector2(0, 10000))
 		dimension2.set_position(Vector2(0, 0))
 	elif dimension == 2:
 		dimension = 1
-		dimension2.set_position(Vector2(0, 1000))
+		dimension2.set_position(Vector2(0, 10000))
 		dimension1.set_position(Vector2(0, 0))
 		get_parent().add_child_below_node(get_parent().get_node("GUI") , dimension1)
 		
@@ -239,6 +239,14 @@ func death_animation():
 	emit_signal("dead")
 	#menu
 	var menu=load("res://control/gameOver.tscn").instance()
+	get_parent().get_node("GUI").add_child(menu)
+# TODO: Do something better with this function:
+func win():
+	state_machine.travel("die")
+	particles_death.set_emitting(true)
+	dead = true
+	emit_signal("dead")
+	var menu=load("res://control/gameWin.tscn").instance()
 	get_parent().get_node("GUI").add_child(menu)
 func add_money(addedMoney):
 	money += addedMoney

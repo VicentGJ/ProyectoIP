@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://scenes/enemies/archer/archer.gd" type="Script" id=1]
 [ext_resource path="res://sprites/Arcane archer/Arcane archer/spritesheet.png" type="Texture" id=2]
@@ -20,13 +20,33 @@ region = Rect2( 128, 320, 64, 64 )
 atlas = ExtResource( 2 )
 region = Rect2( 192, 320, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=116]
+[sub_resource type="AtlasTexture" id=134]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 448, 64, 64 )
+region = Rect2( 0, 192, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=117]
+[sub_resource type="AtlasTexture" id=135]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 448, 64, 64 )
+region = Rect2( 64, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=136]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=137]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=138]
+atlas = ExtResource( 2 )
+region = Rect2( 256, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=139]
+atlas = ExtResource( 2 )
+region = Rect2( 320, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=140]
+atlas = ExtResource( 2 )
+region = Rect2( 384, 192, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=118]
 atlas = ExtResource( 2 )
@@ -60,33 +80,13 @@ region = Rect2( 384, 0, 64, 64 )
 atlas = ExtResource( 2 )
 region = Rect2( 448, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=134]
+[sub_resource type="AtlasTexture" id=116]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 192, 64, 64 )
+region = Rect2( 0, 448, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=135]
+[sub_resource type="AtlasTexture" id=117]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=136]
-atlas = ExtResource( 2 )
-region = Rect2( 128, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=137]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=138]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=139]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 192, 64, 64 )
-
-[sub_resource type="AtlasTexture" id=140]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 192, 64, 64 )
+region = Rect2( 64, 448, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=126]
 atlas = ExtResource( 2 )
@@ -127,9 +127,9 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 116 ), SubResource( 117 ) ],
+"frames": [ SubResource( 134 ), SubResource( 135 ), SubResource( 136 ), SubResource( 137 ), SubResource( 138 ), SubResource( 139 ), SubResource( 140 ) ],
 "loop": true,
-"name": "hit",
+"name": "attack",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 118 ), SubResource( 119 ), SubResource( 120 ), SubResource( 121 ), SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ) ],
@@ -137,9 +137,9 @@ animations = [ {
 "name": "walking",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 134 ), SubResource( 135 ), SubResource( 136 ), SubResource( 137 ), SubResource( 138 ), SubResource( 139 ), SubResource( 140 ) ],
+"frames": [ SubResource( 116 ), SubResource( 117 ) ],
 "loop": true,
-"name": "attack",
+"name": "hit",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ), SubResource( 131 ), SubResource( 132 ), SubResource( 133 ) ],
@@ -231,11 +231,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=108]
 resource_name = "attack"
 length = 0.7
-step = 0.0166667
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -275,33 +286,21 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/path = NodePath("AudioStreamPlayer:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("AudioStreamPlayer:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( -1.05 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=79]
 resource_name = "death"
-length = 0.8
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -325,6 +324,32 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "death" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.8, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
 }
 
 [sub_resource type="Animation" id=85]
@@ -417,6 +442,8 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=142]
+
 [sub_resource type="AnimationNodeStateMachine" id=74]
 states/Idle/node = SubResource( 80 )
 states/Idle/position = Vector2( 436.383, 177.667 )
@@ -428,7 +455,7 @@ states/hit/node = SubResource( 86 )
 states/hit/position = Vector2( 436.037, -30.3333 )
 states/walking/node = SubResource( 73 )
 states/walking/position = Vector2( 223, 186.161 )
-transitions = [ "Idle", "walking", SubResource( 81 ), "walking", "Idle", SubResource( 82 ), "Idle", "death", SubResource( 84 ), "Idle", "hit", SubResource( 87 ), "hit", "Idle", SubResource( 88 ), "Idle", "attack", SubResource( 110 ), "attack", "Idle", SubResource( 111 ) ]
+transitions = [ "Idle", "walking", SubResource( 81 ), "walking", "Idle", SubResource( 82 ), "Idle", "death", SubResource( 84 ), "Idle", "hit", SubResource( 87 ), "hit", "Idle", SubResource( 88 ), "Idle", "attack", SubResource( 110 ), "attack", "Idle", SubResource( 111 ), "attack", "hit", SubResource( 142 ) ]
 start_node = "walking"
 end_node = "death"
 graph_offset = Vector2( -175.361, -33.4773 )
@@ -495,7 +522,7 @@ one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

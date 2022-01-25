@@ -5,7 +5,6 @@ onready var player = get_parent().get_parent().get_node("player")
 onready var leftRay = $left
 onready var rightRay = $right
 onready var particles = $Particles2D
-onready var tween = $Tween
 onready var label = $Label
 var collected = false
 
